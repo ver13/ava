@@ -43,8 +43,8 @@ func (e *Error) ToJSON() (string, *Error) {
 			Subgroup: SubgroupSerializer,
 			Details:  fmt.Sprintf("%v.", "Failed to generate JSON."),
 			Err:      err,
-			Code:     SerializerJSONCode,
-			Message:  StatusTextFunc(SerializerJSONCode),
+			Code:     serializerJSONCode,
+			Message:  statusTextFunc(serializerJSONCode),
 			Info:     RetrieveCallInfo(),
 		}
 

@@ -20,6 +20,7 @@ package error
 // Validator
 // String
 // Logger
+// File
 // Unknown
 // )
 type Subgroup int32

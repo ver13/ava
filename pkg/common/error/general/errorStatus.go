@@ -2,10 +2,11 @@ package general
 
 // AVA errors status codes
 const (
-	NotEqualCode      = 1
-	IsNilCode         = 2
-	DeepCopyWrongCode = 3
-	UnknownErrorCode  = 4
+	NotEqualCode       = 1
+	IsNilCode          = 2
+	DeepCopyWrongCode  = 3
+	UnknownErrorCode   = 4
+	SerializerJSONCode = 7
 )
 
 var statusText = map[int]string{

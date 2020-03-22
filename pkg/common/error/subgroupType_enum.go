@@ -43,11 +43,13 @@ const (
 	SubgroupString
 	// SubgroupLogger is a Subgroup of type Logger
 	SubgroupLogger
+	// SubgroupFile is a Subgroup of type File
+	SubgroupFile
 	// SubgroupUnknown is a Subgroup of type Unknown
 	SubgroupUnknown
 )
 
-const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringUnknown"
+const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringLoggerFileUnknown"
 
 var _SubgroupMap = map[Subgroup]string{
 	0:  _SubgroupName[0:7],
@@ -66,7 +68,9 @@ var _SubgroupMap = map[Subgroup]string{
 	13: _SubgroupName[120:124],
 	14: _SubgroupName[124:133],
 	15: _SubgroupName[133:139],
-	16: _SubgroupName[139:146],
+	16: _SubgroupName[139:145],
+	17: _SubgroupName[145:149],
+	18: _SubgroupName[149:156],
 }
 
 // String implements the Stringer interface.
@@ -110,8 +114,12 @@ var _SubgroupValue = map[string]Subgroup{
 	strings.ToLower(_SubgroupName[124:133]): 14,
 	_SubgroupName[133:139]:                  15,
 	strings.ToLower(_SubgroupName[133:139]): 15,
-	_SubgroupName[139:146]:                  16,
-	strings.ToLower(_SubgroupName[139:146]): 16,
+	_SubgroupName[139:145]:                  16,
+	strings.ToLower(_SubgroupName[139:145]): 16,
+	_SubgroupName[145:149]:                  17,
+	strings.ToLower(_SubgroupName[145:149]): 17,
+	_SubgroupName[149:156]:                  18,
+	strings.ToLower(_SubgroupName[149:156]): 18,
 }
 
 // ParseSubgroup attempts to convert a string to a Subgroup
@@ -119,7 +127,7 @@ func ParseSubgroup(name string) (Subgroup, *Error) {
 	if x, ok := _SubgroupValue[name]; ok {
 		return x, nil
 	}
-	return SubgroupUnknown, SubgroupTypeUnknownSkip(nil, fmt.Sprintf("%s is not a valid Subgroup", name), 4)
+	return SubgroupUnknown, SubgroupTypeUnknown(nil, fmt.Errorf("%s is not a valid Subgroup", name))
 }
 
 // MarshalText implements the text marshaller method

@@ -14,8 +14,8 @@ func SubgroupTypeUnknownSkip(e error, details interface{}, skip int) *Error {
 	err := Error{
 		Group:    GroupUnknown,
 		Subgroup: SubgroupUnknown,
-		Code:     SubgroupUnknownCode,
-		Message:  StatusTextFunc(SubgroupUnknownCode),
+		Code:     statusSubgroupUnknown,
+		Message:  statusTextFunc(statusSubgroupUnknown),
 		Details:  fmt.Sprintf("%v.", details),
 		Err:      e,
 		Info:     RetrieveCallInfoSkip(skip),
