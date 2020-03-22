@@ -2,14 +2,24 @@ package serializer
 
 import (
 	"encoding/json"
-
+	"sync"
+	
 	"github.com/hashicorp/hcl"
 
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
+var onceHCL    sync.Once
+
 type HCL struct {
+
+}
+
+func init() {
+	onceHCL.Do(func() {
+		Register(SerializerTypeHcl, &HCL{})
+	})
 }
 
 func (h *HCL) Serializer(data interface{}) ([]byte, *errorAVA.Error) {

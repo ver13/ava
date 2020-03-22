@@ -1,13 +1,23 @@
 package serializer
 
 import (
+	"sync"
+	
 	"gopkg.in/yaml.v2"
-
+	
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
+var 	onceYAML    sync.Once
+
 type YAML struct {
+}
+
+func init() {
+	onceYAML.Do(func() {
+		Register(SerializerTypeYaml, &YAML{})
+	})
 }
 
 func (y *YAML) Serializer(data interface{}) ([]byte, *errorAVA.Error) {

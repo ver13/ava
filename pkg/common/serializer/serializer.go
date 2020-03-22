@@ -1,58 +1,25 @@
 package serializer
 
 import (
-	"fmt"
-	"sync"
-
 	errorAVA "github.com/ver13/ava/pkg/common/error"
-	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
-type SerializerFactory map[SerializerType]SerializerI
+type Serializer struct {
 
-var (
-	factory SerializerFactory
-	once    sync.Once
-)
-
-func init() {
-	once.Do(func() {
-		factory = make(map[SerializerType]SerializerI)
-
-		Register(SerializerTypeHcl, &HCL{})
-		Register(SerializerTypeJson, &JSON{})
-		Register(SerializerTypeProto, &Proto{})
-		Register(SerializerTypeToml, &TOML{})
-		Register(SerializerTypeXml, &XML{})
-		Register(SerializerTypeYaml, &YAML{})
-	})
 }
 
-func GetInstance() SerializerFactory {
-	return factory
+func (h *Serializer) Serializer(data interface{}) ([]byte, *errorAVA.Error) {
+	panic("Not implemented.")
 }
 
-func (s SerializerFactory) Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
-	s[t] = serializer
-	return nil
-}
-func Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
-	return GetInstance().Register(t, serializer)
+func (h *Serializer) Deserializer(data []byte, out interface{}) *errorAVA.Error {
+	panic("Not implemented.")
 }
 
-func (s SerializerFactory) SerializerFactory(t SerializerType) (SerializerI, *errorAVA.Error) {
-	var serializer SerializerI
-
-	serializer = s[t]
-	if serializer == nil {
-		return nil, errorSerializerAVA.NotImplemented(nil, fmt.Sprintf("Serializer type: %s", t.String()))
-	}
-	return serializer, nil
+func (h *Serializer) String() string {
+	panic("Not implemented.")
 }
-func GetSerializer(t SerializerType) SerializerI {
-	serializer, err := GetInstance().SerializerFactory(t)
-	if err != nil {
-		return nil
-	}
-	return serializer
+
+func (h *Serializer) Type() SerializerType {
+	panic("Not implemented.")
 }

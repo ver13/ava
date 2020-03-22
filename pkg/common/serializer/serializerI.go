@@ -17,3 +17,5 @@ type SerializerI interface {
 	String() string
 	Type() SerializerType
 }
+
+

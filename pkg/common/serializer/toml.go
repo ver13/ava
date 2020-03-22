@@ -3,14 +3,23 @@ package serializer
 import (
 	"bytes"
 	"fmt"
-
+	"sync"
+	
 	"github.com/BurntSushi/toml"
-
+	
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
+var 	onceTOML    sync.Once
+
 type TOML struct {
+}
+
+func init() {
+	onceTOML.Do(func() {
+		Register(SerializerTypeToml, &TOML{})
+	})
 }
 
 func (t *TOML) Serializer(data interface{}) (out []byte, err *errorAVA.Error) {

@@ -2,12 +2,21 @@ package serializer
 
 import (
 	"encoding/xml"
-
+	"sync"
+	
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
+var 	onceXML    sync.Once
+
 type XML struct {
+}
+
+func init() {
+	onceXML.Do(func() {
+		Register(SerializerTypeXml, &XML{})
+	})
 }
 
 func (x *XML) Serializer(data interface{}) ([]byte, *errorAVA.Error) {
