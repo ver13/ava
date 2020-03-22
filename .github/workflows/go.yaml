@@ -1,18 +1,14 @@
-name: Go
-
 on:
   push:
     branches: [ developt ]
   pull_request:
     branches: [ master ]
-
+name: Go
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
     - name: Set up Go 1.14
       uses: actions/setup-go@v1
       with:
