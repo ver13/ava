@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorVersionAVA "github.com/ver13/ava/pkg/common/version/error"
 )
@@ -329,7 +329,7 @@ func Parse(s string) (*SemanticVersion, *errorAVA.Error) {
 		parsedBuild, err := NewBuildVersion(str)
 		if err != nil {
 			return &SemanticVersion{}, err
-		}		
+		}
 		v.Build = append(v.Build, *parsedBuild)
 	}
 
@@ -345,7 +345,7 @@ func NewBuildVersion(str string) (*BuildVersion, *errorAVA.Error) {
 		return &BuildVersion{}, errorVersionAVA.BuildVersionParseError(nil, fmt.Sprintf("Invalid character(s) found in build meta data %q", str))
 	}
 	eparts := strings.Split(str, ".")
-	
+
 	t, err := time.Parse("", eparts[2])
 	if err != nil {
 		return &BuildVersion{}, errorVersionAVA.BuildDateParseError(nil, fmt.Sprintf("Invalid time format found in build meta data %s", eparts[2]))

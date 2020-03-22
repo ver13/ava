@@ -3,10 +3,10 @@ package error_test
 import (
 	"net/http"
 	"testing"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
@@ -55,12 +55,12 @@ func (r *errorHTTPSuite) TestErrorHTTP_ToJSON() {
 
 func (r *errorHTTPSuite) TestErrorHTTP_Error() {
 	Convey("Given a error HTTP ", r.T(), func() {
-	
+
 	})
 }
 
 func (r *errorHTTPSuite) TestErrorHTTP_WriteToResponse() {
 	Convey("Given a error HTTP ", r.T(), func() {
-	
+
 	})
 }

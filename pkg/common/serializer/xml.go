@@ -3,12 +3,12 @@ package serializer
 import (
 	"encoding/xml"
 	"sync"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
-var 	onceXML    sync.Once
+var onceXML sync.Once
 
 type XML struct {
 }

@@ -69,7 +69,7 @@ func (h *hclSuite) TestHCL() {
 		Convey("When unmarshal to struct is OK", func() {
 			h.structData = configHcl{}
 			s := serializerAVA.GetSerializer(serializerAVA.SerializerTypeHcl)
-			
+
 			err := s.Deserializer([]byte("{\"postgres\":{\"user\":\"Ulises\",\"password\":\"Z;Z@pZz9G)MFAw[5\",\"db\":\"AVADataBase\"}}"), &h.structData)
 			So(err, ShouldBeNil)
 			So(h.structData, ShouldNotBeEmpty)
@@ -80,7 +80,7 @@ func (h *hclSuite) TestHCL() {
 		Convey("When unmarshal to struct is Failed", func() {
 			h.structData = configHcl{}
 			s := serializerAVA.GetSerializer(serializerAVA.SerializerTypeHcl)
-			
+
 			err := s.Deserializer([]byte("jjk"), &h.structData)
 			So(err, ShouldNotBeNil)
 		})

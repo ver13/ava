@@ -1,9 +1,9 @@
 package error
 
 import (
-"fmt"
+	"fmt"
 
-errorAVA "github.com/ver13/ava/pkg/common/error"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
 func BuildDateParseError(e error, details interface{}) *errorAVA.Error {
@@ -19,4 +19,3 @@ func BuildDateParseError(e error, details interface{}) *errorAVA.Error {
 	err.Println()
 	return &err
 }
-

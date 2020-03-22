@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"testing"
 	"time"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	fileAVA "github.com/ver13/ava/pkg/common/file"
 )

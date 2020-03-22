@@ -1,9 +1,9 @@
 package error
 
 import (
-"fmt"
+	"fmt"
 
-errorAVA "github.com/ver13/ava/pkg/common/error"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
 // InvalidData is a AVA Error

@@ -3,7 +3,7 @@ package serializer
 import (
 	"fmt"
 	"sync"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
@@ -36,7 +36,7 @@ func Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
 
 func (s Factory) SerializerFactory(t SerializerType) (SerializerI, *errorAVA.Error) {
 	var serializer SerializerI
-	
+
 	serializer = s[t]
 	if serializer == nil {
 		fmt.Sprintf("Serializer is not found and return error.")

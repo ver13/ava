@@ -2,10 +2,9 @@ package validator_test
 
 import (
 	"testing"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-
 )
 
 type validatorSuite struct {

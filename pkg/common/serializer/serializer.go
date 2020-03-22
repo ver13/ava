@@ -5,7 +5,6 @@ import (
 )
 
 type Serializer struct {
-
 }
 
 func (h *Serializer) Serializer(data interface{}) ([]byte, *errorAVA.Error) {

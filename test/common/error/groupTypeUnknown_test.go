@@ -52,11 +52,11 @@ func (r *groupUnknownSuite) TestGroupTypeUnknown() {
 
 			So(err.Group, ShouldEqual, errorAVA.GroupUnknown)
 			So(err.Subgroup, ShouldEqual, errorAVA.SubgroupUnknown)
-			So(err.Code, ShouldEqual, errorAVA.GroupUnknownCode)
+			So(err.Code, ShouldEqual, errorAVA.StatusGroupUnknown)
 
 			So(err.Err, ShouldBeNil)
 
-			So(err.Message, ShouldResemble, errorAVA.StatusTextFunc(errorAVA.GroupUnknownCode))
+			So(err.Message, ShouldResemble, errorAVA.StatusTextFunc(errorAVA.StatusGroupUnknown))
 			So(err.Details, ShouldResemble, fmt.Sprintf("%v.", details))
 
 			So(err.Info, ShouldResemble, &errorAVA.CallInfo{
