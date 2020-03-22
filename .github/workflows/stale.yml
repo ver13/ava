@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/stale@v1
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: c0ff3cd6a5f5a4c41e12ddbbaef0e38eefb9bc96
           stale-issue-message: 'This issue has seen no activity and is marked as stale'
           stale-pr-message: 'This issue has seen no activity and is marked as stale'
