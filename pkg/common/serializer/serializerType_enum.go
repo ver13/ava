@@ -81,11 +81,10 @@ func (x SerializerType) MarshalText() ([]byte, *errorAVA.Error) {
 // UnmarshalText implements the text unmarshaller method
 func (x SerializerType) UnmarshalText(text []byte) (SerializerType, *errorAVA.Error) {
 	name := string(text)
-	var err *errorAVA.Error
-	var tmp SerializerType = SerializerTypeUnknown
-	if tmp, err = ParseSerializerType(name); err != nil {
+	tmp, err := ParseSerializerType(name)
+	if err != nil {
 		return SerializerTypeUnknown, err
 	}
 	x = tmp
-	return x, nil
+	return tmp, nil
 }

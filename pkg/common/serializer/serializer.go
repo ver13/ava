@@ -8,10 +8,10 @@ import (
 	errorSerializerAVA "github.com/ver13/ava/pkg/common/serializer/error"
 )
 
-type serializerFactory map[SerializerType]SerializerI
+type SerializerFactory map[SerializerType]SerializerI
 
 var (
-	factory serializerFactory
+	factory SerializerFactory
 	once    sync.Once
 )
 
@@ -28,11 +28,11 @@ func init() {
 	})
 }
 
-func GetInstance() serializerFactory {
+func GetInstance() SerializerFactory {
 	return factory
 }
 
-func (s serializerFactory) Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
+func (s SerializerFactory) Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
 	s[t] = serializer
 	return nil
 }
@@ -40,7 +40,7 @@ func Register(t SerializerType, serializer SerializerI) *errorAVA.Error {
 	return GetInstance().Register(t, serializer)
 }
 
-func (s serializerFactory) SerializerFactory(t SerializerType) (SerializerI, *errorAVA.Error) {
+func (s SerializerFactory) SerializerFactory(t SerializerType) (SerializerI, *errorAVA.Error) {
 	var serializer SerializerI
 
 	serializer = s[t]
