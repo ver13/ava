@@ -2,7 +2,7 @@ name: Go
 
 on:
   push:
-    branches: [ master ]
+    branches: [ developt ]
   pull_request:
     branches: [ master ]
 
