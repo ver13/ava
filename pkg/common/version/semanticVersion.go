@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
+	"time"
+	
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorVersionAVA "github.com/ver13/ava/pkg/common/version/error"
 )
@@ -325,35 +326,34 @@ func Parse(s string) (*SemanticVersion, *errorAVA.Error) {
 
 	// Build meta data
 	for _, str := range build {
-		if len(str) == 0 {
-			return &SemanticVersion{}, errorVersionAVA.BuildVersionIsEmpty(nil, "Build meta data is empty.")
-		}
-		if !containsOnly(str, alphanum) {
-			return &SemanticVersion{}, errorVersionAVA.BuildVersionParseError(nil, fmt.Sprintf("Invalid character(s) found in build meta data %q", str))
-		}
-		v.Build = append(v.Build, str)
+		parsedBuild, err := NewBuildVersion(str)
+		if err != nil {
+			return &SemanticVersion{}, err
+		}		
+		v.Build = append(v.Build, *parsedBuild)
 	}
 
-	return v, nil
-}
-
-// MustParse is like Parse but panics if the SemanticVersion cannot be parsed.
-func MustParse(s string) (*SemanticVersion, *errorAVA.Error) {
-	v, err := Parse(s)
-	if err != nil {
-		return nil, err
-		//panic(`SemanticVersion: Parse(` + s + `): ` + err.Error())
-	}
 	return v, nil
 }
 
 // NewBuildVersion creates a new valid build SemanticVersion
-func NewBuildVersion(s string) (string, *errorAVA.Error) {
-	if len(s) == 0 {
-		return "", errorVersionAVA.BuildVersionIsEmpty(nil, "Build version is empty.")
+func NewBuildVersion(str string) (*BuildVersion, *errorAVA.Error) {
+	if len(str) == 0 {
+		return &BuildVersion{}, errorVersionAVA.BuildVersionIsEmpty(nil, "Build meta data is empty.")
 	}
-	if !containsOnly(s, alphanum) {
-		return "", errorVersionAVA.BuildVersionWrong(nil, fmt.Sprintf("Invalid character(s) found in build meta data %q", s))
+	if !containsOnly(str, alphanum) {
+		return &BuildVersion{}, errorVersionAVA.BuildVersionParseError(nil, fmt.Sprintf("Invalid character(s) found in build meta data %q", str))
 	}
-	return s, nil
+	eparts := strings.Split(str, ".")
+	
+	t, err := time.Parse("", eparts[2])
+	if err != nil {
+		return &BuildVersion{}, errorVersionAVA.BuildDateParseError(nil, fmt.Sprintf("Invalid time format found in build meta data %s", eparts[2]))
+	}
+	return &BuildVersion{
+		BuildTags:   eparts[0],
+		BuildNumber: eparts[1],
+		BuildDate:   t,
+		BuildHash:   eparts[3],
+	}, nil
 }

@@ -17,6 +17,7 @@ const (
 	statusMinorParseError                   = 14
 	statusPatchParseError                   = 15
 	statusBuildVersionParseError            = 16
+	statusBuildDateParseError               = 17
 )
 
 var statusText = map[int]string{
@@ -36,6 +37,7 @@ var statusText = map[int]string{
 	statusMinorParseError:                   "Minor parse error,",
 	statusPatchParseError:                   "Patch parse error.",
 	statusBuildVersionParseError:            "Build version parse error.",
+	statusBuildDateParseError:               "Build date parse error.",
 }
 
 // StatusText returns a text for the General status code.
