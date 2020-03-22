@@ -14,8 +14,8 @@ func DeepCopyWrong(e error, details interface{}) *errorAVA.Error {
 // DeepCopyWrongSkip is a AVA Error
 func DeepCopyWrongSkip(e error, details interface{}, skip int) *errorAVA.Error {
 	err := errorAVA.Error{
-		Group:    errorAVA.GroupUnknown,
-		Subgroup: errorAVA.SubgroupUnknown,
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupGeneral,
 		Code:     DeepCopyWrongCode,
 		Message:  StatusTextFunc(DeepCopyWrongCode),
 		Details:  fmt.Sprintf("%v.", details),

@@ -14,8 +14,8 @@ func NotEqual(e error, details interface{}) *errorAVA.Error {
 // NotEqualSkip is a AVA Error
 func NotEqualSkip(e error, details interface{}, skip int) *errorAVA.Error {
 	err := errorAVA.Error{
-		Group:    errorAVA.GroupUnknown,
-		Subgroup: errorAVA.SubgroupUnknown,
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupGeneral,
 		Code:     NotEqualCode,
 		Message:  StatusTextFunc(NotEqualCode),
 		Details:  fmt.Sprintf("%v.", details),

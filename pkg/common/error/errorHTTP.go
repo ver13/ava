@@ -8,7 +8,7 @@ import (
 
 // ErrorHTTP contains custom code, errors message, and HTTP status code.
 type ErrorHTTP struct {
-	HTTPStatus int    `json:"-"`
+	HTTPStatus int    `json:"status"`
 	Code       int    `json:"code"`
 	Message    string `json:"message"`
 }

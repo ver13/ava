@@ -14,8 +14,8 @@ func IsNil(e error, details interface{}) *errorAVA.Error {
 // IsNilSkip is a AVA Error
 func IsNilSkip(e error, details interface{}, skip int) *errorAVA.Error {
 	err := errorAVA.Error{
-		Group:    errorAVA.GroupUnknown,
-		Subgroup: errorAVA.SubgroupUnknown,
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupGeneral,
 		Code:     IsNilCode,
 		Message:  StatusTextFunc(IsNilCode),
 		Details:  fmt.Sprintf("%v.", details),

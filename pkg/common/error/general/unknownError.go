@@ -14,8 +14,8 @@ func UnknownError(e error, details interface{}) *errorAVA.Error {
 // UnknownErrorSkip is a AVA Error
 func UnknownErrorSkip(e error, details interface{}, skip int) *errorAVA.Error {
 	err := errorAVA.Error{
-		Group:    errorAVA.GroupUnknown,
-		Subgroup: errorAVA.SubgroupUnknown,
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupGeneral,
 		Code:     UnknownErrorCode,
 		Message:  StatusTextFunc(UnknownErrorCode),
 		Details:  fmt.Sprintf("%v.", details),
