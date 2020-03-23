@@ -1,0 +1,28 @@
+package formatter
+
+const (
+	ASC_TIME         string = "ascTime"
+	FIELDS           string = "fields"
+	LEVEL_NAME       string = "levelName"
+	NAME             string = "name"
+	MESSAGE          string = "message"
+	PROCESS_PID      string = "processPID"
+	RELATIVE_CREATED string = "relativeCreated"
+	SHORT_LEVEL_NAME string = "shortLevelName"
+	HOST             string = "host"
+	USER             string = "user"
+	AUTH_USER_ID     string = "authUserId"
+	METHOD           string = "method"
+	REQUEST          string = "request"
+	RESPONSE_CODE    string = "responseCode"
+	BYTES            string = "bytes"
+	REF_ERRER        string = "referrer"
+	AGENT            string = "agent"
+	USER_IDENTIFIER  string = "userIdentifier"
+	DATETIME         string = "datetime"
+	TIMESTAMP        string = "timestamp"
+	MODULE           string = "module"
+	SEVERITY         string = "severity"
+	THREAD_ID        string = "threadID"
+	CLIENT           string = "client"
+)
