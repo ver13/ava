@@ -4,22 +4,22 @@ import (
 	"os"
 	"runtime"
 	"time"
-	
+
 	"github.com/sirupsen/logrus"
-	
+
 	loggerAVA "github.com/ver13/ava/pkg/common/logger"
 )
 
 const (
 	// RFC5424LogTemplate  : <priority>{version} {iso-timestamp} {hostname} {application} {pid} {message-id} {structured-data} {message}
 	RFC5424LogTemplate = "<priority>{version} {iso-timestamp} {hostname} {application} {pid} {message-id} {structured-data} {message}"
-	
+
 	// message template just logs the message.
 	RFC5424MessageTemplate = "%[MESSAGE]s\n"
-	
+
 	// Detailed template logs padded columns including the running PID.
 	RFC5424DetailedTemplate = "%[ASC_TIME]s %-5[process]d %-7[LEVEL_NAME]s %-20[NAME]s %[MESSAGE]s%[FIELDS]s\n"
-	
+
 	// defaultTimestampFormat is the default format used if the user does not specify their own.
 	RFC5424DefaultTimestampFormat = "2006-01-02 15:04:05.000"
 )
@@ -52,15 +52,15 @@ func newRFC5424Formatter() *RFC5424Formatter {
 			startTime:       time.Now(),
 		},
 	}
-	
+
 	// Parser the template string.
 	formatter.parseTemplate(RFC5424LogTemplate, nil)
-	
+
 	// Disable colors if not supported.
 	if !checkIfTerminal(logrus.StandardLogger().Out) || (runtime.GOOS == "windows" && !WindowsNativeANSI()) {
 		formatter.disableColors = true
 	}
-	
+
 	return &formatter
 }
 
@@ -79,6 +79,6 @@ func NewLoggerRFC5424Default() *loggerAVA.Logger {
 	logger.Log.SetFormatter(newRFC5424Formatter())
 	logger.Log.SetOutput(os.Stdout)
 	logger.Log.SetLevel(logrus.DebugLevel)
-	
+
 	return &logger
 }

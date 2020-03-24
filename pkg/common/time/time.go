@@ -7,7 +7,7 @@ import (
 	"time"
 
 	errorAVA "github.com/ver13/ava/pkg/common/error"
-	errorTimeGmf "github.com/ver13/ava/pkg/common/time/error"
+	errorTimeAVA "github.com/ver13/ava/pkg/common/time/error"
 )
 
 // Represents the number of elements in a given period
@@ -137,18 +137,18 @@ func create(y int, mon time.Month, d, h, m, s, ns int, l *time.Location) *Time {
 }
 
 // Create returns a new pointer to Times instance from a specific date and time.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func Create(y int, mon time.Month, d, h, m, s, ns int, location string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, location)
+		return nil, errorTimeAVA.LoadLocation(err, location)
 	}
 	return create(y, mon, d, h, m, s, ns, l), nil
 }
 
 // CreateFromDate returns a new pointer to a Times instance from just a date.
 // The time portion is set to now.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func CreateFromDate(y int, mon time.Month, d int, location string) (*Time, *errorAVA.Error) {
 	h, m, s := Now().Clock()
 	ns := Now().Nanosecond()
@@ -158,7 +158,7 @@ func CreateFromDate(y int, mon time.Month, d int, location string) (*Time, *erro
 
 // CreateFromTime returns a new pointer to a Times instance from just a date.
 // The time portion is set to now.
-// If the locations is invalid, it returns an ErrorGmf instead.
+// If the locations is invalid, it returns an ErrorAVA instead.
 func CreateFromTime(h, m, s, ns int, location string) (*Time, *errorAVA.Error) {
 	y, mon, d := Now().Date()
 
@@ -166,26 +166,26 @@ func CreateFromTime(h, m, s, ns int, location string) (*Time, *errorAVA.Error) {
 }
 
 // CreateFromFormat returns a new pointer to a Times instance from a specific format.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func CreateFromFormat(layout, value string, location string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, location)
+		return nil, errorTimeAVA.LoadLocation(err, location)
 	}
 	t, err := time.ParseInLocation(layout, value, l)
 	if err != nil {
-		return nil, errorTimeGmf.ParseInLocation(err, fmt.Sprintf("Layout: [%s] Value: [%s] Location: [%s]", layout, value, location))
+		return nil, errorTimeAVA.ParseInLocation(err, fmt.Sprintf("Layout: [%s] Value: [%s] Location: [%s]", layout, value, location))
 	}
 
 	return NewTime(t), nil
 }
 
 // CreateFromTimestamp returns a new pointer to a Times instance from a timestamp.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func CreateFromTimestamp(timestamp int64, location string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, location)
+		return nil, errorTimeAVA.LoadLocation(err, location)
 	}
 	t := NewTime(Now().In(l))
 	t.SetTimestamp(timestamp)
@@ -194,13 +194,13 @@ func CreateFromTimestamp(timestamp int64, location string) (*Time, *errorAVA.Err
 }
 
 // CreateFromTimestampUTC returns a new pointer to a Times instance from an UTC timestamp.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func CreateFromTimestampUTC(timestamp int64) (*Time, *errorAVA.Error) {
 	return CreateFromTimestamp(timestamp, "UTC")
 }
 
 // CreateFromMonthAndYear returns a new pointer to a Times instance from a specific month and year.
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func CreateFromMonthAndYear(y int, mon time.Month, location string) (*Time, *errorAVA.Error) {
 	_, _, d := Now().Date()
 	h, m, s := Now().Clock()
@@ -210,33 +210,33 @@ func CreateFromMonthAndYear(y int, mon time.Month, location string) (*Time, *err
 }
 
 // Parser returns a pointer to a new Times instance from a string
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func Parse(layout, value, location string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, location)
+		return nil, errorTimeAVA.LoadLocation(err, location)
 	}
 	t, err := time.ParseInLocation(layout, value, l)
 	if err != nil {
-		return nil, errorTimeGmf.ParseInLocation(err, fmt.Sprintf("Layout: [%s] Value: [%s] Location: [%s]", layout, value, location))
+		return nil, errorTimeAVA.ParseInLocation(err, fmt.Sprintf("Layout: [%s] Value: [%s] Location: [%s]", layout, value, location))
 	}
 
 	return NewTime(t), nil
 }
 
 // Today returns a pointer to a new Times instance for today
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func Today(location string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, location)
+		return nil, errorTimeAVA.LoadLocation(err, location)
 	}
 
 	return NewTime(Now().In(l)), nil
 }
 
 // Tomorrow returns a pointer to a new Times instance for tomorrow
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func Tomorrow(location string) (*Time, *errorAVA.Error) {
 	c, err := Today(location)
 	if err != nil {
@@ -247,7 +247,7 @@ func Tomorrow(location string) (*Time, *errorAVA.Error) {
 }
 
 // Yesterday returns a pointer to a new Times instance for yesterday
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func Yesterday(location string) (*Time, *errorAVA.Error) {
 	c, err := Today(location)
 	if err != nil {
@@ -286,7 +286,7 @@ func Now() *Time {
 func NowInLocation(loc string) (*Time, *errorAVA.Error) {
 	l, err := time.LoadLocation(loc)
 	if err != nil {
-		return nil, errorTimeGmf.LoadLocation(err, loc)
+		return nil, errorTimeAVA.LoadLocation(err, loc)
 	}
 	return nowIn(l), nil
 }
@@ -702,7 +702,7 @@ func (c *Time) SetTimeFromTimeString(timeString string) *errorAVA.Error {
 		}
 	}
 
-	return errorTimeGmf.TimeFormat(err, "Only supports hh:mm:ss, hh:mm and hh formats")
+	return errorTimeAVA.TimeFormat(err, "Only supports hh:mm:ss, hh:mm and hh formats")
 }
 
 // SetWeekEndsAt sets the last day of week
@@ -726,11 +726,11 @@ func (c *Time) SetTimestamp(sec int64) {
 }
 
 // SetTimeZone sets the location from a string
-// If the location is invalid, it returns an ErrorGmf instead.
+// If the location is invalid, it returns an ErrorAVA instead.
 func (c *Time) SetTimeZone(name string) *errorAVA.Error {
 	loc, err := time.LoadLocation(name)
 	if err != nil {
-		return errorTimeGmf.LoadLocation(err, name)
+		return errorTimeAVA.LoadLocation(err, name)
 	}
 	c.Time = time.Date(c.Year(), c.Month(), c.Day(), c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), loc)
 
@@ -893,20 +893,20 @@ func (c *Time) IsLeapYear() bool {
 
 // IsLongYear determines if the instance is a long year
 func (c *Time) IsLongYear() bool {
-	timeGmf := create(c.Year(), time.December, 31, 0, 0, 0, 0, c.Location())
-	_, w := timeGmf.WeekOfYear()
+	timeAVA := create(c.Year(), time.December, 31, 0, 0, 0, 0, c.Location())
+	_, w := timeAVA.WeekOfYear()
 
 	return w == weeksPerLongYear
 }
 
 // IsSameAs compares the formatted values of the two dates.
 // If passed date is nil, compares against today
-func (c *Time) IsSameAs(format string, timeGmf *Time) bool {
-	if timeGmf == nil {
+func (c *Time) IsSameAs(format string, timeAVA *Time) bool {
+	if timeAVA == nil {
 		return c.Format(DefaultFormat) == Now().Format(format)
 	}
 
-	return c.Format(DefaultFormat) == timeGmf.Format(format)
+	return c.Format(DefaultFormat) == timeAVA.Format(format)
 }
 
 // IsCurrentYear determines if the current time is in the current year
@@ -916,12 +916,12 @@ func (c *Time) IsCurrentYear() bool {
 
 // IsSameYear checks if the passed in date is in the same year as the current time year.
 // If passed date is nil, compares against today
-func (c *Time) IsSameYear(timeGmf *Time) bool {
-	if timeGmf == nil {
+func (c *Time) IsSameYear(timeAVA *Time) bool {
+	if timeAVA == nil {
 		return c.Year() == nowIn(c.Location()).Year()
 	}
 
-	return c.Year() == timeGmf.Year()
+	return c.Year() == timeAVA.Year()
 }
 
 // IsCurrentMonth determines if the current time is in the current month
@@ -931,13 +931,13 @@ func (c *Time) IsCurrentMonth() bool {
 
 // IsSameMonth checks if the passed in date is in the same month as the current month
 // If passed date is nil, compares against today
-func (c *Time) IsSameMonth(timeGmf *Time, sameYear bool) bool {
+func (c *Time) IsSameMonth(timeAVA *Time, sameYear bool) bool {
 	m := nowIn(c.Location()).Month()
-	if timeGmf != nil {
-		m = timeGmf.Month()
+	if timeAVA != nil {
+		m = timeAVA.Month()
 	}
 	if sameYear {
-		return c.IsSameYear(timeGmf) && c.Month() == m
+		return c.IsSameYear(timeAVA) && c.Month() == m
 	}
 
 	return c.Month() == m
@@ -945,10 +945,10 @@ func (c *Time) IsSameMonth(timeGmf *Time, sameYear bool) bool {
 
 // IsSameDay checks if the passed in date is the same day as the current day.
 // If passed date is nil, compares against today
-func (c *Time) IsSameDay(timeGmf *Time) bool {
+func (c *Time) IsSameDay(timeAVA *Time) bool {
 	n := nowIn(c.Location())
-	if timeGmf != nil {
-		n = timeGmf
+	if timeAVA != nil {
+		n = timeAVA
 	}
 
 	return c.Year() == n.Year() && c.Month() == n.Month() && c.Day() == n.Day()
@@ -1018,63 +1018,63 @@ func (c *Time) IsLastMonth() bool {
 }
 
 // Eq determines if the current Times is equal to another
-func (c *Time) Eq(timeGmf *Time) bool {
-	return c.Equal(timeGmf.GetTime())
+func (c *Time) Eq(timeAVA *Time) bool {
+	return c.Equal(timeAVA.GetTime())
 }
 
 // EqualTo determines if the current Times is equal to another
-func (c *Time) EqualTo(timeGmf *Time) bool {
-	return c.Eq(timeGmf)
+func (c *Time) EqualTo(timeAVA *Time) bool {
+	return c.Eq(timeAVA)
 }
 
 // Ne determines if the current Times is not equal to another
-func (c *Time) Ne(timeGmf *Time) bool {
-	return !c.Eq(timeGmf)
+func (c *Time) Ne(timeAVA *Time) bool {
+	return !c.Eq(timeAVA)
 }
 
 // NotEqualTo determines if the current Times is not equal to another
-func (c *Time) NotEqualTo(timeGmf *Time) bool {
-	return c.Ne(timeGmf)
+func (c *Time) NotEqualTo(timeAVA *Time) bool {
+	return c.Ne(timeAVA)
 }
 
 // Gt determines if the current Times is greater (after) than another
-func (c *Time) Gt(timeGmf *Time) bool {
-	return c.After(timeGmf.GetTime())
+func (c *Time) Gt(timeAVA *Time) bool {
+	return c.After(timeAVA.GetTime())
 }
 
 // GreaterThan determines if the current Times is greater (after) than another
-func (c *Time) GreaterThan(timeGmf *Time) bool {
-	return c.Gt(timeGmf)
+func (c *Time) GreaterThan(timeAVA *Time) bool {
+	return c.Gt(timeAVA)
 }
 
 // Gte determines if the instance is greater (after) than or equal to another
-func (c *Time) Gte(timeGmf *Time) bool {
-	return c.Gt(timeGmf) || c.Eq(timeGmf)
+func (c *Time) Gte(timeAVA *Time) bool {
+	return c.Gt(timeAVA) || c.Eq(timeAVA)
 }
 
 // GreaterThanOrEqualTo determines if the instance is greater (after) than or equal to another
-func (c *Time) GreaterThanOrEqualTo(timeGmf *Time) bool {
-	return c.Gte(timeGmf) || c.Eq(timeGmf)
+func (c *Time) GreaterThanOrEqualTo(timeAVA *Time) bool {
+	return c.Gte(timeAVA) || c.Eq(timeAVA)
 }
 
 // Lt determines if the instance is less (before) than another
-func (c *Time) Lt(timeGmf *Time) bool {
-	return c.Before(timeGmf.GetTime())
+func (c *Time) Lt(timeAVA *Time) bool {
+	return c.Before(timeAVA.GetTime())
 }
 
 // LessThan determines if the instance is less (before) than another
-func (c *Time) LessThan(timeGmf *Time) bool {
-	return c.Lt(timeGmf)
+func (c *Time) LessThan(timeAVA *Time) bool {
+	return c.Lt(timeAVA)
 }
 
 // Lte determines if the instance is less (before) or equal to another
-func (c *Time) Lte(timeGmf *Time) bool {
-	return c.Lt(timeGmf) || c.Eq(timeGmf)
+func (c *Time) Lte(timeAVA *Time) bool {
+	return c.Lt(timeAVA) || c.Eq(timeAVA)
 }
 
 // LessThanOrEqualTo determines if the instance is less (before) or equal to another
-func (c *Time) LessThanOrEqualTo(timeGmf *Time) bool {
-	return c.Lte(timeGmf)
+func (c *Time) LessThanOrEqualTo(timeAVA *Time) bool {
+	return c.Lte(timeAVA)
 }
 
 // Between determines if the current instance is between two others
@@ -1109,52 +1109,52 @@ func (c *Time) Farthest(a, b *Time) *Time {
 }
 
 // Min returns the minimum instance between a given instance and the current instance
-func (c *Time) Min(timeGmf *Time) *Time {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) Min(timeAVA *Time) *Time {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	if c.Lt(timeGmf) {
+	if c.Lt(timeAVA) {
 		return c
 	}
 
-	return timeGmf
+	return timeAVA
 }
 
 // Minimum returns the minimum instance between a given instance and the current instance
-func (c *Time) Minimum(timeGmf *Time) *Time {
-	return c.Min(timeGmf)
+func (c *Time) Minimum(timeAVA *Time) *Time {
+	return c.Min(timeAVA)
 }
 
 // Max returns the maximum instance between a given instance and the current instance
-func (c *Time) Max(timeGmf *Time) *Time {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) Max(timeAVA *Time) *Time {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
 
-	if c.Gt(timeGmf) {
+	if c.Gt(timeAVA) {
 		return c
 	}
 
-	return timeGmf
+	return timeAVA
 }
 
 // Maximum returns the maximum instance between a given instance and the current instance
-func (c *Time) Maximum(timeGmf *Time) *Time {
-	return c.Max(timeGmf)
+func (c *Time) Maximum(timeAVA *Time) *Time {
+	return c.Max(timeAVA)
 }
 
 // DiffInYears returns the difference in years
-func (c *Time) DiffInYears(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInYears(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
 
-	if c.Year() == timeGmf.Year() {
+	if c.Year() == timeAVA.Year() {
 		return 0
 	}
 
 	start := NewTime(c.Time)
-	end := NewTime(timeGmf.GetTime())
+	end := NewTime(timeAVA.GetTime())
 	if end.UnixNano() < start.UnixNano() {
 		aux := start
 		start = end
@@ -1173,29 +1173,29 @@ func (c *Time) DiffInYears(timeGmf *Time, abs bool) int64 {
 }
 
 // DiffInMonths returns the difference in months
-func (c *Time) DiffInMonths(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInMonths(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
 
 	cAux := c.Copy()
-	timeGmfAux := timeGmf.Copy()
-	if cAux.Location() != timeGmfAux.Location() {
+	timeAVAAux := timeAVA.Copy()
+	if cAux.Location() != timeAVAAux.Location() {
 		cAux = NewTime(cAux.In(time.UTC))
-		timeGmfAux = NewTime(timeGmfAux.In(time.UTC))
+		timeAVAAux = NewTime(timeAVAAux.In(time.UTC))
 	}
 
-	return calculateDiffInMonths(cAux, timeGmfAux, abs)
+	return calculateDiffInMonths(cAux, timeAVAAux, abs)
 }
 
-func calculateDiffInMonths(c, timeGmf *Time, abs bool) int64 {
-	if c.Month() == timeGmf.Month() && c.Year() == timeGmf.Year() {
+func calculateDiffInMonths(c, timeAVA *Time, abs bool) int64 {
+	if c.Month() == timeAVA.Month() && c.Year() == timeAVA.Year() {
 		return 0
 	}
 
-	if c.Month() != timeGmf.Month() && c.Year() == timeGmf.Year() {
-		diffInMonths := int64(timeGmf.Month() - c.Month())
-		remainingTime := int(timeGmf.DiffInHours(c, true))
+	if c.Month() != timeAVA.Month() && c.Year() == timeAVA.Year() {
+		diffInMonths := int64(timeAVA.Month() - c.Month())
+		remainingTime := int(timeAVA.DiffInHours(c, true))
 
 		if remainingTime < c.DaysInMonth()*hoursPerDay {
 			return 0
@@ -1204,76 +1204,76 @@ func calculateDiffInMonths(c, timeGmf *Time, abs bool) int64 {
 		return absValue(abs, diffInMonths)
 	}
 
-	m := monthsPerYear - c.Month() + timeGmf.Month() - 1
-	if c.Year() < timeGmf.Year() && c.hasRemainingHours(timeGmf) {
+	m := monthsPerYear - c.Month() + timeAVA.Month() - 1
+	if c.Year() < timeAVA.Year() && c.hasRemainingHours(timeAVA) {
 		m = m + 1
 	}
 
-	if c.Year() > timeGmf.Year() {
-		m = monthsPerYear - timeGmf.Month() + c.Month() - 1
+	if c.Year() > timeAVA.Year() {
+		m = monthsPerYear - timeAVA.Month() + c.Month() - 1
 
-		if timeGmf.hasRemainingHours(c) {
+		if timeAVA.hasRemainingHours(c) {
 			m = m + 1
 		}
 	}
 
-	diffYr := c.Year() - timeGmf.Year()
+	diffYr := c.Year() - timeAVA.Year()
 	if math.Abs(float64(diffYr)) > 1 {
 		dateWithoutMonths := c.AddMonths(int(m))
-		diff := dateWithoutMonths.DiffInYears(timeGmf, abs)*monthsPerYear + int64(m)
+		diff := dateWithoutMonths.DiffInYears(timeAVA, abs)*monthsPerYear + int64(m)
 
 		return absValue(abs, diff)
 	}
 
 	diff := int64(m)
 
-	if c.GreaterThan(timeGmf) {
+	if c.GreaterThan(timeAVA) {
 		diff = -diff
 	}
 
 	return absValue(abs, diff)
 }
 
-func (c *Time) hasRemainingHours(timeGmf *Time) bool {
+func (c *Time) hasRemainingHours(timeAVA *Time) bool {
 	totalHr := int64(c.DaysInMonth() * hoursPerDay)
 	cHr := c.StartOfMonth().DiffInHours(c, false)
 	remainHr := totalHr - cHr
-	spentInHr := timeGmf.StartOfMonth().DiffInHours(timeGmf, false)
+	spentInHr := timeAVA.StartOfMonth().DiffInHours(timeAVA, false)
 
 	return remainHr+spentInHr >= totalHr
 }
 
 // DiffDurationInString returns the duration difference in string format
-func (c *Time) DiffDurationInString(timeGmf *Time) string {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffDurationInString(timeAVA *Time) string {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
 
-	return strings.Replace(timeGmf.Sub(c.Time).String(), "-", "", 1)
+	return strings.Replace(timeAVA.Sub(c.Time).String(), "-", "", 1)
 }
 
 // DiffInWeeks returns the difference in weeks
-func (c *Time) DiffInWeeks(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInWeeks(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	return c.DiffInDays(timeGmf, abs) / daysPerWeek
+	return c.DiffInDays(timeAVA, abs) / daysPerWeek
 }
 
 // DiffInDays returns the difference in days
-func (c *Time) DiffInDays(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInDays(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	return c.DiffInHours(timeGmf, abs) / hoursPerDay
+	return c.DiffInHours(timeAVA, abs) / hoursPerDay
 }
 
 // DiffInNights returns the difference in nights
-func (c *Time) DiffInNights(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInNights(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	return c.DiffInDays(timeGmf, abs)
+	return c.DiffInDays(timeAVA, abs)
 }
 
 // Filter represents a predicate used for filtering diffs
@@ -1283,46 +1283,46 @@ type Filter func(*Time) bool
 const dayDuration = time.Hour * hoursPerDay
 
 // DiffInDaysFiltered returns the difference in days using a filter
-func (c *Time) DiffInDaysFiltered(f Filter, timeGmf *Time, abs bool) int64 {
-	return c.DiffFiltered(dayDuration, f, timeGmf, abs)
+func (c *Time) DiffInDaysFiltered(f Filter, timeAVA *Time, abs bool) int64 {
+	return c.DiffFiltered(dayDuration, f, timeAVA, abs)
 }
 
 // DiffInHoursFiltered returns the difference in hours using a filter
-func (c *Time) DiffInHoursFiltered(f Filter, timeGmf *Time, abs bool) int64 {
-	return c.DiffFiltered(time.Hour, f, timeGmf, abs)
+func (c *Time) DiffInHoursFiltered(f Filter, timeAVA *Time, abs bool) int64 {
+	return c.DiffFiltered(time.Hour, f, timeAVA, abs)
 }
 
 // DiffInWeekdays returns the difference in weekdays
-func (c *Time) DiffInWeekdays(timeGmf *Time, abs bool) int64 {
+func (c *Time) DiffInWeekdays(timeAVA *Time, abs bool) int64 {
 	f := func(t *Time) bool {
 		return t.IsWeekday()
 	}
 
-	return c.DiffFiltered(dayDuration, f, timeGmf, abs)
+	return c.DiffFiltered(dayDuration, f, timeAVA, abs)
 }
 
 // DiffInWeekendDays returns the difference in weekend days using a filter
-func (c *Time) DiffInWeekendDays(timeGmf *Time, abs bool) int64 {
+func (c *Time) DiffInWeekendDays(timeAVA *Time, abs bool) int64 {
 	f := func(t *Time) bool {
 		return t.IsWeekend()
 	}
 
-	return c.DiffFiltered(dayDuration, f, timeGmf, abs)
+	return c.DiffFiltered(dayDuration, f, timeAVA, abs)
 }
 
 // DiffFiltered returns the difference by the given duration using a filter
-func (c *Time) DiffFiltered(duration time.Duration, f Filter, timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffFiltered(duration time.Duration, f Filter, timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	if c.IsSameDay(timeGmf) {
+	if c.IsSameDay(timeAVA) {
 		return 0
 	}
 
 	inverse := false
 	var counter int64
 	s := int64(duration.Seconds())
-	start, end := c.Copy(), timeGmf.Copy()
+	start, end := c.Copy(), timeAVA.Copy()
 	if start.Gt(end) {
 		start, end = swap(start, end)
 		inverse = true
@@ -1351,11 +1351,11 @@ func (c *Time) DiffInMinutes(d *Time, abs bool) int64 {
 }
 
 // DiffInSeconds returns the difference in seconds
-func (c *Time) DiffInSeconds(timeGmf *Time, abs bool) int64 {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) DiffInSeconds(timeAVA *Time, abs bool) int64 {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	diff := timeGmf.Timestamp() - c.Timestamp()
+	diff := timeAVA.Timestamp() - c.Timestamp()
 
 	return absValue(abs, diff)
 }
@@ -1473,7 +1473,7 @@ func (c *Time) EndOfWeek() *Time {
 
 // Results changes the time to the next occurrence of a given day of the week
 func (c *Time) Next(wd time.Weekday) *Time {
-	var temp *Time = c
+	var temp = c
 	temp = temp.AddDay()
 	for temp.Weekday() != wd {
 		temp = temp.AddDay()
@@ -1494,7 +1494,7 @@ func (c *Time) PreviousWeekday() *Time {
 
 // NextWeekendDay goes forward to the next weekend day
 func (c *Time) NextWeekendDay() *Time {
-	var temp *Time = c
+	var temp = c
 	temp = temp.AddDay()
 	for !temp.IsWeekend() {
 		temp = temp.AddDay()
@@ -1505,7 +1505,7 @@ func (c *Time) NextWeekendDay() *Time {
 
 // PreviousWeekendDay goes back to the previous weekend day
 func (c *Time) PreviousWeekendDay() *Time {
-	var temp *Time = c
+	var temp = c
 	temp = temp.SubDay()
 	for !temp.IsWeekend() {
 		temp = temp.SubDay()
@@ -1516,7 +1516,7 @@ func (c *Time) PreviousWeekendDay() *Time {
 
 // Previous changes the time to the previous occurrence of a given day of the week
 func (c *Time) Previous(wd time.Weekday) *Time {
-	var temp *Time = c
+	var temp = c
 	temp = temp.SubDay()
 	for temp.Weekday() != wd {
 		temp = temp.SubDay()
@@ -1653,14 +1653,14 @@ func (c *Time) NthOfYear(nth int, wd time.Weekday) *Time {
 }
 
 // Average returns the average between a given Times date and the current date
-func (c *Time) Average(timeGmf *Time) *Time {
-	if timeGmf == nil {
-		timeGmf = nowIn(c.Location())
+func (c *Time) Average(timeAVA *Time) *Time {
+	if timeAVA == nil {
+		timeAVA = nowIn(c.Location())
 	}
-	if c.Eq(timeGmf) {
+	if c.Eq(timeAVA) {
 		return c.Copy()
 	}
-	average := int(c.DiffInSeconds(timeGmf, false) / 2)
+	average := int(c.DiffInSeconds(timeAVA, false) / 2)
 
 	return c.AddSeconds(average)
 }

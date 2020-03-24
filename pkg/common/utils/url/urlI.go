@@ -9,7 +9,7 @@ package url
 
 import (
 	"net/url"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 

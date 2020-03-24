@@ -3,42 +3,43 @@ package addr_test
 import (
 	"testing"
 
+	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
 )
 
-type addrGmfSuite struct {
+type addrAVASuite struct {
 	suite.Suite
 }
 
-func TestAddrGmfInit(t *testing.T) {
-	suite.Run(t, new(addrGmfSuite))
+func TestAddrAVAInit(t *testing.T) {
+	suite.Run(t, new(addrAVASuite))
 }
 
-func (a *addrGmfSuite) BeforeTest() {
+func (a *addrAVASuite) BeforeTest() {
 	a.T().Log("BeforeTest")
 }
 
-func (a *addrGmfSuite) AfterTest() {
+func (a *addrAVASuite) AfterTest() {
 	a.T().Log("AfterTest")
 }
 
-func (a *addrGmfSuite) SetupSuite() {
+func (a *addrAVASuite) SetupSuite() {
 	a.T().Log("SetupSuite")
 }
 
-func (a *addrGmfSuite) SetupTest() {
+func (a *addrAVASuite) SetupTest() {
 	a.T().Log("SetupTest")
 }
 
-func (a *addrGmfSuite) TearDownSuite() {
+func (a *addrAVASuite) TearDownSuite() {
 	a.T().Log("TearDownSuite")
 }
 
-func (a *addrGmfSuite) TearDownTest() {
+func (a *addrAVASuite) TearDownTest() {
 	a.T().Log("TearDownTest")
 }
 
-func (a *addrGmfSuite) Test_GetIPWithPrefix() {
+func (a *addrAVASuite) Test_GetIPWithPrefix() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -49,7 +50,7 @@ func (a *addrGmfSuite) Test_GetIPWithPrefix() {
 	})
 }
 
-func (a *addrGmfSuite) Test_GetIP() {
+func (a *addrAVASuite) Test_GetIP() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -60,7 +61,7 @@ func (a *addrGmfSuite) Test_GetIP() {
 	})
 }
 
-func (a *addrGmfSuite) Test_ResolveIPFromHostsFile() {
+func (a *addrAVASuite) Test_ResolveIPFromHostsFile() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -71,7 +72,7 @@ func (a *addrGmfSuite) Test_ResolveIPFromHostsFile() {
 	})
 }
 
-func (a *addrGmfSuite) Test_IPs() {
+func (a *addrAVASuite) Test_IPs() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -82,7 +83,7 @@ func (a *addrGmfSuite) Test_IPs() {
 	})
 }
 
-func (a *addrGmfSuite) Test_Extract() {
+func (a *addrAVASuite) Test_Extract() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -93,7 +94,7 @@ func (a *addrGmfSuite) Test_Extract() {
 	})
 }
 
-func (a *addrGmfSuite) Test_IsPrivateIP() {
+func (a *addrAVASuite) Test_IsPrivateIP() {
 	Convey("Given a ", a.T(), func() {
 		Convey("Went it's OK ", func() {
 

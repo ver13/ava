@@ -25,7 +25,7 @@ const (
 var (
 	// RoutingPattern to use during route conversion. By default, use the colon router pattern
 	RoutingPattern         = ColonRouterPatternBuilder
-	EndpointURLKeysPattern = regexp.MustCompile(`/{([a-zA-Z\-_0-9]+)\}`)
+	EndpointURLKeysPattern = regexp.MustCompile(`/{([a-zA-Z\-_0-9]+)/}`)
 	hostPattern            = regexp.MustCompile(`(https?://)?([a-zA-Z0-9._\-]+)(:[0-9]{2,6})?/?`)
 )
 

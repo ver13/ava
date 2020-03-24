@@ -60,27 +60,27 @@ func (r *tomlSuite) TearDownTest() {
 func (r *tomlSuite) TestTOML() {
 	Convey("Given a struct ", r.T(), func() {
 		Convey("When marshal to TOML ", func() {
-			r.structData = configToml{postgresToml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "GmfDataBase"}}
+			r.structData = configToml{postgresToml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "AVADataBase"}}
 
 			data, err := r.serializer.Serializer(r.structData)
 			So(err, ShouldBeNil)
 			So(data, ShouldNotBeNil)
-			So(string(data), ShouldResemble, "[postgresYaml]\n  user = \"Ulises\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  db = \"GmfDataBase\"\n")
+			So(string(data), ShouldResemble, "[postgresYaml]\n  user = \"Ulises\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  db = \"AVADataBase\"\n")
 		})
 	})
 	Convey("Given a TOML ", r.T(), func() {
 		Convey("When unmarshal to struct is OK", func() {
 			r.structData = configToml{}
-			err := r.serializer.Deserializer([]byte("\n# Postgres configurationServiceI\n[postgresYaml]\n  db = \"GmfDataBase\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  user = \"Ulises\"\n"), &r.structData)
+			err := r.serializer.Deserializer([]byte("\n# Postgres configurationServiceI\n[postgresYaml]\n  db = \"AVADataBase\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  user = \"Ulises\"\n"), &r.structData)
 			So(err, ShouldBeNil)
 			So(r.structData, ShouldNotBeEmpty)
 			So(r.structData.Postgres.User, ShouldResemble, "Ulises")
 			So(r.structData.Postgres.Password, ShouldResemble, "Z;Z@pZz9G)MFAw[5")
-			So(r.structData.Postgres.Database, ShouldResemble, "GmfDataBase")
+			So(r.structData.Postgres.Database, ShouldResemble, "AVADataBase")
 		})
 		Convey("When unmarshal to struct is Failed", func() {
 			r.structData = configToml{}
-			err := r.serializer.Deserializer([]byte("Postgres configurationServiceI\n[postgres]\n\n  # not used anymore\n  db = \"GmfDataBase\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  user = \"Ulises\"\n"), &r.structData)
+			err := r.serializer.Deserializer([]byte("Postgres configurationServiceI\n[postgres]\n\n  # not used anymore\n  db = \"AVADataBase\"\n  password = \"Z;Z@pZz9G)MFAw[5\"\n  user = \"Ulises\"\n"), &r.structData)
 			So(err, ShouldNotBeNil)
 		})
 	})

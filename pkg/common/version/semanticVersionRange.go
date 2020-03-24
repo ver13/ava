@@ -231,7 +231,7 @@ func getWildcardType(vStr string) WildcardType {
 	nparts := len(parts)
 	wildcard := parts[nparts-1]
 
-	var possibleWildcardType WildcardType = WildcardType(nparts)
+	var possibleWildcardType = WildcardType(nparts)
 	if wildcard == "x" {
 		return possibleWildcardType
 	}

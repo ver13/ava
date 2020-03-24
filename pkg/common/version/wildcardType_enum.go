@@ -77,7 +77,7 @@ func (x WildcardType) MarshalText() ([]byte, *errorAVA.Error) {
 func (x WildcardType) UnmarshalText(text []byte) (WildcardType, *errorAVA.Error) {
 	name := string(text)
 	var err *errorAVA.Error
-	var tmp WildcardType = WildcardTypeUnknown
+	var tmp = WildcardTypeUnknown
 	if tmp, err = WildcardTypeType(name); err != nil {
 		return WildcardTypeUnknown, err
 	}

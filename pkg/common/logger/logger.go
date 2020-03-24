@@ -387,4 +387,3 @@ func (l *Logger) Parser() (*Logger, *errorAVA.Error) {
 func Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
 	return GetInstance().Serializer(t)
 }
-

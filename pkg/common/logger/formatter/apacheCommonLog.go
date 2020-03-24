@@ -15,7 +15,7 @@ var (
 	// Basic template just logs the level name, name field, message and fields.
 	// ApacheCommonFormatTemplate : {host} {userIdentifier} {authUserId} [{datetime}] "{method} {request} HTTP/1.0" {responseCode} {bytes}
 	ApacheCommonFormatTemplate = fmt.Sprintf("%s[%s]s - %s[%s]s %s[%s]d [%s[%s]s] \"%s[%s]s %s[%s]s HTTP/1.0\" %s[%s]d %s[%s]d\n",
-	"%", HOST, "%", USER_IDENTIFIER, "%", AUTH_USER_ID, "%", DATETIME, "%", METHOD, "%",REQUEST, "%",RESPONSE_CODE, "%",BYTES)
+		"%", HOST, "%", USER_IDENTIFIER, "%", AUTH_USER_ID, "%", DATETIME, "%", METHOD, "%", REQUEST, "%", RESPONSE_CODE, "%", BYTES)
 
 	// message template just logs the message.
 	ApacheCommonMessageTemplate = fmt.Sprintf("%s[%s]s\n", "%", MESSAGE)
@@ -43,12 +43,12 @@ func init() {
 // :param custom: User-defined formatters evaluated before built-in formatters. Keys are attributes to look for in the
 // 	formatting string (e.g. "%[myFormatter]s") and values are formatting functions.
 func newApacheCommonLogFormatter() *ApacheCommonFormatter {
-	var disableColors bool = false
+	var disableColors = false
 	// Disable colors if not supported.
 	if !checkIfTerminal(logrus.StandardLogger().Out) || (runtime.GOOS == "windows" && !WindowsNativeANSI()) {
 		disableColors = true
 	}
-	
+
 	formatter := ApacheCommonFormatter{struct {
 		template        string
 		handlers        []handler
@@ -85,10 +85,10 @@ func newApacheCommonLogFormatter() *ApacheCommonFormatter {
 		startTime:       time.Now(),
 	},
 	}
-	
+
 	// Parser the template string.
 	formatter.parseTemplate(ApacheCommonFormatTemplate, nil)
-	
+
 	return &formatter
 }
 
@@ -107,6 +107,6 @@ func NewApacheCommonLogFormatterDefault() *loggerAVA.Logger {
 	logger.Log.SetFormatter(newApacheCommonLogFormatter())
 	logger.Log.SetOutput(os.Stdout)
 	logger.Log.SetLevel(logrus.DebugLevel)
-	
+
 	return &logger
 }

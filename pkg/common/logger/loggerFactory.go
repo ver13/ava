@@ -3,7 +3,7 @@ package logger
 import (
 	"fmt"
 	"sync"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorLoggerAVA "github.com/ver13/ava/pkg/common/logger/error"
 )

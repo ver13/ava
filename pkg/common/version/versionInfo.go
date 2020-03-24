@@ -3,8 +3,8 @@
 // At build time, the variables name, version, Commit, and BuildTags can be passed as build flags as shown in the following example:
 //
 //  go build -X "github.com/ver13/ava/pkg/common/version.name=Golang Microservices Framework" \
-//           -X "github.com/ver13/ava/pkg/common/version.ServerName=gmfServer" \
-//           -X "github.com/ver13/ava/pkg/common/version.ClientName=gmfCli" \
+//           -X "github.com/ver13/ava/pkg/common/version.ServerName=avaServer" \
+//           -X "github.com/ver13/ava/pkg/common/version.ClientName=avaCli" \
 //           -X "github.com/ver13/ava/pkg/common/version.version=v1.0.0" \
 //           -X "github.com/ver13/ava/pkg/common/version.Commit=f0f7b7dab7e36c20b757cebce0e8f4fc5b95de60" \
 //           -X "github.com/ver13/ava/pkg/common/version.BuildTags=linux darwin amd64"
@@ -26,25 +26,25 @@ var (
 
 var (
 	// application's name
-	Name string = ""
+	Name = ""
 	// server binary name
-	ServerName string = "<appd>"
+	ServerName = "<appd>"
 	// client binary name
-	ClientName string = "<appcli>"
+	ClientName = "<appcli>"
 	// application's version
 	Version string
-	Release string = ""
+	Release = ""
 	// commit
-	Commit string = ""
+	Commit = ""
 	// hash of the go.sum file
-	GoSumHash string = ""
+	GoSumHash = ""
 	// build tags
-	BuildTags   string = ""
-	BuildNumber string = ""
-	BuildDate   string = ""
-	BuildHash   string = ""
+	BuildTags   = ""
+	BuildNumber = ""
+	BuildDate   = ""
+	BuildHash   = ""
 
-	SemanticVersionStr string = ""
+	SemanticVersionStr = ""
 )
 
 type VersionInfo struct {

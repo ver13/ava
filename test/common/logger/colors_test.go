@@ -7,7 +7,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
-	
+
 	loggerAVA "github.com/ver13/ava/pkg/common/logger"
 	. "github.com/ver13/ava/pkg/common/logger/formatter"
 )

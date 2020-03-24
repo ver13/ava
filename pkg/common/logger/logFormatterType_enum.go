@@ -6,7 +6,7 @@ package logger
 import (
 	"fmt"
 	"strings"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorLoggerAVA "github.com/ver13/ava/pkg/common/logger/error"
 )

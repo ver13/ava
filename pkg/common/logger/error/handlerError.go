@@ -2,7 +2,7 @@ package error
 
 import (
 	"fmt"
-	
+
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
@@ -25,4 +25,3 @@ func HandlerErrorSkip(e error, details interface{}, skip int) *errorAVA.Error {
 	err.Println()
 	return &err
 }
-

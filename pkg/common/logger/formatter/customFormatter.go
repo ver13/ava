@@ -6,10 +6,10 @@ import (
 	"os"
 	"runtime"
 	"time"
-	
+
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh/terminal"
-	
+
 	loggerAVA "github.com/ver13/ava/pkg/common/logger"
 )
 

@@ -213,7 +213,7 @@ func handlerHost(entry *logrus.Entry, formatter *customFormatter) (interface{}, 
 }
 
 func handlerUser(entry *logrus.Entry, formatter *customFormatter) (interface{}, error) {
-	return Color(entry, formatter,"User"), nil
+	return Color(entry, formatter, "User"), nil
 }
 
 func handlerAuthUserID(entry *logrus.Entry, formatter *customFormatter) (interface{}, error) {
@@ -221,7 +221,7 @@ func handlerAuthUserID(entry *logrus.Entry, formatter *customFormatter) (interfa
 }
 
 func handlerMethod(entry *logrus.Entry, formatter *customFormatter) (interface{}, error) {
-	return Color(entry, formatter,"Method"), nil
+	return Color(entry, formatter, "Method"), nil
 }
 
 func handlerRequest(entry *logrus.Entry, formatter *customFormatter) (interface{}, error) {
@@ -271,4 +271,3 @@ func handlerThreadID(entry *logrus.Entry, formatter *customFormatter) (interface
 func handlerClient(entry *logrus.Entry, formatter *customFormatter) (interface{}, error) {
 	return Color(entry, formatter, "Client"), nil
 }
-

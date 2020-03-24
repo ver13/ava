@@ -3,7 +3,7 @@ package uri_test
 import (
 	"testing"
 
-	. "github.com/ValentinEncinasRojas/ava/pkg/common/utils/uri"
+	. "github.com/ver13/ava/pkg/common/utils/uri"
 )
 
 func TestURIParser_cleanHosts(t *testing.T) {

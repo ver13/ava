@@ -2,7 +2,7 @@ package formatter
 
 import (
 	"github.com/sirupsen/logrus"
-	
+
 	loggerAVA "github.com/ver13/ava/pkg/common/logger"
 )
 

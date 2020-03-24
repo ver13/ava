@@ -3,10 +3,10 @@ package time_test
 import (
 	"testing"
 	"time"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-	
+
 	. "github.com/ver13/ava/pkg/common/time"
 )
 
@@ -295,7 +295,7 @@ func (t *timeSuite) TestTime_AddCenturies() {
 			So(err, ShouldBeNil)
 
 			actual := c.AddCenturies(1)
-			
+
 			expected, err := Create(2109, time.November, 10, 23, 0, 0, 0, "UTC")
 			So(err, ShouldBeNil)
 			So(expected, ShouldResemble, actual)

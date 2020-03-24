@@ -192,7 +192,7 @@ func (s *String) ConvertTime(timeString string, formatIn string, formatOut strin
 	}
 	t, err := time.Parse(formatIn, timeString)
 	if err != nil {
-		return "", errorStringAVA.TimeParser(err, fmt.Sprintf("format: [%s] - TimeGmf: [%s]", formatIn, timeString))
+		return "", errorStringAVA.TimeParser(err, fmt.Sprintf("format: [%s] - TimeAVA: [%s]", formatIn, timeString))
 	}
 	return t.Format(formatOut), nil
 }

@@ -59,27 +59,27 @@ func (r *yamlSuite) TearDownTest() {
 func (r *yamlSuite) TestYAML() {
 	Convey("Given a struct ", r.T(), func() {
 		Convey("When marshal to YAML ", func() {
-			r.structData = configYaml{postgresYaml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "GmfDataBase"}}
+			r.structData = configYaml{postgresYaml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "AVADataBase"}}
 
 			data, err := r.serializer.Serializer(r.structData)
 			So(err, ShouldBeNil)
 			So(data, ShouldNotBeNil)
-			So(string(data), ShouldResemble, "postgresYaml:\n  user: Ulises\n  password: Z;Z@pZz9G)MFAw[5\n  db: GmfDataBase\n")
+			So(string(data), ShouldResemble, "postgresYaml:\n  user: Ulises\n  password: Z;Z@pZz9G)MFAw[5\n  db: AVADataBase\n")
 		})
 	})
 	Convey("Given a YAML ", r.T(), func() {
 		Convey("When unmarshal to struct is OK", func() {
 			r.structData = configYaml{}
-			err := r.serializer.Deserializer([]byte("postgresYaml:\n  user: Ulises\n  password: Z;Z@pZz9G)MFAw[5\n  db: GmfDataBase\n"), &r.structData)
+			err := r.serializer.Deserializer([]byte("postgresYaml:\n  user: Ulises\n  password: Z;Z@pZz9G)MFAw[5\n  db: AVADataBase\n"), &r.structData)
 			So(err, ShouldBeNil)
 			So(r.structData, ShouldNotBeEmpty)
 			So(r.structData.Postgres.User, ShouldResemble, "Ulises")
 			So(r.structData.Postgres.Password, ShouldResemble, "Z;Z@pZz9G)MFAw[5")
-			So(r.structData.Postgres.Database, ShouldResemble, "GmfDataBase")
+			So(r.structData.Postgres.Database, ShouldResemble, "AVADataBase")
 		})
 		Convey("When unmarshal to struct is Failed", func() {
 			r.structData = configYaml{}
-			err := r.serializer.Deserializer([]byte("postgresYaml:  user: Ulises  password: Z;Z@pZz9G)MFAw[5  db: GmfDataBase"), &r.structData)
+			err := r.serializer.Deserializer([]byte("postgresYaml:  user: Ulises  password: Z;Z@pZz9G)MFAw[5  db: AVADataBase"), &r.structData)
 			So(err, ShouldNotBeNil)
 		})
 	})

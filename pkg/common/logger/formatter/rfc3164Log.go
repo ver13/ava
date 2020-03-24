@@ -79,6 +79,6 @@ func NewLoggerRFC3164Default() *loggerAVA.Logger {
 	logger.Log.SetFormatter(newRFC3164Formatter())
 	logger.Log.SetOutput(os.Stdout)
 	logger.Log.SetLevel(logrus.DebugLevel)
-	
+
 	return &logger
 }

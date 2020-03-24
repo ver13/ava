@@ -3,7 +3,7 @@ package grpc_test
 import (
 	"testing"
 
-	. "github.com/ValentinEncinasRojas/ava/pkg/common/utils/grpc"
+	. "github.com/ver13/ava/pkg/common/utils/grpc"
 )
 
 func TestServiceMethod(t *testing.T) {

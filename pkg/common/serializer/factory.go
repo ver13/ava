@@ -42,7 +42,7 @@ func (s Factory) SerializerFactory(t SerializerType) (SerializerI, *errorAVA.Err
 		fmt.Sprintf("Serializer is not found and return error.")
 		return nil, errorSerializerAVA.NotImplemented(nil, fmt.Sprintf("Serializer type: %s", t.String()))
 	}
-	fmt.Sprintf("Serializer %s is registered and return it.")
+	fmt.Sprintf("Serializer %s is registered and return it.", t)
 	return serializer, nil
 }
 func GetSerializer(t SerializerType) SerializerI {

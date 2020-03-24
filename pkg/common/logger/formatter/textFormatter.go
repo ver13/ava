@@ -42,12 +42,12 @@ func init() {
 // :param custom: User-defined formatters evaluated before built-in formatters. Keys are attributes to look for in the
 // 	formatting string (e.g. "%[myFormatter]s") and values are formatting functions.
 func newTextFormatter() *TextFormatter {
-	var disableColors bool = false
+	var disableColors = false
 	// Disable colors if not supported.
 	if !checkIfTerminal(logrus.StandardLogger().Out) || (runtime.GOOS == "windows" && !WindowsNativeANSI()) {
 		disableColors = true
 	}
-	
+
 	formatter := TextFormatter{struct {
 		template        string
 		handlers        []handler
@@ -65,29 +65,29 @@ func newTextFormatter() *TextFormatter {
 		color           map[loggerAVA.LogLevelType]int
 		handleColors    [][3]int
 		startTime       time.Time
-		}{
-			template: TextLogTemplate,
-			handlers: nil,
-			attributes: nil,
-			forceColors: false,
-			disableColors: disableColors,
-			timestampFormat: TextDefaultTimestampFormat,
-			disableSorting: true,
-			colorDebug: AnsiCyan,
-			colorInfo: AnsiGreen,
-			colorWarn: AnsiYellow,
-			colorError: AnsiRed,
-			colorFatal: AnsiMagenta,
-			colorPanic: AnsiMagenta,
-			color: nil,
-			handleColors: nil,
-			startTime: time.Now(),
-		},
+	}{
+		template:        TextLogTemplate,
+		handlers:        nil,
+		attributes:      nil,
+		forceColors:     false,
+		disableColors:   disableColors,
+		timestampFormat: TextDefaultTimestampFormat,
+		disableSorting:  true,
+		colorDebug:      AnsiCyan,
+		colorInfo:       AnsiGreen,
+		colorWarn:       AnsiYellow,
+		colorError:      AnsiRed,
+		colorFatal:      AnsiMagenta,
+		colorPanic:      AnsiMagenta,
+		color:           nil,
+		handleColors:    nil,
+		startTime:       time.Now(),
+	},
 	}
-	
+
 	// Parser the template string.
 	formatter.parseTemplate(TextLogTemplate, nil)
-	
+
 	return &formatter
 }
 
@@ -106,6 +106,6 @@ func NewLoggerTextFormatterDefault() *loggerAVA.Logger {
 	logger.Log.SetFormatter(newTextFormatter())
 	logger.Log.SetOutput(os.Stdout)
 	logger.Log.SetLevel(logrus.DebugLevel)
-	
+
 	return &logger
 }

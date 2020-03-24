@@ -58,47 +58,47 @@ func (v *SemanticVersion) String() string {
 
 // Equals checks if v is equal to o.
 func (v *SemanticVersion) Equals(o *SemanticVersion) bool {
-	return (v.Compare(o) == 0)
+	return v.Compare(o) == 0
 }
 
 // EQ checks if v is equal to o.
 func (v *SemanticVersion) EQ(o *SemanticVersion) bool {
-	return (v.Compare(o) == 0)
+	return v.Compare(o) == 0
 }
 
 // NE checks if v is not equal to o.
 func (v *SemanticVersion) NE(o *SemanticVersion) bool {
-	return (v.Compare(o) != 0)
+	return v.Compare(o) != 0
 }
 
 // GT checks if v is greater than o.
 func (v *SemanticVersion) GT(o *SemanticVersion) bool {
-	return (v.Compare(o) == 1)
+	return v.Compare(o) == 1
 }
 
 // GTE checks if v is greater than or equal to o.
 func (v *SemanticVersion) GTE(o *SemanticVersion) bool {
-	return (v.Compare(o) >= 0)
+	return v.Compare(o) >= 0
 }
 
 // GE checks if v is greater than or equal to o.
 func (v *SemanticVersion) GE(o *SemanticVersion) bool {
-	return (v.Compare(o) >= 0)
+	return v.Compare(o) >= 0
 }
 
 // LT checks if v is less than o.
 func (v *SemanticVersion) LT(o *SemanticVersion) bool {
-	return (v.Compare(o) == -1)
+	return v.Compare(o) == -1
 }
 
 // LTE checks if v is less than or equal to o.
 func (v *SemanticVersion) LTE(o *SemanticVersion) bool {
-	return (v.Compare(o) <= 0)
+	return v.Compare(o) <= 0
 }
 
 // LE checks if v is less than or equal to o.
 func (v *SemanticVersion) LE(o *SemanticVersion) bool {
-	return (v.Compare(o) <= 0)
+	return v.Compare(o) <= 0
 }
 
 // Compare compares Semantic Versions v to o:

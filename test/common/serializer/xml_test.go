@@ -59,27 +59,27 @@ func (r *xmlSuite) TearDownTest() {
 func (r *xmlSuite) TestXML() {
 	Convey("Given a struct ", r.T(), func() {
 		Convey("When marshal to Pretty XML ", func() {
-			r.structData = configXml{postgresXml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "GmfDataBase"}}
+			r.structData = configXml{postgresXml{User: "Ulises", Password: "Z;Z@pZz9G)MFAw[5", Database: "AVADataBase"}}
 
 			data, err := r.serializer.Serializer(r.structData)
 			So(err, ShouldBeNil)
 			So(data, ShouldNotBeNil)
-			So(string(data), ShouldResemble, "<configXml>\n    <postgresYaml>\n        <user>Ulises</user>\n        <password>Z;Z@pZz9G)MFAw[5</password>\n        <db>GmfDataBase</db>\n    </postgresYaml>\n</configXml>")
+			So(string(data), ShouldResemble, "<configXml>\n    <postgresYaml>\n        <user>Ulises</user>\n        <password>Z;Z@pZz9G)MFAw[5</password>\n        <db>AVADataBase</db>\n    </postgresYaml>\n</configXml>")
 		})
 	})
 	Convey("Given a XML ", r.T(), func() {
 		Convey("When unmarshal to struct is OK", func() {
 			r.structData = configXml{}
-			err := r.serializer.Deserializer([]byte("<configXml><postgresYaml><user>Ulises</user><password>Z;Z@pZz9G)MFAw[5</password><db>GmfDataBase</db></postgresYaml></configXml>"), &r.structData)
+			err := r.serializer.Deserializer([]byte("<configXml><postgresYaml><user>Ulises</user><password>Z;Z@pZz9G)MFAw[5</password><db>AVADataBase</db></postgresYaml></configXml>"), &r.structData)
 			So(err, ShouldBeNil)
 			So(r.structData, ShouldNotBeEmpty)
 			So(r.structData.Postgres.User, ShouldResemble, "Ulises")
 			So(r.structData.Postgres.Password, ShouldResemble, "Z;Z@pZz9G)MFAw[5")
-			So(r.structData.Postgres.Database, ShouldResemble, "GmfDataBase")
+			So(r.structData.Postgres.Database, ShouldResemble, "AVADataBase")
 		})
 		Convey("When unmarshal to struct is Failed", func() {
 			r.structData = configXml{}
-			err := r.serializer.Deserializer([]byte("<error><postgres><user>Ulises</user><password>Z;Z@pZz9G)MFAw[5</password><db>GmfDataBase</db></postgresYaml></configXml>"), &r.structData)
+			err := r.serializer.Deserializer([]byte("<error><postgres><user>Ulises</user><password>Z;Z@pZz9G)MFAw[5</password><db>AVADataBase</db></postgresYaml></configXml>"), &r.structData)
 			So(err, ShouldNotBeNil)
 		})
 	})

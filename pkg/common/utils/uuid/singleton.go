@@ -6,7 +6,7 @@ import (
 
 var (
 	f *UUID
-	
+
 	once sync.Once
 )
 

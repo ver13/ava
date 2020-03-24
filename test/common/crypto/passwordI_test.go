@@ -3,10 +3,10 @@ package crypto_test
 import (
 	"reflect"
 	"testing"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-	
+
 	. "github.com/ver13/ava/pkg/common/crypto"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )

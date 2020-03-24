@@ -2,9 +2,9 @@ package crypto
 
 import (
 	"fmt"
-	
+
 	"golang.org/x/crypto/bcrypt"
-	
+
 	errCryptoAVA "github.com/ver13/ava/pkg/common/crypto/error"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )

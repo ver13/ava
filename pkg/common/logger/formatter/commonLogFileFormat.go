@@ -40,12 +40,12 @@ func init() {
 // :param custom: User-defined formatters evaluated before built-in formatters. Keys are attributes to look for in the
 // 	formatting string (e.g. "%[myFormatter]s") and values are formatting functions.
 func newCommonLogfileFormatter() *CommonLogFileFormatter {
-	var disableColors bool = false
+	var disableColors = false
 	// Disable colors if not supported.
 	if !checkIfTerminal(logrus.StandardLogger().Out) || (runtime.GOOS == "windows" && !WindowsNativeANSI()) {
 		disableColors = true
 	}
-	
+
 	formatter := CommonLogFileFormatter{struct {
 		template        string
 		handlers        []handler
@@ -82,10 +82,10 @@ func newCommonLogfileFormatter() *CommonLogFileFormatter {
 		startTime:       time.Now(),
 	},
 	}
-	
+
 	// Parser the template string.
 	formatter.parseTemplate(CommonFileFormatTemplate, nil)
-	
+
 	return &formatter
 }
 
@@ -104,6 +104,6 @@ func NewLoggerCommonLogfileFormatterDefault() *loggerAVA.Logger {
 	logger.Log.SetFormatter(newCommonLogfileFormatter())
 	logger.Log.SetOutput(os.Stdout)
 	logger.Log.SetLevel(logrus.DebugLevel)
-	
+
 	return &logger
 }

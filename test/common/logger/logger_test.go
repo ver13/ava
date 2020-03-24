@@ -3,7 +3,7 @@ package logger_test
 import (
 	"os"
 	"testing"
-	
+
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
 
@@ -42,7 +42,7 @@ func (log *loggerAVASuite) TearDownTest() {
 	log.T().Log("TearDownTest")
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_New() {
+func (log *loggerAVASuite) TestLoggerAVA_New() {
 	Convey("Given create a logger", log.T(), func() {
 		Convey("When logger configurationService is ok", func() {
 			stdout, stderr, err := WithCapSys(func() {
@@ -58,7 +58,7 @@ func (log *loggerAVASuite) TestLoggerGmf_New() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Debug() {
+func (log *loggerAVASuite) TestLoggerAVA_Debug() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -69,7 +69,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Debug() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Debugln() {
+func (log *loggerAVASuite) TestLoggerAVA_Debugln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -80,7 +80,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Debugln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Debugf() {
+func (log *loggerAVASuite) TestLoggerAVA_Debugf() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -91,7 +91,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Debugf() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Trace() {
+func (log *loggerAVASuite) TestLoggerAVA_Trace() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -102,7 +102,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Trace() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Traceln() {
+func (log *loggerAVASuite) TestLoggerAVA_Traceln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -113,7 +113,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Traceln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Tracef() {
+func (log *loggerAVASuite) TestLoggerAVA_Tracef() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -124,7 +124,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Tracef() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Info() {
+func (log *loggerAVASuite) TestLoggerAVA_Info() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -135,7 +135,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Info() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Infoln() {
+func (log *loggerAVASuite) TestLoggerAVA_Infoln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -146,7 +146,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Infoln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Infof() {
+func (log *loggerAVASuite) TestLoggerAVA_Infof() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -157,7 +157,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Infof() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Warn() {
+func (log *loggerAVASuite) TestLoggerAVA_Warn() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -168,7 +168,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Warn() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Warnln() {
+func (log *loggerAVASuite) TestLoggerAVA_Warnln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -179,7 +179,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Warnln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Warnf() {
+func (log *loggerAVASuite) TestLoggerAVA_Warnf() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -190,7 +190,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Warnf() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Error() {
+func (log *loggerAVASuite) TestLoggerAVA_Error() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -201,7 +201,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Error() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Errorln() {
+func (log *loggerAVASuite) TestLoggerAVA_Errorln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -212,7 +212,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Errorln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Errorf() {
+func (log *loggerAVASuite) TestLoggerAVA_Errorf() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -223,7 +223,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Errorf() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Fatal() {
+func (log *loggerAVASuite) TestLoggerAVA_Fatal() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -234,7 +234,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Fatal() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Fatalln() {
+func (log *loggerAVASuite) TestLoggerAVA_Fatalln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -245,7 +245,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Fatalln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Fatalf() {
+func (log *loggerAVASuite) TestLoggerAVA_Fatalf() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -256,7 +256,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Fatalf() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Panic() {
+func (log *loggerAVASuite) TestLoggerAVA_Panic() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -267,7 +267,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Panic() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Panicln() {
+func (log *loggerAVASuite) TestLoggerAVA_Panicln() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 
@@ -278,7 +278,7 @@ func (log *loggerAVASuite) TestLoggerGmf_Panicln() {
 	})
 }
 
-func (log *loggerAVASuite) TestLoggerGmf_Panicf() {
+func (log *loggerAVASuite) TestLoggerAVA_Panicf() {
 	Convey("Given a ", log.T(), func() {
 		Convey("Went it's OK ", func() {
 

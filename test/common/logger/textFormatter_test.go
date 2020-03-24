@@ -11,9 +11,8 @@ import (
 
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	
+
 	. "github.com/ver13/ava/pkg/common/logger/formatter"
 )
 
@@ -31,7 +30,7 @@ func TestNewFormatterColors(t *testing.T) {
 				formatter.IsForceColors() = tc == true
 				formatter.IsDisableColors() = tc == true
 				formatter.SetLevel(logrus.DebugLevel)
-			
+
 				LogMsgs()
 			})
 			assert.NoError(err)

@@ -1,11 +1,11 @@
 package error
 
 const (
-	statusMethodNameWrong  = 1
+	statusMethodNameWrong = 1
 )
 
 var statusText = map[int]string{
-	statusMethodNameWrong:  "Method name wrong.",
+	statusMethodNameWrong: "Method name wrong.",
 }
 
 // statusTextFunc returns a text for the General status code.

@@ -21,8 +21,8 @@ import (
 	"net"
 	"time"
 
-	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorCriptoAVA "github.com/ver13/ava/pkg/common/crypto/error"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 	stringAVA "github.com/ver13/ava/pkg/common/string"
 )
