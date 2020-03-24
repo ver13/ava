@@ -21,6 +21,9 @@ package error
 // String
 // Logger
 // File
+// GRPC
+// NET
+// URL
 // Unknown
 // )
 type Subgroup int32

@@ -5,15 +5,19 @@
 //go:generate avaGenerateWrap gen -f=${GOFILE} -t opentracing.tmpl -o ${GOFILE}Tracing.go
 //go:generate avaGenerateTest -f=${GOFILE}
 
-package net
+package url
 
 import (
-	"net"
-
+	"net/url"
+	
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
-type NETI interface {
-	HostPort(addr string, port interface{}) string
-	Listen(addr string, fn func(string) (net.Listener, *errorAVA.Error)) (net.Listener, *errorAVA.Error)
+// URL defines the interface for all the URL manipulation required by AVA
+type URLI interface {
+	CleanHosts([]string) []string
+	CleanHost(string) (string, *errorAVA.Error)
+	CleanPath(string) string
+	GetEndpointPath(string, []string) string
+	Parse(string) (*url.URL, *errorAVA.Error)
 }

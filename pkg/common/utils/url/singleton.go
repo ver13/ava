@@ -1,11 +1,11 @@
-package uri
+package url
 
 import (
 	"sync"
 )
 
 var (
-	f *uri
+	f *URL
 
 	once sync.Once
 )
@@ -13,10 +13,11 @@ var (
 // NewURIParser creates a new URIParser using the package variable RoutingPattern
 func init() {
 	once.Do(func() {
-		f = &uri{RoutingPattern}
+		f = new(URL)
+		f.SetRoutingPattern(RoutingPattern)
 	})
 }
 
-func GetInstance() *uri {
+func GetInstance() *URL {
 	return f
 }

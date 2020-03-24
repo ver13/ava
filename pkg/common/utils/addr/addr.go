@@ -7,9 +7,9 @@ import (
 	"strings"
 	"sync"
 
-	errorGmf "github.com/ValentinEncinasRojas/ava/errors"
-	loggerGmf "github.com/ValentinEncinasRojas/ava/pkg/common/logger"
-	errorAddrUtilsGmf "github.com/ValentinEncinasRojas/ava/pkg/common/utils/addr/error"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
+	loggerAVA "github.com/ver13/ava/pkg/common/logger"
+	errorAddrUtilsAVA "github.com/ver13/ava/pkg/common/utils/addr/error"
 )
 
 type addr struct {
@@ -55,7 +55,7 @@ func IsPrivateIP(ipAddr string) bool {
 }
 
 // Extract returns a real ip
-func (a *addr) Extract(addr string) (string, errorGmf.ErrorGmfI) {
+func (a *addr) Extract(addr string) (string, *errorAVA.Error) {
 	// if addr specified then its returned
 	if len(addr) > 0 && (addr != "0.0.0.0" && addr != "[::]" && addr != "::") {
 		return addr, nil
@@ -63,7 +63,7 @@ func (a *addr) Extract(addr string) (string, errorGmf.ErrorGmfI) {
 
 	ifaces, err := net.Interfaces()
 	if err != nil {
-		return "", errorAddrUtilsGmf.FailedGetInterfaces(err, fmt.Sprintf("Failed to get interfaces! Err: %v", err))
+		return "", errorAddrUtilsAVA.FailedGetInterfaces(err, fmt.Sprintf("Failed to get interfaces! Err: %v", err))
 	}
 
 	// nolint:prealloc
@@ -116,9 +116,9 @@ func (a *addr) Extract(addr string) (string, errorGmf.ErrorGmfI) {
 		return net.IP(publicIP).String(), nil
 	}
 
-	return "", errorAddrUtilsGmf.IPNotFount(nil, fmt.Sprintf("No IP address found, and explicit IP not provided. %s", addr))
+	return "", errorAddrUtilsAVA.IPNotFount(nil, fmt.Sprintf("No IP address found, and explicit IP not provided. %s", addr))
 }
-func Extract(addr string) (string, errorGmf.ErrorGmfI) {
+func Extract(addr string) (string, *errorAVA.Error) {
 	return GetInstance().Extract(addr)
 }
 
@@ -169,11 +169,11 @@ func IPs() []string {
 }
 
 // ResolveIPFromHostsFile reads the final IP address of the /etc/hosts file. Works for docker, typically at least...
-func (a *addr) ResolveIPFromHostsFile() (string, errorGmf.ErrorGmfI) {
+func (a *addr) ResolveIPFromHostsFile() (string, *errorAVA.Error) {
 	data, err := ioutil.ReadFile("/etc/hosts")
 	if err != nil {
-		loggerGmf.Errorf("Problem reading /etc/hosts: %v", err.Error())
-		return "", errorAddrUtilsGmf.ReadingEtcHostsWrong(err, fmt.Sprintf("Problem reading /etc/hosts."))
+		loggerAVA.Errorf("Problem reading /etc/hosts: %v", err.Error())
+		return "", errorAddrUtilsAVA.ReadingEtcHostsWrong(err, fmt.Sprintf("Problem reading /etc/hosts."))
 	}
 
 	lines := strings.Split(string(data), "\n")
@@ -188,7 +188,7 @@ func (a *addr) ResolveIPFromHostsFile() (string, errorGmf.ErrorGmfI) {
 	parts := strings.Split(line, "\t")
 	return parts[0], nil
 }
-func ResolveIPFromHostsFile() (string, errorGmf.ErrorGmfI) {
+func ResolveIPFromHostsFile() (string, *errorAVA.Error) {
 	return GetInstance().ResolveIPFromHostsFile()
 }
 

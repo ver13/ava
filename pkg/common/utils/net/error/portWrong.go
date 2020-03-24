@@ -1,17 +1,26 @@
 package error
 
 import (
-	errorGmf "github.com/ValentinEncinasRojas/ava/errors"
+	"fmt"
+	
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
-func PortWrong(e error, details string) errorGmf.ErrorGmfI {
-	err := errorGmf.ErrorGmf{
-		Group:   errorGmf.GroupTypeUtils,
-		Code:    StatusPortWrongCode,
-		Message: StatusText(StatusPortWrongCode),
-		Details: details,
-		Err:     e,
-		Info:    errorGmf.RetrieveCallInfo(),
+// PortWrong is a AVA Error
+func PortWrong(e error, details interface{}) *errorAVA.Error {
+	return PortWrongSkip(e, details, 3)
+}
+
+// PortWrongSkip is a AVA Error
+func PortWrongSkip(e error, details interface{}, skip int) *errorAVA.Error {
+	err := errorAVA.Error{
+		Group:    errorAVA.GroupUtils,
+		Subgroup: errorAVA.SubgroupNET,
+		Code:     statusPortWrong,
+		Message:  statusTextFunc(statusPortWrong),
+		Details:  fmt.Sprintf("%v.", details),
+		Err:      e,
+		Info:     errorAVA.RetrieveCallInfoSkip(skip),
 	}
 	err.Println()
 	return &err

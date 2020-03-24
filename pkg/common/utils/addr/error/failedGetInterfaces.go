@@ -1,18 +1,28 @@
 package error
 
 import (
-	errorGmf "github.com/ValentinEncinasRojas/ava/errors"
+	"fmt"
+	
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
-func FailedGetInterfaces(e error, details string) errorGmf.ErrorGmfI {
-	err := errorGmf.ErrorGmf{
-		Group:   errorGmf.GroupTypeUtils,
-		Code:    StatusFailedGetInterfacesCode,
-		Message: StatusText(StatusFailedGetInterfacesCode),
-		Details: details,
-		Err:     e,
-		Info:    errorGmf.RetrieveCallInfo(),
+// FailedGetInterfaces is a AVA Error
+func FailedGetInterfaces(e error, details interface{}) *errorAVA.Error {
+	return FailedGetInterfacesSkip(e, details, 3)
+}
+
+// FailedGetInterfacesSkip is a AVA Error
+func FailedGetInterfacesSkip(e error, details interface{}, skip int) *errorAVA.Error {
+	err := errorAVA.Error{
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupTime,
+		Code:     statusFailedGetInterfaces,
+		Message:  statusTextFunc(statusFailedGetInterfaces),
+		Details:  fmt.Sprintf("%v.", details),
+		Err:      e,
+		Info:     errorAVA.RetrieveCallInfoSkip(skip),
 	}
 	err.Println()
 	return &err
 }
+

@@ -7,31 +7,31 @@ import (
 	"strings"
 	"sync"
 
-	errorGmf "github.com/ValentinEncinasRojas/ava/errors"
-	errorNetUtilsGmf "github.com/ValentinEncinasRojas/ava/pkg/common/utils/net/error"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
+	errorNETUtilsAVA "github.com/ver13/ava/pkg/common/utils/net/error"
 )
 
-type netGmf struct {
+type NET struct {
 }
 
 var (
-	f *netGmf
+	f *NET
 
 	once sync.Once
 )
 
 func init() {
 	once.Do(func() {
-		f = &netGmf{}
+		f = &NET{}
 	})
 }
 
-func GetInstance() *netGmf {
+func GetInstance() *NET {
 	return f
 }
 
 // HostPort format addr and port suitable for dial
-func (n *netGmf) HostPort(addr string, port interface{}) string {
+func (n *NET) HostPort(addr string, port interface{}) string {
 	host := addr
 	if strings.Count(addr, ":") > 0 {
 		host = fmt.Sprintf("[%s]", addr)
@@ -51,7 +51,7 @@ func HostPort(addr string, port interface{}) string {
 
 // Listen takes addr:portmin-portmax and binds to the first available port
 // Example: Listen("localhost:5000-6000", fn)
-func (n *netGmf) Listen(addr string, fn func(string) (net.Listener, errorGmf.ErrorGmfI)) (net.Listener, errorGmf.ErrorGmfI) {
+func (n *NET) Listen(addr string, fn func(string) (net.Listener, *errorAVA.Error)) (net.Listener, *errorAVA.Error) {
 
 	if strings.Count(addr, ":") == 1 && strings.Count(addr, "-") == 0 {
 		return fn(addr)
@@ -60,7 +60,7 @@ func (n *netGmf) Listen(addr string, fn func(string) (net.Listener, errorGmf.Err
 	// host:port || host:min-max
 	host, ports, err := net.SplitHostPort(addr)
 	if err != nil {
-		return nil, errorNetUtilsGmf.HostPortWrong(err, fmt.Sprintf("%v.", addr))
+		return nil, errorNETUtilsAVA.HostPortWrong(err, fmt.Sprintf("%v.", addr))
 	}
 
 	// try to extract port range
@@ -76,13 +76,13 @@ func (n *netGmf) Listen(addr string, fn func(string) (net.Listener, errorGmf.Err
 	// extract min port
 	min, err := strconv.Atoi(prange[0])
 	if err != nil {
-		return nil, errorNetUtilsGmf.PortWrong(err, fmt.Sprintf("Unable to extract port range. %s", prange[0]))
+		return nil, errorNETUtilsAVA.PortWrong(err, fmt.Sprintf("Unable to extract port range. %s", prange[0]))
 	}
 
 	// extract max port
 	max, err := strconv.Atoi(prange[1])
 	if err != nil {
-		return nil, errorNetUtilsGmf.PortWrong(err, fmt.Sprintf("Unable to extract port range. %s", prange[1]))
+		return nil, errorNETUtilsAVA.PortWrong(err, fmt.Sprintf("Unable to extract port range. %s", prange[1]))
 	}
 
 	// range the ports
@@ -100,8 +100,8 @@ func (n *netGmf) Listen(addr string, fn func(string) (net.Listener, errorGmf.Err
 	}
 
 	// why are we here?
-	return nil, errorNetUtilsGmf.AddrWrong(err, fmt.Sprintf("Unable to bind to %s", addr))
+	return nil, errorNETUtilsAVA.AddrWrong(err, fmt.Sprintf("Unable to bind to %s", addr))
 }
-func Listen(addr string, fn func(string) (net.Listener, errorGmf.ErrorGmfI)) (net.Listener, errorGmf.ErrorGmfI) {
+func Listen(addr string, fn func(string) (net.Listener, *errorAVA.Error)) (net.Listener, *errorAVA.Error) {
 	return GetInstance().Listen(addr, fn)
 }

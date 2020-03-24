@@ -1,17 +1,26 @@
 package error
 
 import (
-	errorGmf "github.com/ValentinEncinasRojas/ava/errors"
+	"fmt"
+	
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 )
 
-func ReadingEtcHostsWrong(e error, details string) errorGmf.ErrorGmfI {
-	err := errorGmf.ErrorGmf{
-		Group:   errorGmf.GroupTypeUtils,
-		Code:    StatusReadingEtcHostsWrongCode,
-		Message: StatusText(StatusReadingEtcHostsWrongCode),
-		Details: details,
-		Err:     e,
-		Info:    errorGmf.RetrieveCallInfo(),
+// ReadingEtcHostsWrong is a AVA Error
+func ReadingEtcHostsWrong(e error, details interface{}) *errorAVA.Error {
+	return ReadingEtcHostsWrongSkip(e, details, 3)
+}
+
+// ReadingEtcHostsWrongSkip is a AVA Error
+func ReadingEtcHostsWrongSkip(e error, details interface{}, skip int) *errorAVA.Error {
+	err := errorAVA.Error{
+		Group:    errorAVA.GroupGeneral,
+		Subgroup: errorAVA.SubgroupTime,
+		Code:     statusReadingEtcHostsWrong,
+		Message:  statusTextFunc(statusReadingEtcHostsWrong),
+		Details:  fmt.Sprintf("%v.", details),
+		Err:      e,
+		Info:     errorAVA.RetrieveCallInfoSkip(skip),
 	}
 	err.Println()
 	return &err

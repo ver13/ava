@@ -3,6 +3,9 @@ package grpc
 import (
 	"fmt"
 	"strings"
+	
+	errorAVA "github.com/ver13/ava/pkg/common/error"
+	errorGRPCUtilsAVA "github.com/ver13/ava/pkg/common/utils/grpc/error"
 )
 
 // ServiceMethod converts a gRPC method to a Go method
@@ -10,9 +13,9 @@ import (
 // Foo.Bar, /Foo/Bar, /package.Foo/Bar, /a.package.Foo/Bar
 // Output:
 // [Foo, Bar]
-func ServiceMethod(m string) (string, string, error) {
+func ServiceMethod(m string) (string, string, *errorAVA.Error) {
 	if len(m) == 0 {
-		return "", "", fmt.Errorf("malformed method name: %q", m)
+		return "", "", errorGRPCUtilsAVA.StatusMethodNameWrong(nil, fmt.Sprintf("Malformed method name: %q", m))
 	}
 
 	// grpc method
@@ -22,7 +25,7 @@ func ServiceMethod(m string) (string, string, error) {
 		// [ , a.package.Foo, Bar]
 		parts := strings.Split(m, "/")
 		if len(parts) != 3 || len(parts[1]) == 0 || len(parts[2]) == 0 {
-			return "", "", fmt.Errorf("malformed method name: %q", m)
+			return "", "", errorGRPCUtilsAVA.StatusMethodNameWrong(nil, fmt.Sprintf("Malformed method name: %q", m))
 		}
 		service := strings.Split(parts[1], ".")
 		return service[len(service)-1], parts[2], nil
@@ -33,7 +36,7 @@ func ServiceMethod(m string) (string, string, error) {
 
 	// expect [Foo, Bar]
 	if len(parts) != 2 {
-		return "", "", fmt.Errorf("malformed method name: %q", m)
+		return "", "", errorGRPCUtilsAVA.StatusMethodNameWrong(nil, fmt.Sprintf("Malformed method name: %q", m))
 	}
 
 	return parts[0], parts[1], nil

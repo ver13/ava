@@ -45,11 +45,17 @@ const (
 	SubgroupLogger
 	// SubgroupFile is a Subgroup of type File
 	SubgroupFile
+	// SubgroupGRPC is a Subgroup of type GRPC
+	SubgroupGRPC
+	// SubgroupNET is a Subgroup of type NET
+	SubgroupNET
+	// SubgroupURL is a Subgroup of type URL
+	SubgroupURL
 	// SubgroupUnknown is a Subgroup of type Unknown
 	SubgroupUnknown
 )
 
-const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringLoggerFileUnknown"
+const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringLoggerFileGRPCNETURLUnknown"
 
 var _SubgroupMap = map[Subgroup]string{
 	0:  _SubgroupName[0:7],
@@ -70,7 +76,10 @@ var _SubgroupMap = map[Subgroup]string{
 	15: _SubgroupName[133:139],
 	16: _SubgroupName[139:145],
 	17: _SubgroupName[145:149],
-	18: _SubgroupName[149:156],
+	18: _SubgroupName[149:153],
+	19: _SubgroupName[153:156],
+	20: _SubgroupName[156:159],
+	21: _SubgroupName[159:166],
 }
 
 // String implements the Stringer interface.
@@ -118,8 +127,14 @@ var _SubgroupValue = map[string]Subgroup{
 	strings.ToLower(_SubgroupName[139:145]): 16,
 	_SubgroupName[145:149]:                  17,
 	strings.ToLower(_SubgroupName[145:149]): 17,
-	_SubgroupName[149:156]:                  18,
-	strings.ToLower(_SubgroupName[149:156]): 18,
+	_SubgroupName[149:153]:                  18,
+	strings.ToLower(_SubgroupName[149:153]): 18,
+	_SubgroupName[153:156]:                  19,
+	strings.ToLower(_SubgroupName[153:156]): 19,
+	_SubgroupName[156:159]:                  20,
+	strings.ToLower(_SubgroupName[156:159]): 20,
+	_SubgroupName[159:166]:                  21,
+	strings.ToLower(_SubgroupName[159:166]): 21,
 }
 
 // ParseSubgroup attempts to convert a string to a Subgroup
