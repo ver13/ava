@@ -379,11 +379,6 @@ func (l *Logger) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.E
 	}
 	return nil, errorSerializerAVA.NotImplemented(nil, fmt.Sprintf("Serializer type: %s", t.String()))
 }
-
-func (l *Logger) Parser() (*Logger, *errorAVA.Error) {
-	panic("Not implemented.")
-}
-
 func Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
 	return GetInstance().Serializer(t)
 }

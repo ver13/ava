@@ -3,7 +3,7 @@ package formatter
 import (
 	"github.com/sirupsen/logrus"
 
-	loggerAVA "github.com/ver13/ava/pkg/common/logger"
+	"github.com/ver13/ava/pkg/common/logger"
 )
 
 type CustomFormatterI interface {
@@ -13,6 +13,6 @@ type CustomFormatterI interface {
 	EnableForceColors()
 	IsForceColors() bool
 	IsDisableColors() bool
-	Color(t loggerAVA.LogLevelType) int
-	SetColor(t loggerAVA.LogLevelType, reset int)
+	Color(t logger.LogLevelType) int
+	SetColor(t logger.LogLevelType, reset int)
 }

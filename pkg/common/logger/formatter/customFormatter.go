@@ -10,7 +10,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh/terminal"
 
-	loggerAVA "github.com/ver13/ava/pkg/common/logger"
+	"github.com/ver13/ava/pkg/common/logger"
 )
 
 const (
@@ -49,13 +49,13 @@ type customFormatter struct {
 	colorFatal int
 	colorPanic int
 
-	color map[loggerAVA.LogLevelType]int
+	color map[logger.LogLevelType]int
 
 	handleColors [][3]int
 	startTime    time.Time
 }
 
-func (f *customFormatter) SetColor(t loggerAVA.LogLevelType, reset int) {
+func (f *customFormatter) SetColor(t logger.LogLevelType, reset int) {
 	f.color[t] = reset
 }
 
@@ -71,7 +71,7 @@ func (f *customFormatter) IsDisableColors() bool {
 	return f.disableColors
 }
 
-func (f *customFormatter) Color(t loggerAVA.LogLevelType) int {
+func (f *customFormatter) Color(t logger.LogLevelType) int {
 	return f.color[t]
 }
 

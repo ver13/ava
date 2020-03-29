@@ -10,7 +10,7 @@ The following table defines the log levels and messages in logger, in decreasing
 | Error    | Other runtime errors or unexpected conditions.                                                                                                       |
 |          | Expect these to be immediately visible on a status console.                                                                                          |
 | Critical |                                                                                                                                                      |
-| Warn     | Use of deprecated APIs, poor use of API, 'almost' errors, other runtime situations that are undesirable or unexpected, but not necessarily "wrong".  |
+| Warn     | Use of deprecated APIs, poor use of APIConfig, 'almost' errors, other runtime situations that are undesirable or unexpected, but not necessarily "wrong".  |
 |          | Expect these to be immediately visible on a status console.                                                                                          |
 | Info     | Interesting runtime events (startup/shutdown).                                                                                                       |
 |          | Expect these to be immediately visible on a console, so be conservative and keep to a minimum.                                                       |

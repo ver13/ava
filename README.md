@@ -14,7 +14,7 @@ but everything can be easily swapped out.
 
 AVA abstracts away the details of distributed systems. Here are the main features.
 
-- **Core** - AVA Framework Core functionality provides the basis for developing and improving third-party integration. It offers the basic functionality that is needed to connect to a database system, blockchain, RESTful API, etc.
+- **Core** - AVA Framework Core functionality provides the basis for developing and improving third-party integration. It offers the basic functionality that is needed to connect to a database system, blockchain, RESTful APIConfig, etc.
 
 - **Tools** -
 

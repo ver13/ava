@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 
-	loggerAVA "github.com/ver13/ava/pkg/common/logger"
+	"github.com/ver13/ava/pkg/common/logger"
 	. "github.com/ver13/ava/pkg/common/logger/formatter"
 )
 
@@ -31,7 +31,7 @@ func TestWindowsEnableNativeANSI(t *testing.T) {
 func TestColor(t *testing.T) {
 	formatter := NewFormatter("", nil)
 	formatter.EnableForceColors()
-	formatter.SetColor(loggerAVA.LogLevelTypeFatal, AnsiReset) // Testing no colors on fatal.
+	formatter.SetColor(logger.LogLevelTypeFatal, AnsiReset) // Testing no colors on fatal.
 	entry := logrus.NewEntry(logrus.New())
 
 	testCases := map[logrus.Level]string{
