@@ -11,7 +11,7 @@ import (
 	validatorAVA "github.com/ver13/ava/pkg/common/validator"
 )
 
-type DatabaseSQL struct {
+type DbSQL struct {
 	Dialect     string `mapstructure:"dialect"`
 	URL         string `mapstructure:"url"`
 	Name        string `mapstructure:"name,omitempty"`
@@ -24,11 +24,11 @@ type DatabaseSQL struct {
 	AutoMigrate bool   `mapstructure:"auto_migrate,omitempty"`
 }
 
-func (database *DatabaseSQL) Parser() (*stored.DBSQL, *errorAVA.Error) {
+func (database *DbSQL) Parser() (*stored.DbSQL, *errorAVA.Error) {
 
 	dialect, err := stored.ParseDialectType(database.Dialect)
 	if err != nil {
-		return nil, errorConfigAVA.InvalidConfig(nil, fmt.Sprintf("DatabaseSQL dialect incorrect. %s", database.Dialect))
+		return nil, errorConfigAVA.InvalidConfig(nil, fmt.Sprintf("DbSQL dialect incorrect. %s", database.Dialect))
 	}
 
 	var ssl = "enable"
@@ -85,7 +85,7 @@ func (database *DatabaseSQL) Parser() (*stored.DBSQL, *errorAVA.Error) {
 		database.AutoMigrate)
 }
 
-func (database *DatabaseSQL) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
+func (database *DbSQL) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
 	serializer, errSerializer := serializerAVA.GetInstance().SerializerFactory(t)
 	if errSerializer != nil {
 		return nil, errSerializer

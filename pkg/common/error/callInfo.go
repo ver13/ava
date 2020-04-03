@@ -24,8 +24,9 @@ func RetrieveCallInfo() *CallInfo {
 func RetrieveCallInfoSkip(skip int) *CallInfo {
 	pc, file, line, _ := runtime.Caller(skip)
 	_, fileName := path.Split(file)
-	parts := strings.Split(runtime.FuncForPC(pc).Name(), ".")
-	funcName := parts[3]
+	funcName := runtime.FuncForPC(pc).Name()
+	parts := strings.Split(funcName, ".")
+	funcName = parts[2]
 	packageName := parts[0] + "." + parts[1]
 
 	return &CallInfo{

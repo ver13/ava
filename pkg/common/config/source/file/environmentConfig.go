@@ -23,7 +23,7 @@ type EnvironmentConfig struct {
 	Tls *http.TLSConfig `mapstructure:"crypto,omitempty"`
 	Api *http.APIConfig `mapstructure:"api,omitempty"`
 
-	Database *stored.DatabaseSQL `mapstructure:"database,omitempty"`
+	Database *stored.DbSQL `mapstructure:"database,omitempty"`
 
 	Blockchain *blockchain.Blockchain `mapstructure:"blockchain,omitempty"`
 
