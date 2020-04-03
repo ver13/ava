@@ -13,8 +13,6 @@ import (
 
 type passwordSuite struct {
 	suite.Suite
-
-	password PasswordI
 }
 
 func TestPasswordInit(t *testing.T) {
@@ -31,7 +29,6 @@ func (r *passwordSuite) AfterTest() {
 
 func (r *passwordSuite) SetupSuite() {
 	r.T().Log("SetupSuite")
-	r.password = NewPassword("password")
 }
 
 func (r *passwordSuite) SetupTest() {
@@ -46,47 +43,55 @@ func (r *passwordSuite) TearDownTest() {
 	r.T().Log("TearDownTest")
 }
 
-func (r *passwordSuite) TestPassword_ComparePassword(t *testing.T) {
+func (r *passwordSuite) TestPassword_ComparePassword() {
 	Convey("Compare password ", r.T(), func() {
-		type args struct {
-			newPassword string
-		}
 		tests := []struct {
-			name string
-			p    Password
-			args args
-			want errorAVA.Error
+			name        string
+			p           Password
+			newPassword string
+			want        *errorAVA.Error
 		}{
-			// TODO: Add test cases.
+			{
+				"Equals",
+				NewPassword("Password"),
+				"Password",
+				nil,
+			},
+			{
+				"Not equals",
+				NewPassword("Password"),
+				"Different",
+				nil,
+			},
 		}
 		for _, tt := range tests {
-			t.Run(tt.name, func(t *testing.T) {
-				if got := tt.p.ComparePassword(tt.args.newPassword); !reflect.DeepEqual(got, tt.want) {
-					t.Errorf("ComparePassword() = %v, want %v", got, tt.want)
+			r.T().Run(tt.name, func(t *testing.T) {
+				if got := tt.p.ComparePassword(tt.newPassword); reflect.DeepEqual(got, tt.want) {
+					r.T().Errorf("ComparePassword() = %v, want %v", got, tt.want)
 				}
 			})
 		}
 	})
 }
 
-func (r *passwordSuite) TestPassword_Hash(t *testing.T) {
+func (r *passwordSuite) TestPassword_Hash() {
 	Convey("Hash ", r.T(), func() {
 		tests := []struct {
-			name  string
-			p     Password
-			want  string
-			want1 errorAVA.Error
+			name string
+			p    Password
+			want string
+			err  errorAVA.Error
 		}{
 			// TODO: Add test cases.
 		}
 		for _, tt := range tests {
-			t.Run(tt.name, func(t *testing.T) {
-				got, got1 := tt.p.Hash()
+			r.T().Run(tt.name, func(t *testing.T) {
+				got, err := tt.p.Hash()
 				if got != tt.want {
 					t.Errorf("Hash() got = %v, want %v", got, tt.want)
 				}
-				if !reflect.DeepEqual(got1, tt.want1) {
-					t.Errorf("Hash() got1 = %v, want %v", got1, tt.want1)
+				if !reflect.DeepEqual(err, tt.err) {
+					r.T().Errorf("Hash() err = %v, errWwant %v", err, tt.err)
 				}
 			})
 		}

@@ -11,18 +11,16 @@ import (
 
 type Password string
 
-func NewPassword(password string) *Password {
-	p := new(Password)
-	*p = Password(password)
-	return p
+func NewPassword(password string) Password {
+	return Password(password)
 }
 
-func (p *Password) Hash() (string, *errorAVA.Error) {
+func (p Password) Hash() (string, *errorAVA.Error) {
 	var hash []byte
 
-	if len(*p) > 0 {
+	if len(p) > 0 {
 		var err error
-		hash, err = bcrypt.GenerateFromPassword([]byte(*p), 10)
+		hash, err = bcrypt.GenerateFromPassword([]byte(p), 10)
 		if err != nil {
 			return "", errCryptoAVA.BcryptHash(err, "")
 		}
@@ -32,12 +30,12 @@ func (p *Password) Hash() (string, *errorAVA.Error) {
 	return hashPassword, nil
 }
 
-func (p *Password) ComparePassword(newPassword string) *errorAVA.Error {
-	if len(*p) == 0 || len(newPassword) == 0 {
-		return errCryptoAVA.PasswordIsEmpty(nil, fmt.Sprintf("Password: %s - NewPassword: %s.", *p, newPassword))
+func (p Password) ComparePassword(newPassword string) *errorAVA.Error {
+	if len(p) == 0 || len(newPassword) == 0 {
+		return errCryptoAVA.PasswordIsEmpty(nil, fmt.Sprintf("Password: %s - NewPassword: %s.", p, newPassword))
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(*p), []byte(newPassword)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(p), []byte(newPassword)); err != nil {
 		return errCryptoAVA.MismatchedHashAndPassword(err, "Hashed password is not the hash of the given password.")
 	}
 
