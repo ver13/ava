@@ -124,7 +124,7 @@ Content-Security-Policy-Report-Only // Allows web developers to experiment with 
 Expect-CT // Allows sites to opt in to reporting and/or enforcement of Certificate Transparency requirements, which prevents the use of misissued certificates for that site from going unnoticed. When a site enables the Expect-CT header, they are requesting that Chrome check that any certificate for that site appears in public CT logs.
 Feature-Policy // Provides a mechanism to allow and deny the use of browser features in its own frame, and in iframes that it embeds.
 Public-Key-Pins // Associates a specific cryptographic public key with a certain web server to decrease the risk of MITM attacks with forged certificates.
-Public-Key-Pins-Report-Only // Sends reports to the report-uri specified in the header and does still allow clients to connect to the server even if the pinning is violated.
+Public-Key-Pins-Report-Only // Sends reports to the report-url specified in the header and does still allow clients to connect to the server even if the pinning is violated.
 Strict-Transport-Security // Force communication using HTTPS instead of HTTP.
 Upgrade-Insecure-Requests // Sends a signal to the server expressing the client’s preference for an encrypted and authenticated response, and that it can successfully handle the upgrade-insecure-requests directive.
 X-Content-Type-Options // Disables MIME sniffing and forces browser to use the type given in Content-Type.
@@ -163,7 +163,7 @@ Push-Policy // A Push-Policy defines the server behaviour regarding push when pr
 Retry-After // Indicates how long the user agent should wait before making a follow-up request.
 Signature // The Signature header field conveys a list of signatures for an exchange, each one accompanied by information about how to determine the authority of and refresh that signature.
 Signed-headers // The Signed-headers header field identifies an ordered list of response header fields to include in a signature.
-Server-Timing // Communicates one or more metricsService and descriptions for the given request-response cycle.
+Server-Timing // Communicates one or more metrics and descriptions for the given request-response cycle.
 SourceMap // Links generated code to a source map.
 Upgrade // The relevant RFC document for the Upgrade header field is RFC 7230, section 6.7. The standard establishes rules for upgrading or changing to a different protocol on the current client, server, transport protocol connection. For example, this header standard allows a client to change from HTTP 1.1 to HTTP 2.0, assuming the server decides to acknowledge and implement the Upgrade header field. Neither party is required to accept the terms specified in the Upgrade header field. It can be used in both client and server headers. If the Upgrade header field is specified, then the sender MUST also send the Connection header field with the upgrade option specified. For details on the Connection header field please see section 6.1 of the aforementioned RFC.
 X-DNS-Prefetch-Control // Controls DNS prefetching, a feature by which browsers proactively perform domain name resolution on both links that the user may choose to follow as well as URLs for items referenced by the document, including images, CSS, JavaScript, and so forth.

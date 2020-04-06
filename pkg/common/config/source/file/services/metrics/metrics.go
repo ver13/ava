@@ -1,14 +1,15 @@
-package metricsService
+package metrics
 
 import (
 	"time"
 
+	metricsServiceModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/services/metrics"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
-	uriUtilsAVA "github.com/ver13/ava/pkg/common/utils/url"
+	urlUtilsAVA "github.com/ver13/ava/pkg/common/utils/url"
 )
 
-type MetricsConfigAVA struct {
+type Metrics struct {
 	URL                  string        `mapstructure:"url"`
 	Timeout              time.Duration `mapstructure:"timeout"`
 	KeepAlive            time.Duration `mapstructure:"keepAlive"`
@@ -19,14 +20,14 @@ type MetricsConfigAVA struct {
 	SummaryIsAvailable   bool          `mapstructure:"summaryIsAvailable"`
 }
 
-func (b *MetricsConfigAVA) Parser() (*MetricsService, *errorAVA.Error) {
-	url, err := uriUtilsAVA.Parse(b.URL)
+func (b *Metrics) Parser() (*metricsServiceModelConfigAVA.Metrics, *errorAVA.Error) {
+	url, err := urlUtilsAVA.Parse(b.URL)
 	if err != nil {
 		return nil, err
 	}
-	return &MetricsService{
-		UrlPattern:           url,
-		ServiceName:          "AVA Metrics Service",
+	return &metricsServiceModelConfigAVA.Metrics{
+		URL:                  url,
+		Name:                 "AVA Metrics Service",
 		CounterIsAvailable:   b.CounterIsAvailable,
 		GaugeIsAvailable:     b.GaugeIsAvailable,
 		HistogramIsAvailable: b.HistogramIsAvailable,
@@ -34,7 +35,7 @@ func (b *MetricsConfigAVA) Parser() (*MetricsService, *errorAVA.Error) {
 	}, nil
 }
 
-func (b *MetricsConfigAVA) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
+func (b *Metrics) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
 	serializer, errSerializer := serializerAVA.GetInstance().SerializerFactory(t)
 	if errSerializer != nil {
 		return nil, errSerializer

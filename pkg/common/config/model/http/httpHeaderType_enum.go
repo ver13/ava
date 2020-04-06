@@ -260,7 +260,7 @@ const (
 	// Associates a specific cryptographic public key with a certain web server to decrease the risk of MITM attacks with forged certificates.
 	HTTPHeaderTypePublicKeyPins
 	// HTTPHeaderTypePublicKeyPinsReportOnly is a HTTPHeaderType of type Public-Key-Pins-Report-Only
-	// Sends reports to the report-uri specified in the header and does still allow clients to connect to the server even if the pinning is violated.
+	// Sends reports to the report-url specified in the header and does still allow clients to connect to the server even if the pinning is violated.
 	HTTPHeaderTypePublicKeyPinsReportOnly
 	// HTTPHeaderTypeStrictTransportSecurity is a HTTPHeaderType of type Strict-Transport-Security
 	// Force communication using HTTPS instead of HTTP.
@@ -345,7 +345,7 @@ const (
 	// The Signed-headers header field identifies an ordered list of response header fields to include in a signature.
 	HTTPHeaderTypeSignedHeaders
 	// HTTPHeaderTypeServerTiming is a HTTPHeaderType of type Server-Timing
-	// Communicates one or more metricsService and descriptions for the given request-response cycle.
+	// Communicates one or more metrics and descriptions for the given request-response cycle.
 	HTTPHeaderTypeServerTiming
 	// HTTPHeaderTypeSourceMap is a HTTPHeaderType of type SourceMap
 	// Links generated code to a source map.

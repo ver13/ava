@@ -43,7 +43,7 @@ func (r *groupUnknownSuite) TearDownTest() {
 }
 
 func (r *groupUnknownSuite) TestGroupTypeUnknown() {
-	Convey("Given a AVA GroupTypeUnknown error", r.T(), func() {
+	Convey("Given a AVA Group type unknown error", r.T(), func() {
 		Convey("Went all fields are OK ", func() {
 			details := "Details"
 			err := errorAVA.GroupTypeUnknown(nil, details)

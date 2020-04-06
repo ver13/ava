@@ -382,3 +382,11 @@ func (l *Logger) Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.E
 func Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error) {
 	return GetInstance().Serializer(t)
 }
+
+func (l *Logger) IsDisableColors() bool {
+	panic("Not implemented.")
+}
+
+func (l *Logger) IsForceColors() bool {
+	panic("Not implemented.")
+}

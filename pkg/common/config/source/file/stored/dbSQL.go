@@ -66,7 +66,7 @@ func (database *DbSQL) Parser() (*stored.DbSQL, *errorAVA.Error) {
 	}
 
 	if database.Port == 0 {
-		return nil, errorConfigAVA.InvalidConfig(nil, fmt.Sprintf("Port is empty or 0. %s", database.Port))
+		return nil, errorConfigAVA.InvalidConfig(nil, fmt.Sprintf("Port is empty or 0. %d", database.Port))
 	}
 	if _, err := validatorAVA.GetInstance().CheckNotKnownPorts(strconv.FormatUint(database.Port, 10)); err != nil {
 		return nil, err

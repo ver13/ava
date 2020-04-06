@@ -47,7 +47,7 @@ func (r *passwordSuite) TestPassword_ComparePassword() {
 	Convey("Compare password ", r.T(), func() {
 		tests := []struct {
 			name        string
-			p           Password
+			p           *Password
 			newPassword string
 			want        *errorAVA.Error
 		}{

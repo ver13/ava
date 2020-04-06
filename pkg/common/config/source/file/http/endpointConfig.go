@@ -43,7 +43,7 @@ type EndpointConfig struct {
 
 func (e *EndpointConfig) Parser(api *APIConfig) (*http.Endpoint, *errorAVA.Error) {
 	if api == nil {
-		return nil, errorConfigAVA.APIIsEmpty(nil, fmt.Sprintf("%e", e))
+		return nil, errorConfigAVA.APIIsEmpty(nil, fmt.Sprintf("%p", e))
 	}
 
 	endpoint, err := e.initEndpointDefaults(api)
@@ -52,7 +52,7 @@ func (e *EndpointConfig) Parser(api *APIConfig) (*http.Endpoint, *errorAVA.Error
 	}
 
 	if e.URL == "" {
-		return nil, errorConfigAVA.URLIsEmpty(nil, fmt.Sprintf("%e", e))
+		return nil, errorConfigAVA.URLIsEmpty(nil, fmt.Sprintf("%p", e))
 	}
 	endpoint.URL = e.URL
 

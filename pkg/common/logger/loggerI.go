@@ -57,5 +57,8 @@ type LoggerI interface {
 
 	Reset()
 
+	IsDisableColors() bool
+	IsForceColors() bool
+
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

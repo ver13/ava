@@ -1,12 +1,12 @@
-package uri_test
+package url_test
 
 import (
 	"testing"
 
-	. "github.com/ver13/ava/pkg/common/utils/uri"
+	. "github.com/ver13/ava/pkg/common/utils/url"
 )
 
-func TestURIParser_cleanHosts(t *testing.T) {
+func TestURLParser_cleanHosts(t *testing.T) {
 	samples := []string{
 		"supu",
 		"127.0.0.1",
@@ -33,7 +33,7 @@ func TestURIParser_cleanHosts(t *testing.T) {
 	}
 }
 
-func TestURIParser_cleanPath(t *testing.T) {
+func TestURLParser_cleanPath(t *testing.T) {
 	samples := []string{
 		"supu/{tupu}",
 		"supu/{tupu}{supu}",

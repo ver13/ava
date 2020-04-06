@@ -132,7 +132,7 @@ func (r *subgroupTypeSuite) TestSubgroupType_MarshalText() {
 			So(string(b), ShouldEqual, "Selected")
 
 			b, _ = errorAVA.SubgroupUnknown.MarshalText()
-			So(string(b), ShouldEqual, "Subgroup(17)")
+			So(string(b), ShouldEqual, "Unknown")
 		})
 	})
 }
@@ -180,7 +180,7 @@ func (r *subgroupTypeSuite) TestSubgroupType_UnmarshalText() {
 			code, err := r.subgroup.UnmarshalText([]byte("Failure"))
 			So(err, ShouldNotBeNil)
 			So(err, ShouldHaveSameTypeAs, errorAVA.SubgroupTypeUnknownSkip(nil, fmt.Sprintf("%s is not a valid Group", "Failure"), 4))
-			So(code, ShouldEqual, errorAVA.Group(0))
+			So(code, ShouldEqual, "Unknown")
 		})
 	})
 }
