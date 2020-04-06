@@ -8,20 +8,20 @@ import (
 )
 
 type Environment struct {
-	environmentType EnvironmentType
-	name            string
-	logger          *loggerAVA.Logger
-	api             *httpModelConfigAVA.API
-	tls             *httpModelConfigAVA.TLS
+	Type   EnvironmentType
+	Name   string
+	Logger *loggerAVA.Logger
+	API    *httpModelConfigAVA.API
+	TLS    *httpModelConfigAVA.TLS
 }
 
 func NewEnvironment(environmentType EnvironmentType, name string, logger *loggerAVA.Logger, api *httpModelConfigAVA.API, tls *httpModelConfigAVA.TLS) (*Environment, *errorAVA.Error) {
 	return &Environment{
-		environmentType: environmentType,
-		name:            name,
-		logger:          logger,
-		api:             api,
-		tls:             tls,
+		Type:   environmentType,
+		Name:   name,
+		Logger: logger,
+		API:    api,
+		TLS:    tls,
 	}, nil
 }
 
