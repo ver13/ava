@@ -15,7 +15,7 @@ type JSON struct {
 
 func init() {
 	onceJSON.Do(func() {
-		Register(SerializerTypeJson, &JSON{})
+		Register(SerializerTypeJson, (*Serializer)(&JSON{}))
 	})
 }
 

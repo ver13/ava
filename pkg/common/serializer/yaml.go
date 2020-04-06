@@ -16,7 +16,7 @@ type YAML struct {
 
 func init() {
 	onceYAML.Do(func() {
-		Register(SerializerTypeYaml, &YAML{})
+		Register(SerializerTypeYaml, (*Serializer)(&YAML{}))
 	})
 }
 

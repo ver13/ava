@@ -17,7 +17,7 @@ type HCL struct {
 
 func init() {
 	onceHCL.Do(func() {
-		Register(SerializerTypeHcl, &HCL{})
+		Register(SerializerTypeHcl, (*Serializer)(&HCL{}))
 	})
 }
 

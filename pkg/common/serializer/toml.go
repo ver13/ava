@@ -18,7 +18,7 @@ type TOML struct {
 
 func init() {
 	onceTOML.Do(func() {
-		Register(SerializerTypeToml, &TOML{})
+		Register(SerializerTypeToml, (*Serializer)(&TOML{}))
 	})
 }
 

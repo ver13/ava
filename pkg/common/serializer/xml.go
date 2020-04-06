@@ -15,7 +15,7 @@ type XML struct {
 
 func init() {
 	onceXML.Do(func() {
-		Register(SerializerTypeXml, &XML{})
+		Register(SerializerTypeXml, (*Serializer)(&XML{}))
 	})
 }
 
