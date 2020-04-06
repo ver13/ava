@@ -34,3 +34,6 @@ _cgo_export.*
 *~
 *.swp
 *.swo
+/configs/prometheus/data/
+/configs/grafana/data/
+/configs/consul/data/
