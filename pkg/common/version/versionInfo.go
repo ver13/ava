@@ -15,11 +15,15 @@ import (
 	"runtime"
 	"sync"
 
+	"github.com/coreos/go-semver/semver"
+
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
+	errorVersionAVA "github.com/ver13/ava/pkg/common/version/error"
 )
 
 var (
-	l *VersionInfo
+	singleton *VersionInfo
 
 	once sync.Once
 )
@@ -44,7 +48,7 @@ var (
 	BuildDate   = ""
 	BuildHash   = ""
 
-	SemanticVersionStr = ""
+	SemanticVersion = ""
 )
 
 type VersionInfo struct {
@@ -53,33 +57,47 @@ type VersionInfo struct {
 	ClientName string `json:"client_name"`
 	GitCommit  string `json:"commit"`
 
-	SemanticVersion *SemanticVersion `json:"semantic_version"`
+	SemanticVersion *semver.Version `json:"semantic_version"`
 
 	GoVersion string `json:"go"`
 }
 
-func init() {
+func GetInstance() (*VersionInfo, *errorAVA.Error) {
 	once.Do(func() {
-		semanticVersion, err := Parse(SemanticVersionStr)
-		if err != nil {
-			panic(err)
-		}
-		l = &VersionInfo{
-			SemanticVersion: semanticVersion,
-			Name:            Name,
-			ServerName:      ServerName,
-			ClientName:      ClientName,
-			GitCommit:       Commit,
-			GoVersion:       fmt.Sprintf("go version %s %s/%s", runtime.Version(), runtime.GOOS, runtime.GOARCH),
+		if semanticVersion, err := getSemanticVersion(SemanticVersion); err == nil {
+			putVersionInfo(semanticVersion)
 		}
 	})
+	if singleton == nil {
+		if semanticVersion, err := getSemanticVersion(SemanticVersion); err != nil {
+			return nil, err
+		} else {
+			putVersionInfo(semanticVersion)
+		}
+	}
+	return singleton, nil
 }
 
-func GetInstance() *VersionInfo {
-	return l
+func putVersionInfo(semanticVersion *semver.Version) {
+	singleton = &VersionInfo{
+		SemanticVersion: semanticVersion,
+		Name:            Name,
+		ServerName:      ServerName,
+		ClientName:      ClientName,
+		GitCommit:       Commit,
+		GoVersion:       fmt.Sprintf("go version %s %s/%s", runtime.Version(), runtime.GOOS, runtime.GOARCH),
+	}
 }
 
-func (v *VersionInfo) GetSemanticVersion() *SemanticVersion {
+func getSemanticVersion(sv string) (*semver.Version, *errorAVA.Error) {
+	semanticVersion, err := semver.NewVersion(sv)
+	if err != nil {
+		return nil, errorVersionAVA.SemanticVersionError(err, sv)
+	}
+	return semanticVersion, nil
+}
+
+func (v *VersionInfo) GetSemanticVersion() *semver.Version {
 	return v.SemanticVersion
 }
 
@@ -113,4 +131,24 @@ func (v *VersionInfo) String() string {
 	} else {
 		return string(a)
 	}
+}
+
+func (v *VersionInfo) Major() int64 {
+	return v.SemanticVersion.Major
+}
+
+func (v *VersionInfo) Minor() int64 {
+	return v.SemanticVersion.Minor
+}
+
+func (v *VersionInfo) Patch() int64 {
+	return v.SemanticVersion.Patch
+}
+
+func (v *VersionInfo) Prerelease() semver.PreRelease {
+	return v.SemanticVersion.PreRelease
+}
+
+func (v *VersionInfo) Metadata() string {
+	return v.SemanticVersion.Metadata
 }

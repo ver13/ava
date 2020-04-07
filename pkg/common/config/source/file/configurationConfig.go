@@ -56,11 +56,16 @@ func (c *ConfigurationConfig) Parser(environmentActivated model.EnvironmentType)
 		return nil, err
 	}
 
+	v, err := versionAVA.GetInstance()
+	if err != nil {
+		return nil, err
+	}
+
 	return &model.Configuration{
 		ProjectName: c.ProjectName,
 		Author:      c.Author,
 		Copyright:   c.Copyright,
-		Version:     versionAVA.GetInstance(),
+		Version:     v,
 		Environment: environment,
 	}, nil
 }

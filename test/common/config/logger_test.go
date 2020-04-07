@@ -5,14 +5,10 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-
-	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type loggerSuite struct {
 	suite.Suite
-
-	serializer *serializerAVA.Serializer
 }
 
 func TestLoggerInit(t *testing.T) {
@@ -29,7 +25,6 @@ func (r *loggerSuite) AfterTest() {
 
 func (r *loggerSuite) SetupSuite() {
 	r.T().Log("SetupSuite")
-	r.serializer = serializerAVA.GetSerializer(serializerAVA.SerializerTypeJson)
 }
 
 func (r *loggerSuite) SetupTest() {

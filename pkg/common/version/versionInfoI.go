@@ -1,7 +1,11 @@
 package version
 
+import (
+	"github.com/coreos/go-semver/semver"
+)
+
 type VersionInfoI interface {
-	GetSemanticVersion() *SemanticVersion
+	GetSemanticVersion() *semver.Version
 	GetName() string
 	GetServerName() string
 	GetClientName() string
