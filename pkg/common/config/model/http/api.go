@@ -54,6 +54,10 @@ type API struct {
 	Debug bool
 }
 
+func NewAPIDefault() (*API, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
 func NewAPI(endpoints []*Endpoint, ttl time.Duration, host []string, port uint64, version int, encoding OutputEncodingType, timeout time.Duration, config *APITimeout, cors *CORS, alives bool, compression bool, conns int, host2 int, rest bool, debug bool) (*API, *errorAVA.Error) {
 	panic("Not implemented.")
 }

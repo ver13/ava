@@ -17,6 +17,10 @@ type Endpoint struct {
 	URL             string
 }
 
+func NewEndpoint(method HTTPVerbType, cacheTTL time.Duration, timeout time.Duration, concurrentCalls int, outputEncoding OutputEncodingType, headersToPass []string, URL string) (*Endpoint, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
 func NewEndpointDefault() (*Endpoint, *errorAVA.Error) {
 	panic("Not implemented.")
 }
