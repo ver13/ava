@@ -2,13 +2,10 @@ package http
 
 import (
 	"fmt"
-	"regexp"
 	"time"
 
-	"github.com/ver13/ava/pkg/common/config/model/http"
-	"github.com/ver13/ava/pkg/common/validator"
-
 	errorConfigAVA "github.com/ver13/ava/pkg/common/config/error"
+	"github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
@@ -39,6 +36,18 @@ type EndpointConfig struct {
 	HeadersToPass []string `mapstructure:"headers_to_pass"`
 	// OutputEncodingType defines the error strategy to use for the endpoint responses
 	OutputEncoding string `mapstructure:"output_encoding"`
+}
+
+func NewEndpointConfig(URL string, method string, backend []*BackendConfig, discoveryService string, concurrentCalls int, timeout time.Duration, cacheTTL time.Duration, queryString []string, headersToPass []string, outputEncoding string) (*http.Endpoint, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewEndpointConfigDefault() (*http.Endpoint, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (e *EndpointConfig) ReadLocal(fileName string) (*http.Endpoint, *errorAVA.Error) {
+	panic("Not implemented.")
 }
 
 func (e *EndpointConfig) Parser(api *APIConfig) (*http.Endpoint, *errorAVA.Error) {
@@ -136,24 +145,4 @@ func (e *EndpointConfig) initEndpointDefaults(api *APIConfig) (*http.Endpoint, *
 	}
 
 	return endpoint, nil
-}
-
-func (e *EndpointConfig) IsValidate() *errorAVA.Error {
-	if err := validator.CheckURL(e.URL); err != nil {
-		return err
-	}
-
-	matched, err := regexp.MatchString(debugPattern, e.URL)
-	if err != nil {
-		return errorConfigAVA.URLWrong(err, fmt.Sprintf("The endpoint url [%s]: %s. Ignoring\n", e.URL, err.Error()))
-	}
-	if matched {
-		return errorConfigAVA.URLWrong(nil, fmt.Sprintf("The endpoint url [%s] is not a valid one!!! Ignoring\n", e.URL))
-	}
-
-	if len(e.Backend) == 0 {
-		return errorConfigAVA.URLWrong(nil, fmt.Sprintf("The endpoint url [%s] has 0 backends defined! Ignoring\n", e.URL))
-	}
-
-	return nil
 }

@@ -21,6 +21,18 @@ type TLSConfig struct {
 	CipherSuites             []string `mapstructure:"cipher_suites"`
 }
 
+func NewTLSConfig(enable bool, publicKey string, privateKey string, minVersion string, maxVersion string, curvePreferences []string, preferServerCipherSuites bool, cipherSuites []string) (*http.TLS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewTLSConfigDefault() (*http.TLS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (tls *TLSConfig) ReadLocal(fileName string) (*http.TLS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
 func (tls *TLSConfig) Parser() (*http.TLS, *errorAVA.Error) {
 
 	if !tls.Enable {

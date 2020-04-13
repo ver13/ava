@@ -7,7 +7,7 @@ import (
 	"time"
 
 	errorConfigAVA "github.com/ver13/ava/pkg/common/config/error"
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	errorGeneralAVA "github.com/ver13/ava/pkg/common/error/general"
 
@@ -50,7 +50,20 @@ type BackendConfig struct {
 	Timeout time.Duration `mapstructure:"timeout"`
 }
 
-func (b *BackendConfig) Parser(disableStrictREST bool, urlPattern string) (*http.Backend, *errorAVA.Error) {
+func NewBackendConfig(group string, method string, host []string, hostSanitizationDisabled bool, url string, blacklist []string, whitelist []string, mapping map[string]string, encoding string, isCollection bool, target string, discoveryService string, urlKeys []string, concurrentCalls int,
+	timeout time.Duration) (*httpModelConfigAVA.Backend, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewBackendConfigDefault() (*httpModelConfigAVA.Backend, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (b *BackendConfig) ReadLocal(fileName string) (*httpModelConfigAVA.Backend, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (b *BackendConfig) Parser(disableStrictREST bool, urlPattern string) (*httpModelConfigAVA.Backend, *errorAVA.Error) {
 	if err := b.checkURLPattern(); err != nil {
 		return nil, err
 	}
@@ -59,7 +72,7 @@ func (b *BackendConfig) Parser(disableStrictREST bool, urlPattern string) (*http
 		return nil, err
 	}
 
-	method, err := http.ParseHTTPVerbType(b.Method)
+	method, err := httpModelConfigAVA.ParseHTTPVerbType(b.Method)
 	if err != nil {
 		return nil, errorConfigAVA.HTTPVerbWrong(err, fmt.Sprintf("Method: %s", b.Method))
 	}
@@ -77,7 +90,7 @@ func (b *BackendConfig) Parser(disableStrictREST bool, urlPattern string) (*http
 		b.Timeout = DefaultTimeout
 	}
 
-	return http.NewBackend(
+	return httpModelConfigAVA.NewBackend(
 		b.Group,
 		method,
 		b.Host,
@@ -105,13 +118,13 @@ func (b *BackendConfig) Serializer(t serializerAVA.SerializerType) ([]byte, *err
 	return serializer.Serializer(b)
 }
 
-func (b *BackendConfig) checkEncode(encoder string) (http.OutputEncodingType, *errorAVA.Error) {
-	var encoding http.OutputEncodingType
+func (b *BackendConfig) checkEncode(encoder string) (httpModelConfigAVA.OutputEncodingType, *errorAVA.Error) {
+	var encoding httpModelConfigAVA.OutputEncodingType
 	if encoder == "" {
-		encoding = http.OutputEncodingTypeJSON
+		encoding = httpModelConfigAVA.OutputEncodingTypeJSON
 	} else {
 		var err error
-		encoding, err = http.ParseOutputEncodingType(encoder)
+		encoding, err = httpModelConfigAVA.ParseOutputEncodingType(encoder)
 		if err != nil {
 			return 0, errorConfigAVA.OutputEncodingWrong(err, fmt.Sprintf("encoding: %s", encoder))
 		}

@@ -14,6 +14,7 @@ import (
 )
 
 type DBSQLConfigI interface {
+	ReadLocal(fileName string, environment model.EnvironmentType) (*model.Configuration, *errorAVA.Error)
 	Parser(model.EnvironmentType) (*model.Configuration, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

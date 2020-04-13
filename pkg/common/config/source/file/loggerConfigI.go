@@ -14,6 +14,7 @@ import (
 )
 
 type LoggerConfigI interface {
+	ReadLocal(fileName string) (*loggerAVA.Logger, *errorAVA.Error)
 	Parser() (*loggerAVA.Logger, *errorAVA.Error)
-	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
+	Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

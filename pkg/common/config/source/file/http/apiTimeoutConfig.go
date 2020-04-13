@@ -3,7 +3,7 @@ package http
 import (
 	"time"
 
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
@@ -48,7 +48,19 @@ type APITimeoutConfig struct {
 	Dialer *DialerConfig `mapstructure:"dialer,omitempty"`
 }
 
-func (a *APITimeoutConfig) Parser() (*http.APITimeout, *errorAVA.Error) {
+func NewAPITimeoutConfig(readTimeout uint64, writeTimeout uint64, idleTimeout uint64, readHeaderTimeout uint64, idleConnTimeout uint64, responseHeaderTimeout uint64, expectContinueTimeout uint64, dialer *DialerConfig) (*httpModelConfigAVA.APITimeout, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewAPITimeoutConfigDefault() (*httpModelConfigAVA.APITimeout, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (a *APITimeoutConfig) ReadLocal(fileName string) (*httpModelConfigAVA.APITimeout, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (a *APITimeoutConfig) Parser() (*httpModelConfigAVA.APITimeout, *errorAVA.Error) {
 
 	var readTimeout time.Duration
 	if a.ReadTimeout == 0 {
@@ -99,10 +111,10 @@ func (a *APITimeoutConfig) Parser() (*http.APITimeout, *errorAVA.Error) {
 		idleConnTimeout = time.Duration(a.IdleConnTimeout * uint64(time.Second))
 	}
 
-	var dialer *http.Dialer
+	var dialer *httpModelConfigAVA.Dialer
 	var errDialer *errorAVA.Error
 	if a.Dialer == nil {
-		dialer, errDialer = http.NewDialerDefault()
+		dialer, errDialer = httpModelConfigAVA.NewDialerDefault()
 	} else {
 		dialer, errDialer = a.Dialer.Parser()
 	}
@@ -110,7 +122,7 @@ func (a *APITimeoutConfig) Parser() (*http.APITimeout, *errorAVA.Error) {
 		return nil, errDialer
 	}
 
-	return http.NewAPITimeout(
+	return httpModelConfigAVA.NewAPITimeout(
 		readTimeout,
 		writeTimeout,
 		idleTimeout,

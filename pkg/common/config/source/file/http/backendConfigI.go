@@ -8,12 +8,13 @@
 package http
 
 import (
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type BackendConfigI interface {
-	Parser(bool, string) (*http.Backend, *errorAVA.Error)
+	ReadLocal(fileName string) (*httpModelConfigAVA.Backend, *errorAVA.Error)
+	Parser(disableStrictREST bool, urlPattern string) (*httpModelConfigAVA.Backend, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	errorConfigAVA "github.com/ver13/ava/pkg/common/config/error"
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 	stringAVA "github.com/ver13/ava/pkg/common/string"
@@ -84,7 +84,37 @@ type APIConfig struct {
 	Debug bool `mapstructure:"debug"`
 }
 
-func (a *APIConfig) Parser() (*http.API, *errorAVA.Error) {
+func NewAPIConfig(endpoints []*EndpointConfig, cacheTTL time.Duration, host []string, port uint64, version int, outputEncoding string, timeout time.Duration, APITime *APITimeoutConfig, CORS *CORSConfig, disableKeepAlives bool, disableCompression bool, maxIdleConns int, maxIdleConnsPerHost int,
+	disableStrictREST bool, debug bool) (*httpModelConfigAVA.API, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewAPIConfigDefault() (*httpModelConfigAVA.API, *errorAVA.Error) {
+	api := &httpModelConfigAVA.API{
+		Endpoints:           nil,
+		CacheTTL:            0,
+		Host:                nil,
+		Port:                0,
+		Version:             0,
+		OutputEncoding:      "",
+		Timeout:             0,
+		APITime:             nil,
+		CORS:                nil,
+		DisableKeepAlives:   false,
+		DisableCompression:  false,
+		MaxIdleConns:        0,
+		MaxIdleConnsPerHost: 0,
+		DisableStrictREST:   false,
+		Debug:               false,
+	}
+	return api, nil
+}
+
+func (a *APIConfig) ReadLocal(fileName string) (*httpModelConfigAVA.API, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (a *APIConfig) Parser() (*httpModelConfigAVA.API, *errorAVA.Error) {
 	if len(a.Host) == 0 {
 		a.Host = []string{"localhost"}
 	}
@@ -94,7 +124,7 @@ func (a *APIConfig) Parser() (*http.API, *errorAVA.Error) {
 		return nil, errorConfigAVA.ConfigVersionWrong(nil, fmt.Sprintf("Unsupported version: %d (want: %d)", a.Version, ConfigVersion))
 	}
 
-	var endpoints []*http.Endpoint
+	var endpoints []*httpModelConfigAVA.Endpoint
 	for _, e := range a.Endpoints {
 		endpoint, err := e.Parser(a)
 		if err != nil {
@@ -103,26 +133,26 @@ func (a *APIConfig) Parser() (*http.API, *errorAVA.Error) {
 		endpoints = append(endpoints, endpoint)
 	}
 
-	outputEncoding, err := http.ParseOutputEncodingType(stringAVA.StringToUpper(a.OutputEncoding))
+	outputEncoding, err := httpModelConfigAVA.ParseOutputEncodingType(stringAVA.StringToUpper(a.OutputEncoding))
 	if err != nil {
 		return nil, errorConfigAVA.OutputEncodingWrong(err, fmt.Sprintf("output error: %s", a.OutputEncoding))
 	}
 
-	var time *http.APITimeout
+	var time *httpModelConfigAVA.APITimeout
 	var errTime *errorAVA.Error
 	if a.APITime == nil {
-		time, errTime = http.NewAPITimeoutDefault()
+		time, errTime = httpModelConfigAVA.NewAPITimeoutDefault()
 	} else {
 		time, errTime = a.APITime.Parser()
 	}
 	if errTime != nil {
-		time, _ = http.NewAPITimeoutDefault()
+		time, _ = httpModelConfigAVA.NewAPITimeoutDefault()
 	}
 
-	var cors *http.CORS
+	var cors *httpModelConfigAVA.CORS
 	var errCors *errorAVA.Error
 	if a.CORS == nil {
-		cors, errCors = http.NewCORSDefault()
+		cors, errCors = httpModelConfigAVA.NewCORSDefault()
 	} else {
 		cors, errCors = a.CORS.Parser()
 	}
@@ -130,7 +160,7 @@ func (a *APIConfig) Parser() (*http.API, *errorAVA.Error) {
 		return nil, errCors
 	}
 
-	return http.NewAPI(endpoints,
+	return httpModelConfigAVA.NewAPI(endpoints,
 		a.CacheTTL,
 		a.Host,
 		a.Port,

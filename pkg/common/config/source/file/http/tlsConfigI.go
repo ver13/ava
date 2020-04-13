@@ -14,6 +14,7 @@ import (
 )
 
 type TLSConfigI interface {
+	ReadLocal(fileName string) (*http.TLS, *errorAVA.Error)
 	Parser() (*http.TLS, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

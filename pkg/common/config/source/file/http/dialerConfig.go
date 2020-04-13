@@ -30,6 +30,18 @@ type DialerConfig struct {
 	DialerKeepAlive uint64 `mapstructure:"dialer_keep_alive,omitempty"`
 }
 
+func NewDialerConfig(dialerTimeout uint64, dialerFallbackDelay uint64, dialerKeepAlive uint64) (*http.Dialer, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewDialerConfigDefault() (*http.Dialer, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (a *DialerConfig) ReadLocal(fileName string) (*http.Dialer, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
 func (a *DialerConfig) Parser() (*http.Dialer, *errorAVA.Error) {
 	var dialerTimeout time.Duration
 	var dialerFallbackDelay time.Duration

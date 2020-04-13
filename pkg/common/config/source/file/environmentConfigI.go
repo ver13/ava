@@ -14,6 +14,7 @@ import (
 )
 
 type EnvironmentConfigI interface {
+	ReadLocal(fileName string) (*model.Environment, *errorAVA.Error)
 	Parser() (*model.Environment, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

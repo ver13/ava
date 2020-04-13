@@ -8,12 +8,13 @@
 package http
 
 import (
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type APIConfigI interface {
-	Parser() (*http.API, *errorAVA.Error)
+	ReadLocal(fileName string) (*httpModelConfigAVA.API, *errorAVA.Error)
+	Parser() (*httpModelConfigAVA.API, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

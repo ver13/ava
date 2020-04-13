@@ -8,12 +8,13 @@
 package http
 
 import (
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type CORSConfigI interface {
-	Parser() (*http.CORS, *errorAVA.Error)
+	ReadLocal(fileName string) (*httpModelConfigAVA.CORS, *errorAVA.Error)
+	Parser() (*httpModelConfigAVA.CORS, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

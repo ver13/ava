@@ -8,12 +8,13 @@
 package http
 
 import (
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type APITimeoutConfigI interface {
-	Parser() (*http.APITimeout, *errorAVA.Error)
+	ReadLocal(fileName string) (*httpModelConfigAVA.APITimeout, *errorAVA.Error)
+	Parser() (*httpModelConfigAVA.APITimeout, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

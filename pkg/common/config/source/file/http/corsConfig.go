@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	errorConfigAVA "github.com/ver13/ava/pkg/common/config/error"
-	"github.com/ver13/ava/pkg/common/config/model/http"
+	httpModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/http"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
@@ -19,7 +19,19 @@ type CORSConfig struct {
 	debug            bool     `mapstructure:"debug,omitempty"`
 }
 
-func (cors *CORSConfig) Parser() (*http.CORS, *errorAVA.Error) {
+func NewCORSConfig(allowOrigins []string, exposeHeaders []string, maxAge int, allowMethods []string, allowHeaders []string, allowCredentials bool, debug bool) (httpModelConfigAVA.CORS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func NewCORSConfigDefault() (httpModelConfigAVA.CORS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (cors *CORSConfig) ReadLocal(fileName string) (*httpModelConfigAVA.CORS, *errorAVA.Error) {
+	panic("Not implemented.")
+}
+
+func (cors *CORSConfig) Parser() (*httpModelConfigAVA.CORS, *errorAVA.Error) {
 	var maxAge = cors.maxAge
 	// Maximum of 10 minutes.
 	if cors.maxAge > 600 {
@@ -45,7 +57,7 @@ func (cors *CORSConfig) Parser() (*http.CORS, *errorAVA.Error) {
 		cors.allowOrigins = allowedOriginsDefault
 	}
 
-	return http.NewCORS(
+	return httpModelConfigAVA.NewCORS(
 		cors.allowOrigins,
 		exposeHeaders,
 		maxAge,
@@ -71,15 +83,15 @@ var (
 	allowedOriginsDefault = []string{"*"}
 )
 
-func (cors *CORSConfig) parseAllowedMethods() ([]http.HTTPVerbType, *errorAVA.Error) {
+func (cors *CORSConfig) parseAllowedMethods() ([]httpModelConfigAVA.HTTPVerbType, *errorAVA.Error) {
 	l := len(cors.allowMethods)
 	if l == 0 {
 		cors.allowMethods = allowedMethodsDefault
 	}
 
-	allowMethods := make([]http.HTTPVerbType, len(cors.allowMethods))
+	allowMethods := make([]httpModelConfigAVA.HTTPVerbType, len(cors.allowMethods))
 	for i := 0; i < len(cors.allowMethods); i++ {
-		allowMethod, err := http.ParseHTTPVerbType(cors.allowMethods[i])
+		allowMethod, err := httpModelConfigAVA.ParseHTTPVerbType(cors.allowMethods[i])
 		if err != nil {
 			return nil, errorConfigAVA.AllowMethodWrong(err, fmt.Sprintf("Method: %s", cors.allowMethods[i]))
 		} else {
@@ -89,15 +101,15 @@ func (cors *CORSConfig) parseAllowedMethods() ([]http.HTTPVerbType, *errorAVA.Er
 	return allowMethods, nil
 }
 
-func (cors *CORSConfig) parseAllowedHeaders() ([]http.HTTPHeaderType, *errorAVA.Error) {
+func (cors *CORSConfig) parseAllowedHeaders() ([]httpModelConfigAVA.HTTPHeaderType, *errorAVA.Error) {
 	l := len(cors.allowHeaders)
 	if l == 0 {
 		cors.allowHeaders = allowedHeadersDefault
 	}
 
-	allowHeaders := make([]http.HTTPHeaderType, len(cors.allowHeaders))
+	allowHeaders := make([]httpModelConfigAVA.HTTPHeaderType, len(cors.allowHeaders))
 	for i := 0; i < len(cors.allowHeaders); i++ {
-		allowHeader, err := http.ParseHTTPHeaderType(cors.allowHeaders[i])
+		allowHeader, err := httpModelConfigAVA.ParseHTTPHeaderType(cors.allowHeaders[i])
 		if err != nil {
 			return nil, err
 		} else {
@@ -107,10 +119,10 @@ func (cors *CORSConfig) parseAllowedHeaders() ([]http.HTTPHeaderType, *errorAVA.
 	return allowHeaders, nil
 }
 
-func (cors *CORSConfig) parseExposeHeaders() ([]http.HTTPHeaderType, *errorAVA.Error) {
-	exposeHeaders := make([]http.HTTPHeaderType, len(cors.exposeHeaders))
+func (cors *CORSConfig) parseExposeHeaders() ([]httpModelConfigAVA.HTTPHeaderType, *errorAVA.Error) {
+	exposeHeaders := make([]httpModelConfigAVA.HTTPHeaderType, len(cors.exposeHeaders))
 	for i := 0; i < len(cors.exposeHeaders); i++ {
-		exposeHeader, err := http.ParseHTTPHeaderType(cors.exposeHeaders[i])
+		exposeHeader, err := httpModelConfigAVA.ParseHTTPHeaderType(cors.exposeHeaders[i])
 		if err != nil {
 			return nil, err
 		} else {

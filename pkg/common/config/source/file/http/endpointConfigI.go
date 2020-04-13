@@ -14,6 +14,7 @@ import (
 )
 
 type EndpointConfigI interface {
-	Parser(*http.API) (*http.Endpoint, *errorAVA.Error)
+	ReadLocal(fileName string) (*http.Endpoint, *errorAVA.Error)
+	Parser(api *APIConfig) (*http.Endpoint, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }

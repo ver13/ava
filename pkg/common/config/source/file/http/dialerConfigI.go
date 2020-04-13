@@ -14,6 +14,7 @@ import (
 )
 
 type DialerConfigI interface {
+	ReadLocal(fileName string) (*http.Dialer, *errorAVA.Error)
 	Parser() (*http.Dialer, *errorAVA.Error)
 	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }
