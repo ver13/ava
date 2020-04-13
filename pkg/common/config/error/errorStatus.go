@@ -27,15 +27,16 @@ const (
 	statusDialectIsWrong          = 25
 	statusDialectTypeUnknown      = 26
 	statusHTTPHeaderUnknown       = 27
+	statusSSLTypeUnknown          = 28
 )
 
 var statusText = map[int]string{
 	statusInvalidConfig:           "Invalid configuration.",
 	statusEnvironmentWrong:        "Environment wrong.",
-	statusAPISEmpty:               "api is empty.",
+	statusAPISEmpty:               "API is empty.",
 	statusEnvironmentsIsEmpty:     "Environments is empty.",
 	statusConfigVersionWrong:      "Config version wrong.",
-	statusOutputEncodingWrong:     "output encoding wrong.",
+	statusOutputEncodingWrong:     "Output encoding wrong.",
 	statusAllowedMethodWrong:      "Allowed method wrong.",
 	statusHTTPVerbWrong:           "HTTP verb wrong.",
 	statusURLIsEmpty:              "URL is empty",
@@ -56,6 +57,7 @@ var statusText = map[int]string{
 	statusDialectIsWrong:          "Database dialect is wrong.",
 	statusDialectTypeUnknown:      "Database dialect type unknown.",
 	statusHTTPHeaderUnknown:       "HTTP header unknown.",
+	statusSSLTypeUnknown:          "Database SSL type unknown.",
 }
 
 // statusTextFunc returns a text for the General status code.

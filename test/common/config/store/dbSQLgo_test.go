@@ -45,14 +45,14 @@ func (r *dbSQLSuite) TearDownTest() {
 func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 	Convey("Given a database configurationServiceI ", r.T(), func() {
 		Convey("When it's empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{}
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{}
 			database, err := databaseViper.Parser()
 
 			So(err, ShouldNotBeNil)
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has dialect field ok and DbName field ok ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect: "PostgreSQL",
 				SSL:     true,
 				DBName:  "AVATest",
@@ -63,11 +63,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has DbName field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -81,11 +81,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has url field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "",
+				Host:        "",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -99,11 +99,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has User field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -117,11 +117,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has Password field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -135,11 +135,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has port field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        0,
@@ -153,11 +153,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has name field empty ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -171,11 +171,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldBeNil)
 		})
 		Convey("When it has AutoMigrate field is true ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -189,11 +189,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldNotBeNil)
 		})
 		Convey("When it has debug field is true ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,
@@ -207,11 +207,11 @@ func (r *dbSQLSuite) TestDatabaseViper_Parser() {
 			So(database, ShouldNotBeNil)
 		})
 		Convey("When it has all fields ok ", func() {
-			databaseViper := &storedFileConfigAVA.DbSQL{
+			databaseViper := &storedFileConfigAVA.DbSQLConfig{
 				Dialect:     "PostgreSQL",
 				SSL:         true,
 				DBName:      "AVATest",
-				URL:         "jdbc:postgresql://localhost/test",
+				Host:        "jdbc:postgresql://localhost/test",
 				User:        "ava",
 				Password:    "password",
 				Port:        storedModelConfigAVA.PortPostgreSQLDefault,

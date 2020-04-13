@@ -20,13 +20,13 @@ type DbSQL struct {
 	User        string
 	Password    *cryptoAVA.Password
 	Port        uint64
-	SSL         string
+	SSL         SSLType
 	DBName      string
 	Debug       bool
 	AutoMigrate bool
 }
 
-func newDbPostgres(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl string, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
+func newDbPostgres(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl SSLType, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
 	if dialect != DialectTypePostgreSQL {
 		return nil, errorConfigAVA.DialectIsWrong(nil, dialect)
 	}
@@ -49,7 +49,7 @@ func newDbPostgres(dialect DialectType, name string, url string, port uint64, us
 	}, nil
 }
 
-func newDbMySQL(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl string, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
+func newDbMySQL(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl SSLType, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
 	if dialect != DialectTypeMySQL {
 		return nil, errorConfigAVA.DialectIsWrong(nil, dialect)
 	}
@@ -72,7 +72,7 @@ func newDbMySQL(dialect DialectType, name string, url string, port uint64, user 
 	}, nil
 }
 
-func newDbSqlite3(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl string, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
+func newDbSqlite3(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl SSLType, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
 	if dialect != DialectTypeSqlite3 {
 		return nil, errorConfigAVA.DialectIsWrong(nil, dialect)
 	}
@@ -95,7 +95,7 @@ func newDbSqlite3(dialect DialectType, name string, url string, port uint64, use
 	}, nil
 }
 
-func newDbSQLServer(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl string, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
+func newDbSQLServer(dialect DialectType, name string, url string, port uint64, user string, password *cryptoAVA.Password, ssl SSLType, dbName string, debug bool, migrate bool) (*DbSQL, *errorAVA.Error) {
 	if dialect != DialectTypeSQLServer {
 		return nil, errorConfigAVA.DialectIsWrong(nil, dialect)
 	}

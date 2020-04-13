@@ -5,15 +5,16 @@
 //go:generate avaGenerateWrap gen -f=${GOFILE} -t opentracing.tmpl -o ${GOFILE}Tracing.go
 //go:generate avaGenerateTest -f=${GOFILE}
 
-package file
+package stored
 
 import (
-	"github.com/ver13/ava/pkg/common/config/model"
+	storedModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/stored"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
-type DBSQLConfigI interface {
-	Parser(model.EnvironmentType) (*model.Configuration, *errorAVA.Error)
-	Serializer(serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
+type DbSQLConfigI interface {
+	ReadLocal(fileName string) (*storedModelConfigAVA.DbSQL, *errorAVA.Error)
+	Parser() (*storedModelConfigAVA.DbSQL, *errorAVA.Error)
+	Serializer(t serializerAVA.SerializerType) ([]byte, *errorAVA.Error)
 }
