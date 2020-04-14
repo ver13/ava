@@ -1,0 +1,5 @@
+failed to determine go env GOMOD value: go command exited unsuccessfully: exit status 1
+$GOPATH/go.mod exists but should not
+using GOPATH mode
+2020/04/14 11:25:21 cannot find package "." in:
+	/src/github.com/ver13/ava

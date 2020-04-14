@@ -75,10 +75,10 @@ endif
 export PATH := $(GOPATH)/bin:$(PATH)
 
 # Path for binary files (where the executable files will be installed)
-BINPATH=$(DESTDIR)/bin/
+BINPATH=bin
 
 # Path for configuration files
-CONFIGPATH=$(DESTDIR)/configs/$(PROJECT)/
+CONFIGPATH=configs/$(PROJECT)/
 
 # Path for ssl root certs
 #SSLCONFIGPATH=etc/ssl/
@@ -88,40 +88,40 @@ SSLCONFIGPATH=
 INITPATH=etc/init.d/
 
 # Path path for documentation
-DOCPATH=$(DESTDIR)/docs/$(PKGNAME)/
+DOCPATH=docs/$(PKGNAME)/
 
 # Path path for man pages
 MANPATH=usr/share/man/man1/
 
 # Installation path for the binary files
-PATHINSTBIN=$(DESTDIR)/$(BINPATH)
+PATHINSTBIN=./$(BINPATH)
 
 # Installation path for the configuration files
-PATHINSTCFG=$(DESTDIR)/$(CONFIGPATH)
+PATHINSTCFG=./$(CONFIGPATH)
 
 # Installation path for the ssl root certs
-PATHINSTSSLCFG=$(DESTDIR)/$(SSLCONFIGPATH)
+PATHINSTSSLCFG=./$(SSLCONFIGPATH)
 
 # Installation path for the init file
-PATHINSTINIT=$(DESTDIR)/$(INITPATH)
+PATHINSTINIT=./$(INITPATH)
 
 # Installation path for documentation
-PATHINSTDOC=$(DESTDIR)/$(DOCPATH)
+PATHINSTDOC=./$(DOCPATH)
 
 # Installation path for man pages
-PATHINSTMAN=$(DESTDIR)/$(MANPATH)
+PATHINSTMAN=./$(MANPATH)
 
 # RPM Packaging path (where RPMs will be stored)
-PATHRPMPKG=$(DESTDIR)/target/RPM
+PATHRPMPKG=./target/bin/RPM
 
 # DEB Packaging path (where DEBs will be stored)
-PATHDEBPKG=$(DESTDIR)/target/DEB
+PATHDEBPKG=./target/bin/DEB
 
 # BZ2 Packaging path (where BZ2s will be stored)
-PATHBZ2PKG=$(DESTDIR)/target/BZ2
+PATHBZ2PKG=./target/bin/BZ2
 
 # DOCKER Packaging path (where BZ2s will be stored)
-PATHDOCKERPKG=$(DESTDIR)/target/DOCKER
+PATHDOCKERPKG=./target/DOCKER
 
 # Cross compilation targets
 CCTARGETS=darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm openbsd/386 openbsd/amd64 windows/386 windows/amd64
@@ -343,25 +343,25 @@ cyclo:
 .PHONY: ineffassign
 ineffassign:
 	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) ineffassign . | tee target/report/ineffassign.txt ; test $${PIPESTATUS[0]} -eq 0
+	@GO111MODULE=$(GO111MODULE) ineffassign . tee | tee ./target/report/ineffassign.txt ; test $${PIPESTATUS[0]} -eq 0
 
 # Detect commonly misspelled words in source files
 .PHONY: misspell
 misspell:
 	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) misspell -error ./...  | tee target/report/misspell.txt ; test $${PIPESTATUS[0]} -eq 0
+	@GO111MODULE=$(GO111MODULE) misspell -error ./... | tee ./target/report/misspell.txt ; test $${PIPESTATUS[0]} -eq 0
 
 # Find unused struct fields.
 .PHONY: structcheck
 structcheck:
 	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) structcheck -a ./...  | tee target/report/structcheck.txt
+	@GO111MODULE=$(GO111MODULE) structcheck -a ./... | tee ./target/report/structcheck.txt
 
 # Find unused global variables and constants.
 .PHONY: varcheck
 varcheck:
 	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) varcheck -e ./... | tee target/report/varcheck.txt
+	@GO111MODULE=$(GO111MODULE) varcheck -e ./... | target/report/varcheck.txt
 
 # Check that error return values are used.
 .PHONY: errcheck
@@ -373,13 +373,13 @@ errcheck:
 .PHONY: staticcheck
 staticcheck:
 	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) staticcheck ./...  | tee target/report/staticcheck.txt
+	@GO111MODULE=$(GO111MODULE) staticcheck ./... | tee target/report/staticcheck.txt
 
 # AST scanner
 .PHONY: astscan
 astscan:
-	@mkdir -p target/report
-	@GO111MODULE=$(GO111MODULE) gosec ./... | tee target/report/astscan.txt ; test $${PIPESTATUS[0]} -eq 0 || true
+	@mkdir -p ./target/report
+	@GO111MODULE=$(GO111MODULE) gosec ./... | tee ./target/report/astscan.txt
 
 # Generate source docs
 .PHONY: docs
@@ -408,7 +408,7 @@ endif
 # Install this application
 .PHONY: install
 install: uninstall
-	mkdir -p $(PATHINSTBIN)
+	mkdir -p ./target/${BINPATH}
 	cp -r ./target/${BINPATH}* $(PATHINSTBIN)
 	find $(PATHINSTBIN) -type d -exec chmod 755 {} \;
 	find $(PATHINSTBIN) -type f -exec chmod 755 {} \;
@@ -452,7 +452,7 @@ endif
 # Remove all installed files (excluding configuration files)
 .PHONY: uninstall
 uninstall:
-	rm -rf $(PATHINSTBIN)$(PROJECT)
+	rm -rf ./target/$(BINPATH)/$(PROJECT)
 	rm -rf $(PATHINSTDOC)
 
 # Remove any build artifact
