@@ -61,11 +61,13 @@ const (
 	GroupGeneratorEnum
 	// GroupRouter is a Group of type Router
 	GroupRouter
+	// GroupRegistry is a Group of type Registry
+	GroupRegistry
 	// GroupUnknown is a Group of type Unknown
 	GroupUnknown
 )
 
-const _GroupName = "GeneralModelSerializerEncoderServerConfigLoggerFileBlockchainDatabaseHttpMicroserviceMessageCoderTimeApiTimeTransportCompressIOCryptoQRValidatorStringUtilsClientGeneratorEnumRouterUnknown"
+const _GroupName = "GeneralModelSerializerEncoderServerConfigLoggerFileBlockchainDatabaseHttpMicroserviceMessageCoderTimeApiTimeTransportCompressIOCryptoQRValidatorStringUtilsClientGeneratorEnumRouterRegistryUnknown"
 
 var _GroupMap = map[Group]string{
 	0:  _GroupName[0:7],
@@ -94,7 +96,8 @@ var _GroupMap = map[Group]string{
 	23: _GroupName[155:161],
 	24: _GroupName[161:174],
 	25: _GroupName[174:180],
-	26: _GroupName[180:187],
+	26: _GroupName[180:188],
+	27: _GroupName[188:195],
 }
 
 // String implements the Stringer interface.
@@ -158,8 +161,10 @@ var _GroupValue = map[string]Group{
 	strings.ToLower(_GroupName[161:174]): 24,
 	_GroupName[174:180]:                  25,
 	strings.ToLower(_GroupName[174:180]): 25,
-	_GroupName[180:187]:                  26,
-	strings.ToLower(_GroupName[180:187]): 26,
+	_GroupName[180:188]:                  26,
+	strings.ToLower(_GroupName[180:188]): 26,
+	_GroupName[188:195]:                  27,
+	strings.ToLower(_GroupName[188:195]): 27,
 }
 
 // ParseGroup attempts to convert a string to a Group

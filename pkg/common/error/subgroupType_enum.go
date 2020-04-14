@@ -53,11 +53,13 @@ const (
 	SubgroupURL
 	// SubgroupCodec is a Subgroup of type Codec
 	SubgroupCodec
+	// SubgroupEvent is a Subgroup of type Event
+	SubgroupEvent
 	// SubgroupUnknown is a Subgroup of type Unknown
 	SubgroupUnknown
 )
 
-const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringLoggerFileGRPCNETURLCodecUnknown"
+const _SubgroupName = "GeneralDiscoveryServiceBrokerServiceCircuitBreakerServiceMetricsServiceClientServerSelectedSerializerHashQRVersionConfigTimeValidatorStringLoggerFileGRPCNETURLCodecEventUnknown"
 
 var _SubgroupMap = map[Subgroup]string{
 	0:  _SubgroupName[0:7],
@@ -82,7 +84,8 @@ var _SubgroupMap = map[Subgroup]string{
 	19: _SubgroupName[153:156],
 	20: _SubgroupName[156:159],
 	21: _SubgroupName[159:164],
-	22: _SubgroupName[164:171],
+	22: _SubgroupName[164:169],
+	23: _SubgroupName[169:176],
 }
 
 // String implements the Stringer interface.
@@ -138,8 +141,10 @@ var _SubgroupValue = map[string]Subgroup{
 	strings.ToLower(_SubgroupName[156:159]): 20,
 	_SubgroupName[159:164]:                  21,
 	strings.ToLower(_SubgroupName[159:164]): 21,
-	_SubgroupName[164:171]:                  22,
-	strings.ToLower(_SubgroupName[164:171]): 22,
+	_SubgroupName[164:169]:                  22,
+	strings.ToLower(_SubgroupName[164:169]): 22,
+	_SubgroupName[169:176]:                  23,
+	strings.ToLower(_SubgroupName[169:176]): 23,
 }
 
 // ParseSubgroup attempts to convert a string to a Subgroup

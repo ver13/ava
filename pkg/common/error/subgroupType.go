@@ -1,4 +1,4 @@
-//go:generate ava-enum -f=$GOFILE --marshal --lower
+//go:generate go-enum -f=$GOFILE --marshal --lower
 
 package error
 
@@ -25,6 +25,7 @@ package error
 // NET
 // URL
 // Codec
+// Event
 // Unknown
 // )
 type Subgroup int32

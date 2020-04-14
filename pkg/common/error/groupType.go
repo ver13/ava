@@ -1,4 +1,4 @@
-//go:generate ava-enum -f=$GOFILE --marshal --lower
+//go:generate go-enum -f=$GOFILE --marshal --lower
 
 package error
 
@@ -29,6 +29,7 @@ package error
 // Client
 // GeneratorEnum
 // Router
+// Registry
 // Unknown
 // )
 type Group int32
