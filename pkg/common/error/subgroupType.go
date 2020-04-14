@@ -24,6 +24,7 @@ package error
 // GRPC
 // NET
 // URL
+// Codec
 // Unknown
 // )
 type Subgroup int32
