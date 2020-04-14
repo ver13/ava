@@ -37,3 +37,4 @@ _cgo_export.*
 /configs/prometheus/data/
 /configs/grafana/data/
 /configs/consul/data/
+/target/
