@@ -1,16 +1,10 @@
 package store
 
 import (
-	"reflect"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/suite"
-
-	storedModelConfigAVA "github.com/ver13/ava/pkg/common/config/model/stored"
-	. "github.com/ver13/ava/pkg/common/config/source/file/stored"
-	errorAVA "github.com/ver13/ava/pkg/common/error"
-	serializerAVA "github.com/ver13/ava/pkg/common/serializer"
 )
 
 type dbSQLSuite struct {
@@ -45,214 +39,466 @@ func (r *dbSQLSuite) TearDownTest() {
 	r.T().Log("TearDownTest")
 }
 
+/*
+TestSpec
+	Subject: read SQL database configuration file
+		Given an initial configuration file
+			When the file does not exist
+				Must return an error of type FileNotFount
+			When the file exists
+				When the file is empty
+					Must return an error of type ReadFile
+				When the file is empty
+					Must return an error of type ReadFile
+				When the file is filled
+					It has all the correct fields
+					When the wrong Dialect is OK
+						Must return an null error
+					When the wrong Dialect field
+						Must return a DialectTypeUnknown dialect type
+						Must return an error of type InvalidConfig
+					When the DBName field is OK
+						Must return an null error
+					When the DBName field is empty
+						Must return an error of type InvalidConfig
+					When the Name field is OK
+						Must return an null error
+					When the Name field is empty
+						Must return an error of type InvalidConfig
+					When the Host field is OK
+						Must return an null error
+					When the wrong Host field
+						When the Host field is empty
+							Must return an error of type InvalidConfig
+						When the Host field is a url wrong
+							Must return an error of type URLWrong
+					When the Password field is OK
+						Must return null error
+					When the wrong Password field
+						When the Password field is empty
+							Must return an error of type InvalidConfig
+						When the Password field is wrong
+							When the Password field has less than 8 characters
+								Must return an error of type PasswordWrong
+							When the Password field does not have at least 1 alphanumeric character, 1 number and a symbol
+								Must return an error of type PasswordWrong
+							Must return an error of type InvalidConfig
+					When the User field is OK
+						Must return null error
+					When the User field is wrong
+						When the User field is empty
+							Must return an error of type InvalidConfig
+						When the User field has a invalid value
+							Must return an error of type UsernameWrong
+					When the Port field is OK
+						Must return null error
+					When the Port field is wrong
+						When the Port field is 0
+							Must return an error of type InvalidConfig
+						When the Port field has a invalid value
+							Must return an error of type CheckNotKnownPorts
+*/
 func (r *dbSQLSuite) TestDbSQLConfig_Parser() {
-	Convey("Given a Database configuration file ", r.T(), func() {
-		Convey("Parser when it's empty ", func() {
-			database := &DbSQLConfig{}
-			db, err := database.Parser()
+	Convey("Subject: Parser SQL database configuration file", r.T(), func() {
 
-			So(err, ShouldNotBeNil)
-			So(db, ShouldBeNil)
-		})
-		Convey("Parser when it's empty ", func() {
-			type fields struct {
-				Dialect     string
-				Host        string
-				Name        string
-				User        string
-				Password    string
-				Port        uint64
-				SSL         bool
-				DBName      string
-				Debug       bool
-				AutoMigrate bool
-			}
-			tests := []struct {
-				name   string
-				fields fields
-				want   *storedModelConfigAVA.DbSQL
-				want1  *errorAVA.Error
-			}{
-				// TODO: Add test cases.
-			}
-			for _, tt := range tests {
-				r.T().Run(tt.name, func(t *testing.T) {
-					database := &DbSQLConfig{
-						Dialect:     tt.fields.Dialect,
-						Host:        tt.fields.Host,
-						Name:        tt.fields.Name,
-						User:        tt.fields.User,
-						Password:    tt.fields.Password,
-						Port:        tt.fields.Port,
-						SSL:         tt.fields.SSL,
-						DBName:      tt.fields.DBName,
-						Debug:       tt.fields.Debug,
-						AutoMigrate: tt.fields.AutoMigrate,
-					}
-					got, got1 := database.Parser()
-					if !reflect.DeepEqual(got, tt.want) {
-						t.Errorf("Parser() got = %v, want %v", got, tt.want)
-					}
-					if !reflect.DeepEqual(got1, tt.want1) {
-						t.Errorf("Parser() got1 = %v, want %v", got1, tt.want1)
-					}
+		Convey("Given an initial configuration file", func() {
+
+			Convey("When the file is filled", func() {
+
+				Convey("It has all the correct fields", func() {
+
+					Convey("Must return an null error", nil)
+
 				})
-			}
+
+				Convey("When the wrong Dialect is OK", func() {
+
+					Convey("Must return an null error", nil)
+
+				})
+
+				Convey("When the wrong Dialect field", func() {
+
+					Convey("Must return a DialectTypeUnknown dialect type", nil)
+
+					Convey("Must return an error of type InvalidConfig", nil)
+
+				})
+
+				Convey("When the DBName field is OK", func() {
+
+					Convey("Must return an null error", nil)
+
+				})
+
+				Convey("When the DBName field is empty", func() {
+
+					Convey("Must return an error of type InvalidConfig", nil)
+
+				})
+
+				Convey("When the Name field is OK", func() {
+
+					Convey("Must return an null error", nil)
+
+				})
+
+				Convey("When the Name field is empty", func() {
+
+					Convey("Must return an error of type InvalidConfig", nil)
+
+				})
+
+				Convey("When the Host field is OK", func() {
+
+					Convey("Must return an null error", nil)
+
+				})
+
+				Convey("When the wrong Host field", func() {
+
+					Convey("When the Host field is empty", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the Host field is a url wrong", func() {
+
+						Convey("Must return an error of type URLWrong", nil)
+
+					})
+
+				})
+
+				Convey("When the Password field is OK", func() {
+
+					Convey("Must return null error", nil)
+
+				})
+
+				Convey("When the wrong Password field", func() {
+
+					Convey("When the Password field is empty", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the Password field is wrong", func() {
+
+						Convey("When the Password field has less than 8 characters", func() {
+
+							Convey("Must return an error of type PasswordWrong", nil)
+
+						})
+
+						Convey("When the Password field does not have at least 1 alphanumeric character, 1 number and a symbol", func() {
+
+							Convey("Must return an error of type PasswordWrong", nil)
+
+						})
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+				})
+
+				Convey("When the User field is OK", func() {
+
+					Convey("Must return null error", nil)
+
+				})
+
+				Convey("When the User field is wrong", func() {
+
+					Convey("When the User field is empty", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the User field has a invalid value", func() {
+
+						Convey("Must return an error of type UsernameWrong", nil)
+
+					})
+
+				})
+
+				Convey("When the Port field is OK", func() {
+
+					Convey("Must return null error", nil)
+
+				})
+
+				Convey("When the Port field is wrong", func() {
+
+					Convey("When the Port field is 0", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the Port field has a invalid value", func() {
+
+						Convey("Must return an error of type CheckNotKnownPorts", nil)
+
+					})
+
+				})
+
+			})
+
 		})
+
 	})
 }
 
-func TestDbSQLConfig_ReadLocal(t *testing.T) {
-	type fields struct {
-		Dialect     string
-		Host        string
-		Name        string
-		User        string
-		Password    string
-		Port        uint64
-		SSL         bool
-		DBName      string
-		Debug       bool
-		AutoMigrate bool
-	}
-	type args struct {
-		fileName string
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		args   args
-		want   *storedModelConfigAVA.DbSQL
-		want1  *errorAVA.Error
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			database := &DbSQLConfig{
-				Dialect:     tt.fields.Dialect,
-				Host:        tt.fields.Host,
-				Name:        tt.fields.Name,
-				User:        tt.fields.User,
-				Password:    tt.fields.Password,
-				Port:        tt.fields.Port,
-				SSL:         tt.fields.SSL,
-				DBName:      tt.fields.DBName,
-				Debug:       tt.fields.Debug,
-				AutoMigrate: tt.fields.AutoMigrate,
-			}
-			got, got1 := database.ReadLocal(tt.args.fileName)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ReadLocal() got = %v, want %v", got, tt.want)
-			}
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("ReadLocal() got1 = %v, want %v", got1, tt.want1)
-			}
+/*
+TestSpec
+	Subject: read SQL database configuration file
+		Given an initial configuration file
+			When the file does not exist
+				Must return an error of type FileNotFount
+			When the file exists
+				When the file is empty
+					Must return an error of type ReadFile
+				When the file is empty
+					Must return an error of type ReadFile
+				When the file is filled
+					It has all the correct fields
+					When the wrong Dialect is OK
+						Must return an null error
+					When the wrong Dialect field
+						Must return a DialectTypeUnknown dialect type
+						Must return an error of type InvalidConfig
+					When the DBName field is OK
+						Must return an null error
+					When the DBName field is empty
+						Must return an error of type InvalidConfig
+					When the Name field is OK
+						Must return an null error
+					When the Name field is empty
+						Must return an error of type InvalidConfig
+					When the Host field is OK
+						Must return an null error
+					When the wrong Host field
+						When the Host field is empty
+							Must return an error of type InvalidConfig
+						When the Host field is a url wrong
+							Must return an error of type URLWrong
+					When the Password field is OK
+						Must return null error
+					When the wrong Password field
+						When the Password field is empty
+							Must return an error of type InvalidConfig
+						When the Password field is wrong
+							When the Password field has less than 8 characters
+								Must return an error of type PasswordWrong
+							When the Password field does not have at least 1 alphanumeric character, 1 number and a symbol
+								Must return an error of type PasswordWrong
+							Must return an error of type InvalidConfig
+					When the User field is OK
+						Must return null error
+					When the User field is wrong
+						When the User field is empty
+							Must return an error of type InvalidConfig
+						When the User field has a invalid value
+							Must return an error of type UsernameWrong
+					When the Port field is OK
+						Must return null error
+					When the Port field is wrong
+						When the Port field is 0
+							Must return an error of type InvalidConfig
+						When the Port field has a invalid value
+							Must return an error of type CheckNotKnownPorts
+*/
+func (r *dbSQLSuite) TestDbSQLConfig_ReadLocal() {
+	Convey("Subject: read SQL database configuration file", r.T(), func() {
+
+		Convey("Given an initial configuration file", func() {
+
+			Convey("When the file does not exist", func() {
+
+				Convey("Must return an error of type FileNotFount", nil)
+
+			})
+
+			Convey("When the file exists", func() {
+
+				Convey("When the file is empty", func() {
+
+					Convey("Must return an error of type ReadFile", nil)
+
+				})
+
+				Convey("When the file is empty", func() {
+
+					Convey("Must return an error of type ReadFile", nil)
+
+				})
+
+				Convey("When the file is filled", func() {
+
+					Convey("It has all the correct fields", nil)
+
+					Convey("When the wrong Dialect is OK", func() {
+
+						Convey("Must return an null error", nil)
+
+					})
+
+					Convey("When the wrong Dialect field", func() {
+
+						Convey("Must return a DialectTypeUnknown dialect type", nil)
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the DBName field is OK", func() {
+
+						Convey("Must return an null error", nil)
+
+					})
+
+					Convey("When the DBName field is empty", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the Name field is OK", func() {
+
+						Convey("Must return an null error", nil)
+
+					})
+
+					Convey("When the Name field is empty", func() {
+
+						Convey("Must return an error of type InvalidConfig", nil)
+
+					})
+
+					Convey("When the Host field is OK", func() {
+
+						Convey("Must return an null error", nil)
+
+					})
+
+					Convey("When the wrong Host field", func() {
+
+						Convey("When the Host field is empty", func() {
+
+							Convey("Must return an error of type InvalidConfig", nil)
+
+						})
+
+						Convey("When the Host field is a url wrong", func() {
+
+							Convey("Must return an error of type URLWrong", nil)
+
+						})
+
+					})
+
+					Convey("When the Password field is OK", func() {
+
+						Convey("Must return null error", nil)
+
+					})
+
+					Convey("When the wrong Password field", func() {
+
+						Convey("When the Password field is empty", func() {
+
+							Convey("Must return an error of type InvalidConfig", nil)
+
+						})
+
+						Convey("When the Password field is wrong", func() {
+
+							Convey("When the Password field has less than 8 characters", func() {
+
+								Convey("Must return an error of type PasswordWrong", nil)
+
+							})
+
+							Convey("When the Password field does not have at least 1 alphanumeric character, 1 number and a symbol", func() {
+
+								Convey("Must return an error of type PasswordWrong", nil)
+
+							})
+
+							Convey("Must return an error of type InvalidConfig", nil)
+
+						})
+
+					})
+
+					Convey("When the User field is OK", func() {
+
+						Convey("Must return null error", nil)
+
+					})
+
+					Convey("When the User field is wrong", func() {
+
+						Convey("When the User field is empty", func() {
+
+							Convey("Must return an error of type InvalidConfig", nil)
+
+						})
+
+						Convey("When the User field has a invalid value", func() {
+
+							Convey("Must return an error of type UsernameWrong", nil)
+
+						})
+
+					})
+
+					Convey("When the Port field is OK", func() {
+
+						Convey("Must return null error", nil)
+
+					})
+
+					Convey("When the Port field is wrong", func() {
+
+						Convey("When the Port field is 0", func() {
+
+							Convey("Must return an error of type InvalidConfig", nil)
+
+						})
+
+						Convey("When the Port field has a invalid value", func() {
+
+							Convey("Must return an error of type CheckNotKnownPorts", nil)
+
+						})
+
+					})
+
+				})
+
+			})
+
 		})
-	}
+
+	})
 }
 
-func TestDbSQLConfig_Serializer(t *testing.T) {
-	type fields struct {
-		Dialect     string
-		Host        string
-		Name        string
-		User        string
-		Password    string
-		Port        uint64
-		SSL         bool
-		DBName      string
-		Debug       bool
-		AutoMigrate bool
-	}
-	type args struct {
-		t serializerAVA.SerializerType
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		args   args
-		want   []byte
-		want1  *errorAVA.Error
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			database := &DbSQLConfig{
-				Dialect:     tt.fields.Dialect,
-				Host:        tt.fields.Host,
-				Name:        tt.fields.Name,
-				User:        tt.fields.User,
-				Password:    tt.fields.Password,
-				Port:        tt.fields.Port,
-				SSL:         tt.fields.SSL,
-				DBName:      tt.fields.DBName,
-				Debug:       tt.fields.Debug,
-				AutoMigrate: tt.fields.AutoMigrate,
-			}
-			got, got1 := database.Serializer(tt.args.t)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Serializer() got = %v, want %v", got, tt.want)
-			}
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("Serializer() got1 = %v, want %v", got1, tt.want1)
-			}
-		})
-	}
+func (r *dbSQLSuite) TestDbSQLConfig_Serializer() {
+
 }
 
-func TestNewDbSQL(t *testing.T) {
-	type args struct {
-		dialect     string
-		url         string
-		name        string
-		user        string
-		password    string
-		port        uint64
-		ssl         bool
-		dbName      string
-		debug       bool
-		autoMigrate bool
-	}
-	tests := []struct {
-		name  string
-		args  args
-		want  *storedModelConfigAVA.DbSQL
-		want1 *errorAVA.Error
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := NewDbSQL(tt.args.dialect, tt.args.url, tt.args.name, tt.args.user, tt.args.password, tt.args.port, tt.args.ssl, tt.args.dbName, tt.args.debug, tt.args.autoMigrate)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewDbSQL() got = %v, want %v", got, tt.want)
-			}
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("NewDbSQL() got1 = %v, want %v", got1, tt.want1)
-			}
-		})
-	}
+func (r *dbSQLSuite) TestNewDbSQL() {
+
 }
 
-func TestNewDbSQLDefault(t *testing.T) {
-	tests := []struct {
-		name  string
-		want  *storedModelConfigAVA.DbSQL
-		want1 *errorAVA.Error
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := NewDbSQLDefault()
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewDbSQLDefault() got = %v, want %v", got, tt.want)
-			}
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("NewDbSQLDefault() got1 = %v, want %v", got1, tt.want1)
-			}
-		})
-	}
+func (r *dbSQLSuite) TestNewDbSQLDefault() {
+
 }
