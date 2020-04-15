@@ -6,6 +6,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ver13/ava/pkg/auth"
+	"github.com/ver13/ava/pkg/broker"
 	"github.com/ver13/ava/pkg/common/codec"
 	errorAVA "github.com/ver13/ava/pkg/common/error"
 	"github.com/ver13/ava/pkg/registry"
@@ -14,10 +16,9 @@ import (
 
 type Options struct {
 	Codecs       map[string]codec.NewCodec
-	Broker       broker.Broker
+	Broker       broker.BrokerI
 	Registry     registry.RegistryI
-	Tracer       trace.Tracer
-	Auth         auth.Auth
+	Auth         auth.AuthI
 	Transport    transport.TransportI
 	Metadata     map[string]string
 	Name         string
@@ -129,7 +130,7 @@ func Advertise(a string) Option {
 }
 
 // Broker to use for pub/sub
-func Broker(b broker.Broker) Option {
+func Broker(b broker.BrokerI) Option {
 	return func(o *Options) {
 		o.Broker = b
 	}
@@ -158,15 +159,8 @@ func Registry(r registry.RegistryI) Option {
 	}
 }
 
-// Tracer mechanism for distributed tracking
-func Tracer(t trace.Tracer) Option {
-	return func(o *Options) {
-		o.Tracer = t
-	}
-}
-
 // Auth mechanism for role based access control
-func Auth(a auth.Auth) Option {
+func Auth(a auth.AuthI) Option {
 	return func(o *Options) {
 		o.Auth = a
 	}
