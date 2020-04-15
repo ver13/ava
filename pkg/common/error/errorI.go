@@ -2,7 +2,7 @@ package error
 
 // AVA Error Interface
 type ErrorI interface {
-	Error() error
+	Error() string
 	Println() string
 	String() string
 	ToJSON() string

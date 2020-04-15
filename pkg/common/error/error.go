@@ -2,7 +2,6 @@ package error
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -20,8 +19,8 @@ type Error struct {
 	Info *CallInfo
 }
 
-func (e *Error) Error() error {
-	return errors.New(e.String())
+func (e *Error) Error() string {
+	return e.String()
 }
 
 func (e *Error) Println() string {
@@ -32,24 +31,14 @@ func (e *Error) String() string {
 	return fmt.Sprintf("Group: %s, Subgroup: %s, Details: %s, Error: %v, Info: %v", e.Group, e.Subgroup, e.Details, e.Err, e.Info)
 }
 
-func (e *Error) ToJSON() (string, *Error) {
+func (e *Error) ToJSON() string {
 	var result []byte
 	var err error
 
 	result, err = json.MarshalIndent(e, "", "    ")
 	if err != nil {
-		err := Error{
-			Group:    GroupGeneral,
-			Subgroup: SubgroupSerializer,
-			Details:  fmt.Sprintf("%v.", "Failed to generate JSON."),
-			Err:      err,
-			Code:     serializerJSONCode,
-			Message:  statusTextFunc(serializerJSONCode),
-			Info:     RetrieveCallInfo(),
-		}
-
-		return "", &err
+		return ""
 	}
 
-	return string(result), nil
+	return string(result)
 }
