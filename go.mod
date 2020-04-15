@@ -7,7 +7,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/abice/go-enum v0.2.3 // indirect
-	github.com/coreos/go-semver v0.2.0
+	github.com/coreos/go-semver v0.3.0
 	github.com/golang/protobuf v1.3.2
 	github.com/googleapis/gax-go v1.0.3 // indirect
 	github.com/hashicorp/hcl v1.0.0
