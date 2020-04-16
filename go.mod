@@ -8,7 +8,7 @@ require (
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/abice/go-enum v0.2.3 // indirect
 	github.com/coreos/go-semver v0.2.0
-	github.com/golang/protobuf v1.3.2
+	github.com/golang/protobuf v1.4.0
 	github.com/googleapis/gax-go v1.0.3 // indirect
 	github.com/hashicorp/hcl v1.0.0
 	github.com/influxdata/influxdb v1.8.0 // indirect
