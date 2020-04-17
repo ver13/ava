@@ -26,6 +26,7 @@ package error
 // URL
 // Codec
 // Event
+// AVAEnum
 // Unknown
 // )
 type Subgroup int32

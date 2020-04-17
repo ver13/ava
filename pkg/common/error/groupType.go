@@ -30,6 +30,7 @@ package error
 // GeneratorEnum
 // Router
 // Registry
+// Tools
 // Unknown
 // )
 type Group int32
