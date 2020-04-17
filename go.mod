@@ -22,8 +22,9 @@ require (
 	github.com/spf13/cobra v0.0.6
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.5.1
+	github.com/ver13/ava/tools/avaEnum v0.0.0-20200417113936-24fb294a4ab8 // indirect
 	golang.org/x/crypto v0.0.0-20200115085410-6d4e4cb37c7d
-	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 	google.golang.org/api v0.21.0 // indirect
 	google.golang.org/grpc v1.27.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect

@@ -7,8 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/abice/go-enum/generator"
 	"github.com/go-easygen/cli"
+
+	"github.com/ver13/ava/tools/avaEnum/generator"
 )
 
 type rootT struct {
@@ -59,7 +60,7 @@ func main() {
 
 			originalName := fileName
 
-			ctx.String("go-enum started. file: %s\n", ctx.Color().Cyan(originalName))
+			ctx.String("ava-enum started. file: %s\n", ctx.Color().Cyan(originalName))
 			fileName, _ = filepath.Abs(fileName)
 			outFilePath := fmt.Sprintf("%s_enum.go", strings.TrimSuffix(fileName, filepath.Ext(fileName)))
 
@@ -74,7 +75,7 @@ func main() {
 			if err != nil {
 				return fmt.Errorf("failed writing to file %s: %s", ctx.Color().Cyan(outFilePath), ctx.Color().Red(err))
 			}
-			ctx.String("go-enum finished. file: %s\n", ctx.Color().Cyan(originalName))
+			ctx.String("ava-enum finished. file: %s\n", ctx.Color().Cyan(originalName))
 		}
 
 		return nil
