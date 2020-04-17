@@ -12,6 +12,7 @@ require (
 	github.com/googleapis/gax-go v1.0.3 // indirect
 	github.com/hashicorp/hcl v1.0.0
 	github.com/influxdata/influxdb v1.8.0 // indirect
+	github.com/mkideal/pkg v0.0.0-20170503154153-3e188c9e7ecc
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/pborman/uuid v1.2.0
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5 // indirect
@@ -22,6 +23,7 @@ require (
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.5.1
 	golang.org/x/crypto v0.0.0-20200115085410-6d4e4cb37c7d
+	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553
 	google.golang.org/api v0.21.0 // indirect
 	google.golang.org/grpc v1.27.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect

@@ -2,6 +2,8 @@ package transport
 
 import (
 	"time"
+
+	httpTransportAVA "github.com/ver13/ava/pkg/transport/http"
 )
 
 type Message struct {
@@ -16,11 +18,11 @@ type DialOption func(*DialOptions)
 type ListenOption func(*ListenOptions)
 
 var (
-	DefaultTransport TransportI = newHTTPTransport()
+	DefaultTransport TransportI = httpTransportAVA.NewTransport()
 
 	DefaultDialTimeout = time.Second * 5
 )
 
 func NewTransport(opts ...Option) TransportI {
-	return newHTTPTransport(opts...)
+	return httpTransportAVA.NewTransport(opts...)
 }

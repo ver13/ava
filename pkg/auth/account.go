@@ -26,9 +26,9 @@ const (
 	// MetadataKey is the key used when storing the account in metadata
 	MetadataKey = "auth-account"
 	// TokenCookieName is the name of the cookie which stores the auth token
-	TokenCookieName = "micro-token"
+	TokenCookieName = "ava-token"
 	// SecretCookieName is the name of the cookie which stores the auth secret
-	SecretCookieName = "micro-secret"
+	SecretCookieName = "ava-secret"
 )
 
 // Account provided by an auth provider

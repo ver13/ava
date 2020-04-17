@@ -595,7 +595,7 @@ func (h *httpTransport) String() string {
 	return "http"
 }
 
-func newHTTPTransport(opts ...transportAVA.Option) *httpTransport {
+func NewTransport(opts ...transportAVA.Option) *httpTransport {
 	var options transportAVA.Options
 	for _, o := range opts {
 		o(&options)
