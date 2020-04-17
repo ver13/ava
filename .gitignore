@@ -38,3 +38,7 @@ _cgo_export.*
 /configs/grafana/data/
 /configs/consul/data/
 /target/
+!/tools/avaEnum/bin/
+/tools/avaEnum/bin/
+!/tools/avaEnum/coverage.out
+!/tools/avaEnum/coverage.html
