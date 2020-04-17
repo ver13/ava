@@ -3,7 +3,7 @@ module github.com/ver13/ava
 go 1.14
 
 require (
-	cloud.google.com/go v0.51.0
+	cloud.google.com/go v0.56.0
 	github.com/BurntSushi/toml v0.3.1
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/abice/go-enum v0.2.3 // indirect
