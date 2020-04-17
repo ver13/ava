@@ -17,8 +17,10 @@ import (
 
 	"github.com/Masterminds/sprig"
 	"github.com/abice/go-enum/generator/assets"
-	"github.com/pkg/errors"
+	errorAVA "github.com/ver13/ava/pkg/common/error"
 	"golang.org/x/tools/imports"
+
+	errorGeneratorAVA "github.com/ver13/ava/tools/avaEnum/generator/error"
 )
 
 const (
@@ -136,17 +138,17 @@ func (g *Generator) WithPrefix(prefix string) *Generator {
 
 // GenerateFromFile is responsible for orchestrating the Code generation.  It results in a byte array
 // that can be written to any file desired.  It has already had goimports run on the code before being returned.
-func (g *Generator) GenerateFromFile(inputFile string) ([]byte, error) {
+func (g *Generator) GenerateFromFile(inputFile string) ([]byte, *errorAVA.Error) {
 	f, err := g.parseFile(inputFile)
 	if err != nil {
-		return nil, fmt.Errorf("generate: error parsing input file '%s': %s", inputFile, err)
+		return nil, errorGeneratorAVA.ParseFileWrong(err, fmt.Sprintf("generate: error parsing input file '%s': %s", inputFile, err))
 	}
 	return g.Generate(f)
 
 }
 
 // Generate does the heavy lifting for the code generation starting from the parsed AST file.
-func (g *Generator) Generate(f *ast.File) ([]byte, error) {
+func (g *Generator) Generate(f *ast.File) ([]byte, *errorAVA.Error) {
 	enums := g.inspect(f)
 	if len(enums) <= 0 {
 		return nil, nil
@@ -157,7 +159,7 @@ func (g *Generator) Generate(f *ast.File) ([]byte, error) {
 	vBuff := bytes.NewBuffer([]byte{})
 	err := g.t.ExecuteTemplate(vBuff, "header", map[string]interface{}{"package": pkg})
 	if err != nil {
-		return nil, errors.WithMessage(err, "Failed writing header")
+		return nil, errorGeneratorAVA.WritingHeaderFailed(err, "Failed writing header.")
 	}
 
 	// Make the output more consistent by iterating over sorted keys of map
@@ -188,15 +190,15 @@ func (g *Generator) Generate(f *ast.File) ([]byte, error) {
 
 		err = g.t.ExecuteTemplate(vBuff, "enum", data)
 		if err != nil {
-			return vBuff.Bytes(), errors.WithMessage(err, fmt.Sprintf("Failed writing enum data for enum: %q", name))
+			return vBuff.Bytes(), errorGeneratorAVA.WritingDataFailed(err, fmt.Sprintf("Failed writing enum data for enum: %q.", name))
 		}
 	}
 
 	formatted, err := imports.Process(pkg, vBuff.Bytes(), nil)
 	if err != nil {
-		err = fmt.Errorf("generate: error formatting code %s\n\n%s", err, vBuff.String())
+		return nil, errorGeneratorAVA.FormattingError(err, fmt.Sprintf("generate: error formatting code %s\n\n%s", err, vBuff.String()))
 	}
-	return formatted, err
+	return formatted, nil
 }
 
 // updateTemplates will update the lookup map for validation checks that are
@@ -208,16 +210,20 @@ func (g *Generator) updateTemplates() {
 }
 
 // parseFile simply calls the go/parser ParseFile function with an empty token.FileSet
-func (g *Generator) parseFile(fileName string) (*ast.File, error) {
+func (g *Generator) parseFile(fileName string) (*ast.File, *errorAVA.Error) {
 	// Parse the file given in arguments
-	return parser.ParseFile(g.fileSet, fileName, nil, parser.ParseComments)
+	f, err := parser.ParseFile(g.fileSet, fileName, nil, parser.ParseComments)
+	if err != nil {
+		return nil, errorGeneratorAVA.ParseFileWrong(err, fmt.Sprintf("Parse file %s error.", fileName))
+	}
+	return f, nil
 }
 
 // parseEnum looks for the ENUM(x,y,z) formatted documentation from the type definition
-func (g *Generator) parseEnum(ts *ast.TypeSpec) (*Enum, error) {
+func (g *Generator) parseEnum(ts *ast.TypeSpec) (*Enum, *errorAVA.Error) {
 
 	if ts.Doc == nil {
-		return nil, errors.New("No Doc on Enum")
+		return nil, errorGeneratorAVA.NoDocOnEnum(nil, "No Doc on Enum")
 	}
 
 	enum := &Enum{}
@@ -256,7 +262,7 @@ func (g *Generator) parseEnum(ts *ast.TypeSpec) (*Enum, error) {
 				if dataVal != "" {
 					newData, err := strconv.ParseInt(dataVal, 10, 32)
 					if err != nil {
-						return nil, errors.Wrapf(err, "failed parsing the data part of enum value '%s'", value)
+						return nil, errorGeneratorAVA.ParseFileWrong(err, fmt.Sprintf("Failed parsing the data part of enum value '%s'", value))
 					}
 					data = int(newData)
 					value = value[:equalIndex]

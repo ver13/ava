@@ -71,9 +71,9 @@ func main() {
 			}
 
 			mode := int(0644)
-			err = ioutil.WriteFile(outFilePath, raw, os.FileMode(mode))
-			if err != nil {
-				return fmt.Errorf("failed writing to file %s: %s", ctx.Color().Cyan(outFilePath), ctx.Color().Red(err))
+			errWrite := ioutil.WriteFile(outFilePath, raw, os.FileMode(mode))
+			if errWrite != nil {
+				return fmt.Errorf("failed writing to file %s: %s", ctx.Color().Cyan(outFilePath), ctx.Color().Red(errWrite))
 			}
 			ctx.String("ava-enum finished. file: %s\n", ctx.Color().Cyan(originalName))
 		}

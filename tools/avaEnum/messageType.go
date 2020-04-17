@@ -1,6 +1,6 @@
 //go:generate avaEnum -f=$GOFILE --marshal --lower
 
-package codec
+package main
 
 // MessageType x ENUM(
 // Error
