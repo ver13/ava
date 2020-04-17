@@ -1,6 +1,4 @@
-// Copyright (c) 2017 Alex Bice
-
-// go-enum is a utility for generating a more functional version of
+// ava-enum is a utility for generating a more functional version of
 // enumerations in go.
 //
 // The generator looks for the exact string `ENUM(` and will continue
@@ -9,11 +7,11 @@
 // to skip a value in the enum that won't be an allowed value.
 //
 // Installation
-//  go get github.com/abice/go-enum
+//  go get github.com/ver13/ava/tools/ava-enum
 //
 // Usage:
 // Sample File
-//  //go:generate go-enum -f=myenum.go --marshal --
+//  //go:generate ava-enum -f=myenum.go --marshal --
 //
 //  package mypackage
 //

@@ -1,4 +1,4 @@
-# go-enum
+# ava-enum
 
 [![CircleCI](https://circleci.com/gh/ver13/ava-enum.svg?style=svg&circle-token=b44c10ce16bcef76e86da801d67811a5ff71fc72)](https://circleci.com/gh/ver13/ava-enum)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ver13/ava-enum)](https://goreportcard.com/report/github.com/ver13/ava-enum)
