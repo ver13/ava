@@ -19,7 +19,7 @@ func init() {
 }
 
 func serverStartCmdF(command *cobra.Command, args []string) error {
-	if _, err := initCommandContext(command); err != nil {
+	if _, err := InitCommandContext(command); err != nil {
 		return err.Error()
 	}
 

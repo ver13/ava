@@ -8,9 +8,26 @@ import (
 	"strings"
 
 	"github.com/go-easygen/cli"
+	"github.com/spf13/viper"
 
 	"github.com/ver13/ava/tools/avaEnum/generator"
+
+	"github.com/ver13/ava/pkg/common/commands"
 )
+
+func init() {
+	commands.RootCmd.AddCommand(commands.VersionCmd)
+
+	commands.RootCmd.PersistentFlags().Bool("noprefix", false, "Prevents the constants generated from having the Enum as a prefix.")
+	commands.RootCmd.PersistentFlags().Bool("lower", false, "Adds lowercase variants of the enum strings for lookup.")
+	commands.RootCmd.PersistentFlags().Bool("marshal", false, "Adds text (and inherently json) marshalling functions.")
+	commands.RootCmd.PersistentFlags().Bool("sql", false, "Adds SQL database scan and value functions.")
+	commands.RootCmd.PersistentFlags().Bool("flag", false, "Adds golang flag functions.")
+	commands.RootCmd.PersistentFlags().Bool("names", false, "Generates a 'Names() []string' function, and adds the possible enum values in the error response during parsing.")
+	commands.RootCmd.PersistentFlags().Bool("nocamel", false, "Removes the snake_case to CamelCase name changing.")
+
+	viper.BindPFlag("file", commands.RootCmd.PersistentFlags().Lookup("file"))
+}
 
 type rootT struct {
 	cli.Helper

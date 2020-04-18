@@ -14,7 +14,7 @@ import (
 	fileAVA "github.com/ver13/ava/pkg/common/file"
 )
 
-func initCommandContext(command *cobra.Command) (*modelConfigAVA.Configuration, *errorAVA.Error) {
+func InitCommandContext(command *cobra.Command) (*modelConfigAVA.Configuration, *errorAVA.Error) {
 	if avaFile != "" {
 		// Use error file from the flag.
 		viper.SetConfigFile(avaFile)
