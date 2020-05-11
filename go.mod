@@ -15,7 +15,7 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/cobra v0.0.6
-	github.com/spf13/viper v1.6.2
+	github.com/spf13/viper v1.7.0
 	github.com/stretchr/testify v1.5.1
 	github.com/ver13/ava/tools/avaEnum v0.0.0-20200417170003-286ee82320d0 // indirect
 	golang.org/x/crypto v0.0.0-20200115085410-6d4e4cb37c7d
