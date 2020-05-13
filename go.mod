@@ -11,7 +11,7 @@ require (
 	github.com/mkideal/pkg v0.0.0-20170503154153-3e188c9e7ecc
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/pborman/uuid v1.2.0
-	github.com/sirupsen/logrus v1.5.0
+	github.com/sirupsen/logrus v1.6.0
 	github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/cobra v0.0.6
