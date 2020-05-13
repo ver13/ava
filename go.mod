@@ -5,7 +5,7 @@ go 1.14
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/coreos/go-semver v0.2.0
-	github.com/golang/protobuf v1.3.2
+	github.com/golang/protobuf v1.4.1
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0
 	github.com/mkideal/pkg v0.0.0-20170503154153-3e188c9e7ecc
